@@ -98,8 +98,8 @@
     <section class="footer-secondary">
         <div class="container">
             <p>
-                Copyright 2017 &copy; Cloudhub Hosting Services. All rights reserved.<br>
-                Powered by HTML5, developed by <a href="../../../serifly.com/index.html">Serifly</a>
+                Copyright 2020 - <?php echo date('Y'); ?> &copy; NucleusSaaS ERP Group. All rights reserved.<br>
+                Designed And Developed by <a href="http://martdev.info/" target="_blank">MartDevelopers Inc</a>
             </p>
         </div>
     </section>

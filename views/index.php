@@ -28,7 +28,7 @@ require_once('../partials/_head.php');
                                 Fully managed enterprise hosting with failover support and load balancing, starting at just <span class="text-color-secondary">$9/month</span>
                             </p>
                         </header>
-                        <img src="uploads/server-shared.png" alt="">
+                        <img src="../public/uploads/server-shared.png" alt="">
                     </div>
                 </a>
                 <a class="slide" data-title="Cloud Servers" href="products-cloud-servers.html">
@@ -41,7 +41,7 @@ require_once('../partials/_head.php');
                                 Powerful cloud servers on enterprise infrastructure with KVM virtualization, starting at just <span class="text-color-secondary">$19/month</span>
                             </p>
                         </header>
-                        <img src="uploads/server-virtual.png" alt="">
+                        <img src="../public/uploads/server-virtual.png" alt="">
                     </div>
                 </a>
                 <a class="slide" data-title="Dedicated Cloud" href="products-dedicated-cloud.html">
@@ -54,7 +54,7 @@ require_once('../partials/_head.php');
                                 Enterprise cloud servers with dedicated resources and KVM virtualization, starting at just <span class="text-color-secondary">$399/month</span>
                             </p>
                         </header>
-                        <img src="uploads/server-dedicated.png" alt="">
+                        <img src="../public/uploads/server-dedicated.png" alt="">
                     </div>
                 </a>
             </div>
@@ -351,7 +351,7 @@ require_once('../partials/_head.php');
                             <a href="network.html"><span class="label-top-right">Sydney</span></a>
                         </li>
                     </ul>
-                    <img src="img/layout/map-dark.svg" alt="">
+                    <img src="../public/layout/map-dark.svg" alt="">
                 </div>
             </div>
         </section>

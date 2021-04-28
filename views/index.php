@@ -372,7 +372,7 @@ require_once('../partials/_head.php');
                                 My business didn't experience a single minute of downtime since I moved my Enterprise Planing System services over to NucleusSaaS ERP Group.
                             </p>
                             <p class="testimonial-author">
-                                <a href="#twitter"><i class="fab fa-twitter icon-left"></i>Mr Antony</a><br>
+                                <span><i class="fab fa-twitter icon-left"></i>Mr Antony</span><br>
                                 <small>DevLan Inc Technologies</small>
                             </p>
                         </div>
@@ -383,7 +383,7 @@ require_once('../partials/_head.php');
                                 NucleusSaaS ERP Group helped me with a professional custom Enterprise Resource Planning System solution when my business was so rapidly growing my old system couldn't handle the load anymore.
                             </p>
                             <p class="testimonial-author">
-                                <a href="#twitter"><i class="fab fa-twitter icon-left"></i>Mr Martin</a><br>
+                                <span><i class="fab fa-twitter icon-left"></i>Mr Martin</span><br>
                                 <small>MartDevelopers Inc</small>
                             </p>
                         </div>
@@ -394,7 +394,7 @@ require_once('../partials/_head.php');
                                 By switching to NucleusSaaS ERP system we were able to increase the worldwide and global sales immensely.
                             </p>
                             <p class="testimonial-author">
-                                <a href="#twitter"><i class="fab fa-twitter icon-left"></i>Mr George</a><br>
+                                <span><i class="fab fa-twitter icon-left"></i>Mr George</span><br>
                                 <small>Gelisa Systems LTD</small>
                             </p>
                         </div>

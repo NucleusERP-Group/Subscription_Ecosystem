@@ -4,12 +4,12 @@
             <div class="column-row">
                 <div class="column-33">
                     <h5>
-                        About Cloudhub
+                        About NucleusSaaS ERP Group
                     </h5>
                     <p>
-                        We provide cloud based enterprise hosting, server and storage solutions of unmatched quality. Feel free to visit or contact us for a custom quote.<br><br>
-                        765th Boulevard, Rochester, NY 14621<br>
-                        +1 800 123 456
+                        We provide Software As A Service Enterprise Resource Planning System with storage solutions of unmatched quality. Feel free to visit or contact us for a custom quote.<br><br>
+                        120 - 90126 Kikima <br>
+                        +254 737 229 776
                     </p>
                 </div>
                 <div class="column-66">
@@ -20,16 +20,10 @@
                             </h5>
                             <ul class="list-style-icon">
                                 <li>
-                                    <a href="#facebook"><i class="fab fa-facebook"></i>Facebook</a>
+                                    <a href="https://twitter.com/martinezmbithi"><i class="fab fa-twitter"></i>Twitter</a>
                                 </li>
                                 <li>
-                                    <a href="#twitter"><i class="fab fa-twitter"></i>Twitter</a>
-                                </li>
-                                <li>
-                                    <a href="#github"><i class="fab fa-github"></i>Github</a>
-                                </li>
-                                <li>
-                                    <a href="#xing"><i class="fab fa-xing"></i>Xing</a>
+                                    <a href="https://github.com/NucleusERP-Group"><i class="fab fa-github"></i>Github</a>
                                 </li>
                             </ul>
                         </div>
@@ -39,19 +33,16 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="products-cloud-hosting.html">Cloud Hosting</a>
+                                    <a href="nucleus_community_version.php">Community Version ERP</a>
                                 </li>
                                 <li>
-                                    <a href="products-cloud-servers.html">Cloud Servers</a>
+                                    <a href="nucleus_enterprise_version.php">Enterprise Version ERP </a>
                                 </li>
                                 <li>
-                                    <a href="products-dedicated-cloud.html">Dedicated Cloud</a>
+                                    <a href="nucleus_desktop_version.php">NucleusSaaS ERP Desktop Version</a>
                                 </li>
                                 <li>
-                                    <a href="products-block-storage.html">Block Storage</a>
-                                </li>
-                                <li>
-                                    <a href="products-anycast-dns.html">Anycast DNS</a>
+                                    <a href="nucleus_mobile_version">NucleusSaaS ERP Mobile Version</a>
                                 </li>
                             </ul>
                         </div>
@@ -61,16 +52,16 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="features.html">Features</a>
+                                    <a href="nucleus_features.php">Features</a>
                                 </li>
                                 <li>
-                                    <a href="network.html">Network</a>
+                                    <a href="nucleus_network.php">Network</a>
                                 </li>
                                 <li>
-                                    <a href="terms-of-service.html#privacy-policy">Privacy Policy</a>
+                                    <a href="nucleus_terms_of_service.php#privacy-policy">Privacy Policy</a>
                                 </li>
                                 <li>
-                                    <a href="terms-of-service.html">Terms of Service</a>
+                                    <a href="nucleus_terms_of_service.php">Terms of Service</a>
                                 </li>
                             </ul>
                         </div>
@@ -80,13 +71,10 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="blog.html">Blog</a>
+                                    <a href="nucleus_about.php">About</a>
                                 </li>
                                 <li>
-                                    <a href="about.html">About</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
+                                    <a href="nucleus_contact.php">Contact</a>
                                 </li>
                             </ul>
                         </div>

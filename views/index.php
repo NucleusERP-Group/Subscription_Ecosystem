@@ -18,7 +18,7 @@ require_once('../partials/_head.php');
         <!-- Content Row -->
         <section class="content-row content-row-color content-row-clouds">
             <div class="content-slider animate-container-slide" data-nav="true" data-rotation="5">
-                <a class="slide" data-title="Community Version" href="">
+                <a class="slide" data-title="Community Version" href="subscriptions.php">
                     <div class="container">
                         <header class="content-header content-header-large content-header-uppercas">
                             <h1>
@@ -31,14 +31,14 @@ require_once('../partials/_head.php');
                         <img src="../public/uploads/server-shared.png" alt="">
                     </div>
                 </a>
-                <a class="slide" data-title="Enterprise Version" href="">
+                <a class="slide" data-title="Enterprise Version" href="subscriptions.php">
                     <div class="container">
                         <header class="content-header content-header-large ">
                             <h1>
                                 <mark>NucleusSaaS ERP </mark> Enterprise Version
                             </h1>
                             <p>
-                                Fully managed Software As A Service Enterprise Resource Planning System, an enterprise subscription with failover support and load balancing, starting at just <span class="text-color-secondary"> $300/Month</span>
+                                Fully managed Software As A Service Enterprise Resource Planning System, an enterprise subscription with failover support, load balancing, powerful Enterprise Resource Planning System cloud servers on enterprise infrastructure with KVM virtualization starting at just <span class="text-color-secondary"> $300/Month</span>
                             </p>
                         </header>
                         <img src="../public/uploads/server-shared.png" alt="">

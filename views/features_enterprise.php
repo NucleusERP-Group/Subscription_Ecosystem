@@ -8,12 +8,12 @@
         <!-- Content Row -->
         <section class="content-row content-row-color content-row-clouds">
             <div class="container">
-                <header class="content-header content-header-small ">
+                <header class="content-header content-header-small">
                     <h1>
-                        NucleusSaaS ERP Community Version Features
+                        NucleusSaaS ERP Enterprise Version Features
                     </h1>
                     <p>
-                        This version is suitable for your business which require less or no ERP customizations and by doing so, you gain the trust of your clients.
+                        Fully managed Software As A Service Enterprise Resource Planning System, an enterprise subscription with failover support and load balancing suitable for high level organizations or busineses which require heavy customizations.
                     </p>
                 </header>
             </div>

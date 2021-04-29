@@ -38,12 +38,6 @@
                                 <li>
                                     <a href="features_enterprise.php">Enterprise Version ERP </a>
                                 </li>
-                                <li>
-                                    <a href="nucleus_desktop_version.php">NucleusSaaS ERP Desktop Version</a>
-                                </li>
-                                <li>
-                                    <a href="nucleus_mobile_version">NucleusSaaS ERP Mobile Version</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="column-25">

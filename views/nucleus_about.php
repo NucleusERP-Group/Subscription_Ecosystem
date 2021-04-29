@@ -31,7 +31,7 @@
                 </header>
                 <div class="column-row align-center-bottom text-align-center">
                     <div class="column-33">
-                        <i class="fas fa-wrench icon-feature"></i>
+                        <i class="fas fa-user-tie icon-feature"></i>
                         <h3>
                             <span class="text-color-primary">5+</span> Qualified Engineers
                         </h3>

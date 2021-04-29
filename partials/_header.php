@@ -20,6 +20,9 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="subscriptions.php">Subscriptions</a>
+                </li>
+                <li>
                     <a class="button button-secondary" href="client-login.php">
                         <i class="fas fa-lock icon-left"></i>Client Login
                     </a>
@@ -33,7 +36,7 @@
                     <a href="contact.php"><i class="fas fa-comment icon-left"></i>NucleusERP Support Chat</a>
                 </li>
                 <li>
-                    <a href="knowledge_base.php"><i class="fas fa-question-circle icon-left"></i>NucleusERP Knowledge Base</a>
+                    <a href="knowledge_base.php"><i class="fas fa-question-circle icon-left"></i>NucleusERP Knowledge Base & FaQ</a>
                 </li>
                 <li>
                     <a href="service_status.php"><i class="fas fa-check icon-left"></i>NucleusERP Service Status</a>

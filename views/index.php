@@ -6,12 +6,12 @@ require_once('../partials/_head.php');
     <!-- Header -->
     <?php require_once('../partials/_header.php'); ?>
     <!-- Notification -->
-    <section id="notification" data-dismissible="true" data-title="" data-expires="">
+    <!-- <section id="notification" data-dismissible="true" data-title="" data-expires="">
         <div class="container">
             <p>
                 Introducing NucleusSaaS ERP block storage. Attach up to 12 TB of SSD-based storage to your cloud server. <a class="text-margin-left" href="products-block-storage.html">Learn more<i class="fas fa-angle-right icon-right"></i></a>
             </p>
-        </div>
+        </div> -->
     </section>
     <!-- Content -->
     <section id="content">
@@ -44,7 +44,7 @@ require_once('../partials/_head.php');
                         <img src="../public/uploads/server-shared.png" alt="">
                     </div>
                 </a>
-                <a class="slide" data-title="Cloud Servers" href="">
+                <!-- <a class="slide" data-title="Cloud Servers" href="">
                     <div class="container">
                         <header class="content-header content-header-large ">
                             <h1>
@@ -69,7 +69,7 @@ require_once('../partials/_head.php');
                         </header>
                         <img src="../public/uploads/server-dedicated.png" alt="">
                     </div>
-                </a>
+                </a> -->
             </div>
         </section>
         <!-- Content Row -->

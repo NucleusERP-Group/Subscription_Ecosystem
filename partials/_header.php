@@ -23,6 +23,9 @@
                     <a href="subscriptions.php">Subscriptions</a>
                 </li>
                 <li>
+                    <a href="downloads.php">Downloads</a>
+                </li>
+                <li>
                     <a class="button button-secondary" href="client-login.php">
                         <i class="fas fa-lock icon-left"></i>Client Login
                     </a>

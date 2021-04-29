@@ -33,16 +33,10 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="nucleus_community_version.php">Community Version ERP</a>
+                                    <a href="features_community.php">Community Version ERP</a>
                                 </li>
                                 <li>
-                                    <a href="nucleus_enterprise_version.php">Enterprise Version ERP </a>
-                                </li>
-                                <li>
-                                    <a href="nucleus_desktop_version.php">NucleusSaaS ERP Desktop Version</a>
-                                </li>
-                                <li>
-                                    <a href="nucleus_mobile_version">NucleusSaaS ERP Mobile Version</a>
+                                    <a href="features_enterprise.php">Enterprise Version ERP </a>
                                 </li>
                             </ul>
                         </div>
@@ -74,7 +68,7 @@
                                     <a href="nucleus_about.php">About</a>
                                 </li>
                                 <li>
-                                    <a href="nucleus_contact.php">Contact</a>
+                                    <a href="contact.php">Contact</a>
                                 </li>
                             </ul>
                         </div>

@@ -30,7 +30,7 @@
                                         </p>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-starter-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>
@@ -49,7 +49,7 @@
                                     </div>
 
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-business-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>
@@ -71,7 +71,7 @@
                                         </p>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-starter-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>
@@ -90,7 +90,7 @@
                                     </div>
 
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-business-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>

@@ -9,7 +9,7 @@
                     <a href="index.php">Home</a>
                 </li>
                 <li>
-                    <a href="features.html">NucleusSaaS ERP Features</a>
+                    <a href="nucleus_features.php">NucleusSaaS ERP Features</a>
                     <ul>
                         <li>
                             <a href="features_community.php">Community Version</a>

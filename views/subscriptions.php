@@ -54,7 +54,7 @@
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-starter-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>
@@ -104,18 +104,18 @@
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-business-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="tab-item" data-title="Yearly">
                         <div class="column-row align-center-bottom">
-                        <div class="column-33">
+                            <div class="column-33">
                                 <div class="product-box">
                                     <div class="product-header">
                                         <h4>
@@ -150,7 +150,7 @@
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-starter-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>
@@ -200,7 +200,7 @@
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="products-cloud-hosting.html#cloud-business-monthly">
+                                        <a class="button button-secondary" href="client-login.php">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>

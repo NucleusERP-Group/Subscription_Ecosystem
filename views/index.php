@@ -144,166 +144,7 @@ require_once('../partials/_head.php');
                 </div>
             </div>
         </section>
-        <!-- Content Row -->
-        <section class="content-row content-row-gray">
-            <div class="container">
-                <header class="content-header">
-                    <h2>
-                        Managed Cloud Hosting
-                    </h2>
-                    <p>
-                        Easily enhance the performance, security and reliability of your services with one of our managed cloud hosting products, free data migration included.
-                    </p>
-                </header>
-                <div class="column-row align-center-bottom">
-                    <div class="column-33">
-                        <div class="product-box">
-                            <div class="product-header">
-                                <h4>
-                                    Cloud Starter
-                                </h4>
-                                <p>
-                                    Medium traffic personal sites
-                                </p>
-                            </div>
-                            <div class="product-price">
-                                $9<span class="term">/ month</span>
-                            </div>
-                            <div class="product-features">
-                                <ul>
-                                    <li>
-                                        <strong>10</strong> Hosted Domains
-                                    </li>
-                                    <li>
-                                        <strong>25 GB</strong> RAID 10 Storage
-                                    </li>
-                                    <li>
-                                        <strong>200 GB</strong> Premium Bandwidth
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        Powered by cPanel&reg;
-                                    </li>
-                                    <li>
-                                        Dedicated IP Address
-                                    </li>
-                                    <li>
-                                        99.95% Uptime SLA
-                                    </li>
-                                    <li>
-                                        1000 Mbit Uplink
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-order">
-                                <a class="button button-secondary" href="products-cloud-hosting.html#cloud-starter-monthly">
-                                    <i class="fas fa-shopping-cart icon-left"></i>Order Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column-33">
-                        <div class="product-box product-box-popular">
-                            <div class="product-popular">
-                                Most Popular
-                            </div>
-                            <div class="product-header">
-                                <h4>
-                                    Cloud Business
-                                </h4>
-                                <p>
-                                    High traffic corporate sites
-                                </p>
-                            </div>
-                            <div class="product-price">
-                                $18<span class="term">/ month</span>
-                            </div>
-                            <div class="product-features">
-                                <ul>
-                                    <li>
-                                        <strong>30</strong> Hosted Domains
-                                    </li>
-                                    <li>
-                                        <strong>75 GB</strong> RAID 10 Storage
-                                    </li>
-                                    <li>
-                                        <strong>600 GB</strong> Premium Bandwidth
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        Powered by cPanel&reg;
-                                    </li>
-                                    <li>
-                                        Dedicated IP Address
-                                    </li>
-                                    <li>
-                                        99.95% Uptime SLA
-                                    </li>
-                                    <li>
-                                        1000 Mbit Uplink
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-order">
-                                <a class="button button-secondary" href="products-cloud-hosting.html#cloud-business-monthly">
-                                    <i class="fas fa-shopping-cart icon-left"></i>Order Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column-33">
-                        <div class="product-box">
-                            <div class="product-header">
-                                <h4>
-                                    Cloud Enterprise
-                                </h4>
-                                <p>
-                                    Enterprise content management
-                                </p>
-                            </div>
-                            <div class="product-price">
-                                $36<span class="term">/ month</span>
-                            </div>
-                            <div class="product-features">
-                                <ul>
-                                    <li>
-                                        <strong>60</strong> Hosted Domains
-                                    </li>
-                                    <li>
-                                        <strong>150 GB</strong> RAID 10 Storage
-                                    </li>
-                                    <li>
-                                        <strong>1200 GB</strong> Premium Bandwidth
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        Powered by cPanel&reg;
-                                    </li>
-                                    <li>
-                                        Dedicated IP Address
-                                    </li>
-                                    <li>
-                                        99.95% Uptime SLA
-                                    </li>
-                                    <li>
-                                        1000 Mbit Uplink
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-order">
-                                <a class="button button-secondary" href="products-cloud-hosting.html#cloud-enterprise-monthly">
-                                    <i class="fas fa-shopping-cart icon-left"></i>Order Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Content Row -->
+        
         <section class="content-row">
             <div class="container">
                 <header class="content-header">
@@ -317,37 +158,37 @@ require_once('../partials/_head.php');
                 <div class="network-map">
                     <ul>
                         <li style="top: 42%; left: 12.5%;">
-                            <a href="network.php"><span class="label-top-left">San Francisco</span></a>
+                            <a href="nucleus_network.php"><span class="label-top-left">San Francisco</span></a>
                         </li>
                         <li style="top: 44%; left: 20%;">
-                            <a href="network.php"><span class="label-bottom-right">Dallas</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-right">Dallas</span></a>
                         </li>
                         <li style="top: 40%; left: 26%;">
-                            <a href="network.php"><span class="label-top-right">New York</span></a>
+                            <a href="nucleus_network.php"><span class="label-top-right">New York</span></a>
                         </li>
                         <li style="top: 78%; left: 34%;">
-                            <a href="network.php"><span class="label-bottom-right">Sao Paulo</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-right">Sao Paulo</span></a>
                         </li>
                         <li style="top: 41%; left: 44.5%;">
-                            <a href="network.php"><span class="label-bottom-left">Lisbon</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-left">Lisbon</span></a>
                         </li>
                         <li style="top: 32%; left: 46.5%;">
-                            <a href="network.php"><span class="label-top-left">London</span></a>
+                            <a href="nucleus_network.php"><span class="label-top-left">London</span></a>
                         </li>
                         <li style="top: 64%; left: 57.5%;">
-                            <a href="network.php"><span class="label-bottom-right">Nairobi</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-right">Nairobi</span></a>
                         </li>
                         <li style="top: 34%; left: 49.5%;">
-                            <a href="network.php"><span class="label-bottom-right">Frankfurt</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-right">Frankfurt</span></a>
                         </li>
                         <li style="top: 64%; left: 75%;">
-                            <a href="network.php"><span class="label-bottom-left">Singapore</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-left">Singapore</span></a>
                         </li>
                         <li style="top: 44%; left: 85%;">
-                            <a href="network.php"><span class="label-bottom-right">Tokyo</span></a>
+                            <a href="nucleus_network.php"><span class="label-bottom-right">Tokyo</span></a>
                         </li>
                         <li style="top: 83%; left: 89%;">
-                            <a href="network.php"><span class="label-top-right">Sydney</span></a>
+                            <a href="nucleus_network.php"><span class="label-top-right">Sydney</span></a>
                         </li>
                     </ul>
                     <img src="../public/img/layout/map-dark.svg" alt="">

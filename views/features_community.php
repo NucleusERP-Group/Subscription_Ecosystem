@@ -81,6 +81,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="column-row">
                     <div class="column-25">
                         <div class="feature-box">
@@ -132,6 +133,65 @@
                             <div class="feature-content">
                                 <h3>
                                     Billable Expenses
+                                </h3>
+                                <p>
+                                    Create clients and send invoices to them. You can also set a password so they could to access the client portal. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column-row">
+                    <div class="column-25">
+                        <div class="feature-box">
+                            <div class="feature-header">
+                                <i class="fas fa-credit-card icon-feature"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>
+                                    Various Payments
+                                </h3>
+                                <p>
+                                    Send professional invoices to clients and start accepting online payments, no commission/transaction fee. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-25">
+                        <div class="feature-box">
+                            <div class="feature-header">
+                                <i class="fas fa-address-book icon-feature"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>
+                                    Taxes Management
+                                </h3>
+                                <p>
+                                    Add deposits to and transfers between accounts and keep the balance of your bank accounts active.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-25">
+                        <div class="feature-box">
+                            <div class="feature-header">
+                                <i class="fas fa-chart-line icon-feature"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>
+                                    Powerful Reporting
+                                </h3>
+                                <p>
+                                    Create vendors so you could assign bills and payments to them and later filter their transactions easily. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-25">
+                        <div class="feature-box">
+                            <div class="feature-header">
+                                <i class="fas fa-user-check icon-feature"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>
+                                    Customer Summary
                                 </h3>
                                 <p>
                                     Create clients and send invoices to them. You can also set a password so they could to access the client portal. </p>

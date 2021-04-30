@@ -51,12 +51,6 @@
                                 <li>
                                     <a href="nucleus_network.php">Network</a>
                                 </li>
-                                <li>
-                                    <a href="nucleus_terms_of_service.php#privacy-policy">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="nucleus_terms_of_service.php">Terms of Service</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="column-flex">

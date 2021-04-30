@@ -39,9 +39,6 @@
                     <a href="contact.php"><i class="fas fa-comment icon-left"></i>NucleusERP Support Chat</a>
                 </li>
                 <li>
-                    <a href="knowledge_base.php"><i class="fas fa-question-circle icon-left"></i>NucleusERP Knowledge Base & FaQ</a>
-                </li>
-                <li>
                     <a href="service_status.php"><i class="fas fa-check icon-left"></i>NucleusERP Service Status</a>
                 </li>
             </ul>

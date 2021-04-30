@@ -11,7 +11,7 @@ require_once('../partials/_head.php'); ?>
             <div class="container">
                 <header class="content-header content-header-small content-header-uppercase">
                     <h1>
-                        NucleusSaaS ERP Client Login
+                        NucleusSaaS ERP Client Reset Password
                     </h1>
                     <p>
                         Our customer portal uses 128-bit encryption. Your details are safe.
@@ -30,15 +30,7 @@ require_once('../partials/_head.php'); ?>
                                 <input id="form-email" type="text" name="email">
                             </div>
                             <div class="form-row">
-                                <label for="form-password">Password</label>
-                                <input id="form-password" type="password" name="password">
-                            </div>
-                            <div class="form-row">
-                                <input id="form-login" type="checkbox" name="login" checked>
-                                <label for="form-login">Save my login session on this computer</label>
-                            </div>
-                            <div class="form-row">
-                                <button class="button-secondary"><i class="fas fa-lock icon-left"></i>Confirm</button>
+                                <button class="button-secondary"><i class="fas fa-lock icon-left"></i>Reset Password</button>
                             </div>
                         </form>
                     </div>
@@ -51,8 +43,8 @@ require_once('../partials/_head.php'); ?>
                 <div class="column-row align-center">
                     <div class="column-50 text-align-center">
                         <p class="text-color-gray">
-                            Having Troubles Logging Into Your Account?<br>
-                            <a href="client-reset-password.php">Password Reset<i class="fas fa-angle-right icon-right"></i></a>
+                            Remembered Your Account Password ?<br>
+                            <a href="client-login.php">Login<i class="fas fa-angle-right icon-right"></i></a>
                         </p>
                         <p class="text-color-gray">
                             New to NucleusSaaS ERP Ecosystem?<br>

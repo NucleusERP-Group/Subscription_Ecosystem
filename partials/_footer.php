@@ -46,7 +46,7 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="nucleus_features.php">Features</a>
+                                    <a href="nucleus_features.php">Main Modules</a>
                                 </li>
                                 <li>
                                     <a href="nucleus_network.php">Network</a>

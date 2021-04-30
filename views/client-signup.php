@@ -24,14 +24,47 @@ require_once('../partials/_head.php'); ?>
             <div class="container">
                 <div class="column-row align-center">
                     <div class="column-50">
+
                         <form class="form-full-width" method="POST">
+                            <div class="text-center">
+                                <h3>Personal Information</h3>
+                            </div>
                             <div class="form-row">
+
                                 <label for="form-email">Full Name</label>
                                 <input id="form-email" type="text" name="email">
                             </div>
                             <div class="form-row">
                                 <label for="form-email">Email Address</label>
                                 <input id="form-email" type="text" name="email">
+                            </div>
+                            <div class="form-row">
+                                <label for="form-email">Phone Number</label>
+                                <input id="form-email" type="text" name="email">
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <h3>Billing Address</h3>
+                            </div>
+                            <div class="form-row">
+                                <label>Company Name (Optional)</label>
+                                <input type="text" name="password">
+                            </div>
+                            <div class="form-row">
+                                <label>Country</label>
+                                <input type="text" name="password">
+                            </div>
+                            <div class="form-row">
+                                <label>City</label>
+                                <input type="text" name="password">
+                            </div>
+                            <div class="form-row">
+                                <label>Street Address</label>
+                                <input type="text" name="password">
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <h3>Account Security</h3>
                             </div>
                             <div class="form-row">
                                 <label for="form-password">Password</label>
@@ -41,10 +74,13 @@ require_once('../partials/_head.php'); ?>
                                 <label for="form-password">Confirm Password</label>
                                 <input id="form-password" type="password" name="password">
                             </div>
+
                             <div class="form-row">
                                 <button class="button-secondary"><i class="fas fa-user-check icon-left"></i>Sign Up</button>
+                                <button class="button-secondary"><i class="fab fa-google icon-left"></i>Sign Up Using Google</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

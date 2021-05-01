@@ -1,5 +1,103 @@
 <?php
-require_once('../partials/_head.php'); ?>
+session_start();
+include('../config/config.php');
+include('../config/codeGen.php');
+
+if (isset($_POST['Sign_Up'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_POST['Client_id']) && !empty($_POST['Client_id'])) {
+        $Client_id = mysqli_real_escape_string($mysqli, trim($_POST['Client_id']));
+    } else {
+        $error = 1;
+        $err = "Client ID Cannot Be Empty";
+    }
+    if (isset($_POST['Client_name']) && !empty($_POST['Client_name'])) {
+        $Client_name = mysqli_real_escape_string($mysqli, trim($_POST['Client_name']));
+    } else {
+        $error = 1;
+        $err = "Client Name Cannot Be Empty";
+    }
+    if (isset($_POST['Client_phone_no']) && !empty($_POST['Client_phone_no'])) {
+        $Client_phone_no = mysqli_real_escape_string($mysqli, trim($_POST['Client_phone_no']));
+    } else {
+        $error = 1;
+        $err = "Client Phone Number Cannot Be Empty";
+    }
+
+    if (isset($_POST['Client_gender']) && !empty($_POST['Client_gender'])) {
+        $Client_gender = mysqli_real_escape_string($mysqli, trim($_POST['Client_gender']));
+    } else {
+        $error = 1;
+        $err = "Client Gender Cannot Be Empty";
+    }
+
+    if (isset($_POST['Client_email']) && !empty($_POST['Client_email'])) {
+        $Client_email = mysqli_real_escape_string($mysqli, trim($_POST['Client_email']));
+    } else {
+        $error = 1;
+        $err = "Client Email Cannot Be Empty";
+    }
+
+    if (isset($_POST['Client_location']) && !empty($_POST['Client_location'])) {
+        $Client_location = mysqli_real_escape_string($mysqli, trim($_POST['Client_location']));
+    } else {
+        $error = 1;
+        $err = "Client Location Number Cannot Be Empty";
+    }
+    /* Client Auth Details */
+    if (isset($_POST['Login_id']) && !empty($_POST['Login_id'])) {
+        $Login_id = mysqli_real_escape_string($mysqli, trim($_POST['Login_id']));
+    } else {
+        $error = 1;
+        $err = "Client Login ID Number Cannot Be Empty";
+    }
+
+    if (isset($_POST['Login_Password']) && !empty($_POST['Login_Password'])) {
+        $Login_Password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['Login_Password']))));
+    } else {
+        $error = 1;
+        $err = "Client Login Password Cannot Be Empty";
+    }
+
+    $Login_Rank = 'Client';
+
+    if (!$error) {
+        //prevent Double entries
+        $sql = "SELECT * FROM Clients  WHERE  Client_email='$Client_email'  || Client_phone_no = '$Client_phone_no' ";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+
+            if ($Client_email == $row['Client_email']) {
+                $err =  "A Client Account With That Phone Number  Exists";
+            } else {
+                $err =  "A Client Account With That Email Address Exists";
+            }
+        } else {
+            $query = "INSERT INTO Clients (Client_id, Client_name, Client_login_id, Client_phone_no, Client_gender, Client_email, Client_location) VALUES(?,?,?,?,?,?,?)";
+            $auth = "INSERT INTO Login (Login_id, Login_user_name, Login_email, Login_Password,  Login_Rank) VALUES(?,?,?,?,?)";
+
+            $stmt = $mysqli->prepare($query);
+            $authstmt = $mysqli->prepare($auth);
+
+            $rc = $stmt->bind_param('sssssss', $Client_id, $Client_name, $Login_id, $Client_phone_no, $Client_gender, $Client_email, $Client_location);
+            $rc = $authstmt->bind_param('sssss', $Login_id, $Client_name, $Client_email, $Login_Password, $Login_Rank);
+
+            $stmt->execute();
+            $authstmt->execute();
+
+            if ($stmt && $authstmt) {
+                $success = "Added" && header("refresh:1; url=index.php");
+            } else {
+                $info = "Please Try Again Or Try Later";
+            }
+        }
+    }
+}
+require_once('../partials/_head.php');
+?>
 
 <body class="footer-dark">
     <!-- Header -->

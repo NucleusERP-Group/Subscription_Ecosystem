@@ -1,5 +1,8 @@
-<?php
-require_once('../partials/_head.php'); ?>
+<?php 
+
+require_once('../partials/_head.php'); 
+
+?>
 
 <body class="footer-dark">
     <!-- Header -->
@@ -27,18 +30,14 @@ require_once('../partials/_head.php'); ?>
                         <form class="form-full-width" method="POST">
                             <div class="form-row">
                                 <label for="form-email">Email Address</label>
-                                <input id="form-email" type="text" name="email">
+                                <input id="form-email" name="email" type="text" name="email">
                             </div>
                             <div class="form-row">
                                 <label for="form-password">Password</label>
-                                <input id="form-password" type="password" name="password">
+                                <input id="form-password" name="password" type="password" name="password">
                             </div>
                             <div class="form-row">
-                                <input id="form-login" type="checkbox" name="login" checked>
-                                <label for="form-login">Save my login session on this computer</label>
-                            </div>
-                            <div class="form-row">
-                                <button class="button-secondary"><i class="fas fa-lock icon-left"></i>Confirm</button>
+                                <button type="submit" name="Login" class="button-secondary"><i class="fas fa-lock icon-left"></i>Confirm</button>
                             </div>
                         </form>
                     </div>

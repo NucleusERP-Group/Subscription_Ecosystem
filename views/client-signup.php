@@ -156,23 +156,22 @@ require_once('../partials/_head.php');
                 <div class="column-row align-center">
                     <div class="column-50">
 
-                        <form class="form-full-width" method="POST">
+                        <form class="form-full-width" method="post">
                             <div class="text-center">
                                 <h3>Personal Information</h3>
                             </div>
                             <div class="form-row">
-
-                                <label for="form-email">Full Name</label>
-                                <input id="form-email" type="text" name="name">
+                                <label for="">Full Name</label>
+                                <input id="" required type="text" name="name">
                                 <input type="hidden" name="id" value="<?php echo $ID; ?>">
                             </div>
                             <div class="form-row">
                                 <label for="form-email">Email Address</label>
-                                <input id="form-email" type="email" name="email">
+                                <input id="form-email" required type="email" name="email">
                             </div>
                             <div class="form-row">
                                 <label for="form-email">Phone Number</label>
-                                <input id="form-email" type="text" name="phone">
+                                <input id="form-email" required type="text" name="phone">
                             </div>
                             <hr>
                             <div class="text-center">
@@ -184,15 +183,15 @@ require_once('../partials/_head.php');
                             </div>
                             <div class="form-row">
                                 <label>Country</label>
-                                <input type="text" name="country">
+                                <input type="text" required name="country">
                             </div>
                             <div class="form-row">
                                 <label>City</label>
-                                <input type="text" name="city">
+                                <input type="text" required name="city">
                             </div>
                             <div class="form-row">
                                 <label>Street Address</label>
-                                <input type="text" name="adr">
+                                <input type="text" required name="adr">
                             </div>
                             <hr>
                             <div class="text-center">
@@ -200,11 +199,11 @@ require_once('../partials/_head.php');
                             </div>
                             <div class="form-row">
                                 <label for="form-password">Password</label>
-                                <input id="form-password" type="password" name="password">
+                                <input id="form-password" required type="password" name="password">
                             </div>
                             <div class="form-row">
                                 <label for="form-password">Confirm Password</label>
-                                <input id="form-password" type="password" name="confirm_password">
+                                <input id="form-password" required type="password" name="confirm_password">
                             </div>
 
                             <div class="form-row">

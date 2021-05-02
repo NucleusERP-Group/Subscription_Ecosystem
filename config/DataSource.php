@@ -29,7 +29,7 @@ class DataSource
 
     const PASSWORD = '';
 
-    const DATABASENAME = 'iCollege';
+    const DATABASENAME = 'NucleusSAASERP_Subscription_Manager';
 
     private $conn;
 

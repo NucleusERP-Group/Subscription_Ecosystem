@@ -32,7 +32,7 @@ if (isset($_POST['Sign Up'])) {
         $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
     } else {
         $error = 1;
-        $err = "Client ID Cannot Be Empty";
+        $err = " ID Cannot Be Empty";
     }
     if (isset($_POST['name']) && !empty($_POST['name'])) {
         $name = mysqli_real_escape_string($mysqli, trim($_POST['name']));
@@ -40,39 +40,39 @@ if (isset($_POST['Sign Up'])) {
         $error = 1;
         $err = "Name Cannot Be Empty";
     }
-    if (isset($_POST['']) && !empty($_POST['Client_phone_no'])) {
-        $Client_phone_no = mysqli_real_escape_string($mysqli, trim($_POST['Client_phone_no']));
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
     } else {
         $error = 1;
-        $err = "Client Phone Number Cannot Be Empty";
+        $err = "Email  Cannot Be Empty";
     }
 
-    if (isset($_POST['Client_gender']) && !empty($_POST['Client_gender'])) {
-        $Client_gender = mysqli_real_escape_string($mysqli, trim($_POST['Client_gender']));
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
     } else {
         $error = 1;
-        $err = "Client Gender Cannot Be Empty";
+        $err = "Phone Cannot Be Empty";
     }
 
-    if (isset($_POST['Client_email']) && !empty($_POST['Client_email'])) {
-        $Client_email = mysqli_real_escape_string($mysqli, trim($_POST['Client_email']));
+    if (isset($_POST['country']) && !empty($_POST['country'])) {
+        $country = mysqli_real_escape_string($mysqli, trim($_POST['country']));
     } else {
         $error = 1;
-        $err = "Client Email Cannot Be Empty";
+        $err = "Country Number Cannot Be Empty";
     }
 
-    if (isset($_POST['Client_location']) && !empty($_POST['Client_location'])) {
-        $Client_location = mysqli_real_escape_string($mysqli, trim($_POST['Client_location']));
+    if (isset($_POST['city']) && !empty($_POST['city'])) {
+        $city = mysqli_real_escape_string($mysqli, trim($_POST['city']));
     } else {
         $error = 1;
-        $err = "Client Location Number Cannot Be Empty";
+        $err = "City Cannot Be Empty";
     }
-    /* Client Auth Details */
-    if (isset($_POST['Login_id']) && !empty($_POST['Login_id'])) {
-        $Login_id = mysqli_real_escape_string($mysqli, trim($_POST['Login_id']));
+
+    if (isset($_POST['adr']) && !empty($_POST['adr'])) {
+        $adr = mysqli_real_escape_string($mysqli, trim($_POST['adr']));
     } else {
         $error = 1;
-        $err = "Client Login ID Number Cannot Be Empty";
+        $err = "Adress Cannot Be Empty";
     }
 
     if (isset($_POST['Login_Password']) && !empty($_POST['Login_Password'])) {
@@ -82,37 +82,55 @@ if (isset($_POST['Sign Up'])) {
         $err = "Client Login Password Cannot Be Empty";
     }
 
-    $Login_Rank = 'Client';
+    if (isset($_POST['password']) && !empty($_POST['password'])) {
+        $password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['password']))));
+    } else {
+        $error = 1;
+        $err = "New Password Cannot Be Empty";
+    }
+    if (isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])) {
+        $confirm_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['confirm_password']))));
+    } else {
+        $error = 1;
+        $err = "Confirmation Password Cannot Be Empty";
+    }
+
+    /* No Filters Because Its Optional */
+    $company_name = $_POST['company_name'];
 
     if (!$error) {
-        //prevent Double entries
-        $sql = "SELECT * FROM Clients  WHERE  Client_email='$Client_email'  || Client_phone_no = '$Client_phone_no' ";
-        $res = mysqli_query($mysqli, $sql);
-        if (mysqli_num_rows($res) > 0) {
-            $row = mysqli_fetch_assoc($res);
-
-            if ($Client_email == $row['Client_email']) {
-                $err =  "A Client Account With That Phone Number  Exists";
-            } else {
-                $err =  "A Client Account With That Email Address Exists";
-            }
+        /* Check If Passwords Match */
+        if ($password != $confirm_password) {
+            $err = "Passwords Do Not Match";
         } else {
-            $query = "INSERT INTO Clients (Client_id, Client_name, Client_login_id, Client_phone_no, Client_gender, Client_email, Client_location) VALUES(?,?,?,?,?,?,?)";
-            $auth = "INSERT INTO Login (Login_id, Login_user_name, Login_email, Login_Password,  Login_Rank) VALUES(?,?,?,?,?)";
+            //prevent Double entries
+            $sql = "SELECT * FROM NucleusSAASERP_Users  WHERE  email='$email'  || phone = '$phone' ";
+            $res = mysqli_query($mysqli, $sql);
+            if (mysqli_num_rows($res) > 0) {
+                $row = mysqli_fetch_assoc($res);
 
-            $stmt = $mysqli->prepare($query);
-            $authstmt = $mysqli->prepare($auth);
-
-            $rc = $stmt->bind_param('sssssss', $Client_id, $Client_name, $Login_id, $Client_phone_no, $Client_gender, $Client_email, $Client_location);
-            $rc = $authstmt->bind_param('sssss', $Login_id, $Client_name, $Client_email, $Login_Password, $Login_Rank);
-
-            $stmt->execute();
-            $authstmt->execute();
-
-            if ($stmt && $authstmt) {
-                $success = "Added" && header("refresh:1; url=index.php");
+                if ($email == $row['email']) {
+                    $err =  "A Client Account With That Email   Exists";
+                } else {
+                    $err =  "A Client Account With That Phone Number Address Exists";
+                }
             } else {
-                $info = "Please Try Again Or Try Later";
+                $query = "INSERT INTO Clients (Client_id, Client_name, Client_login_id, Client_phone_no, Client_gender, Client_email, Client_location) VALUES(?,?,?,?,?,?,?)";
+
+                $stmt = $mysqli->prepare($query);
+                $authstmt = $mysqli->prepare($auth);
+
+                $rc = $stmt->bind_param('sssssss', $Client_id, $Client_name, $Login_id, $Client_phone_no, $Client_gender, $Client_email, $Client_location);
+                $rc = $authstmt->bind_param('sssss', $Login_id, $Client_name, $Client_email, $Login_Password, $Login_Rank);
+
+                $stmt->execute();
+                $authstmt->execute();
+
+                if ($stmt && $authstmt) {
+                    $success = "Added" && header("refresh:1; url=index.php");
+                } else {
+                    $info = "Please Try Again Or Try Later";
+                }
             }
         }
     }

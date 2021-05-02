@@ -24,7 +24,7 @@ session_start();
 include('../config/config.php');
 include('../config/codeGen.php');
 
-if (isset($_POST['Sign Up'])) {
+if (isset($_POST['SignUp'])) {
     //Error Handling and prevention of posting double entries
     $error = 0;
 
@@ -115,19 +115,12 @@ if (isset($_POST['Sign Up'])) {
                     $err =  "A Client Account With That Phone Number Address Exists";
                 }
             } else {
-                $query = "INSERT INTO Clients (Client_id, Client_name, Client_login_id, Client_phone_no, Client_gender, Client_email, Client_location) VALUES(?,?,?,?,?,?,?)";
-
+                $query = "INSERT INTO NucleusSAASERP_Users (id, name, email, phone, company_name, country, city, adr, password) VALUES(?,?,?,?,?,?,?,?,?)";
                 $stmt = $mysqli->prepare($query);
-                $authstmt = $mysqli->prepare($auth);
-
-                $rc = $stmt->bind_param('sssssss', $Client_id, $Client_name, $Login_id, $Client_phone_no, $Client_gender, $Client_email, $Client_location);
-                $rc = $authstmt->bind_param('sssss', $Login_id, $Client_name, $Client_email, $Login_Password, $Login_Rank);
-
+                $rc = $stmt->bind_param('sssssssss', $id, $name, $email, $phone, $company_name, $country, $city, $adr, $password);
                 $stmt->execute();
-                $authstmt->execute();
-
-                if ($stmt && $authstmt) {
-                    $success = "Added" && header("refresh:1; url=index.php");
+                if ($stmt) {
+                    $success = "Client Account Created" && header("refresh:1; url=client-signup.php");
                 } else {
                     $info = "Please Try Again Or Try Later";
                 }
@@ -213,7 +206,7 @@ require_once('../partials/_head.php');
                             </div>
 
                             <div class="form-row">
-                                <button type="submit" name="Sign Up" class="button-secondary"><i class="fas fa-user-check icon-left"></i>Sign Up</button>
+                                <button type="submit" name="SignUp" class="button-secondary"><i class="fas fa-user-check icon-left"></i>Sign Up</button>
                                 <button class="button-secondary"><i class="fab fa-google icon-left"></i>Sign Up Using Google</button>
                             </div>
                         </form>

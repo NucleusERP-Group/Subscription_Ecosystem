@@ -128,6 +128,7 @@ if (isset($_POST['SignUp'])) {
         }
     }
 }
+
 require_once('../partials/_head.php');
 ?>
 
@@ -163,6 +164,7 @@ require_once('../partials/_head.php');
 
                                 <label for="form-email">Full Name</label>
                                 <input id="form-email" type="text" name="name">
+                                <input type="hidden" name="id" value="<?php echo $ID; ?>">
                             </div>
                             <div class="form-row">
                                 <label for="form-email">Email Address</label>

@@ -20,7 +20,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 session_start();
-include('configs/config.php');
+include('../config/config.php');
 
 if (isset($_POST['login'])) {
     /* Secure Login */
@@ -38,7 +38,7 @@ if (isset($_POST['login'])) {
         $err = "Password Cannot  Be Empty";
     }
     if (!$error) {
-        $stmt = $mysqli->prepare("SELECT email, password, id  FROM iBursary_admin  WHERE email =? AND password =?");
+        $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =?");
         $stmt->bind_param('ss', $email, $password); //bind fetched parameters
         $stmt->execute(); //execute bind
         $stmt->bind_result($email, $password, $id); //bind result
@@ -78,7 +78,7 @@ require_once('../partials/_head.php');
             <div class="container">
                 <div class="column-row align-center">
                     <div class="column-50">
-                        <form class="form-full-width" method="POST">
+                        <form  method="POST" class="form-full-width" >
                             <div class="form-row">
                                 <label for="form-email">Email Address</label>
                                 <input id="form-email" name="email" type="text" name="email">
@@ -88,7 +88,7 @@ require_once('../partials/_head.php');
                                 <input id="form-password" name="password" type="password" name="password">
                             </div>
                             <div class="form-row">
-                                <button type="submit" name="Login" class="button-secondary"><i class="fas fa-lock icon-left"></i>Confirm</button>
+                                <input  type="submit" name="login" class="button-secondary" value="Sign In"><i class="fas fa-lock icon-left"></i>
                             </div>
                         </form>
                     </div>

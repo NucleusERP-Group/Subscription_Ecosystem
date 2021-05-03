@@ -155,64 +155,61 @@ require_once('../partials/_head.php');
             <div class="container">
                 <div class="column-row align-center">
                     <div class="column-50">
-
-                        <form method="post" enctype="multipart/form-data" role="form">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="form-group col-md-4">
-                                        <label for="">Module Name</label>
-                                        <input type="text" required name="name" class="form-control" id="exampleInputEmail1">
-                                        <input type="hidden" required name="id" value="<?php echo $ID; ?>" class="form-control">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="">Module Number / Code</label>
-                                        <input type="text" required name="code" value="<?php echo $a; ?><?php echo $b; ?>" class="form-control">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="">Course Name</label>
-                                        <input type="text" value="<?php echo $course->name; ?>" required name="course_name" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row">
-
-                                    <div class="form-group col-md-4" style="display:none">
-                                        <label for="">Course ID</label>
-                                        <input type="text" readonly value="<?php echo $course->id; ?>" required name="course_id" class="form-control">
-                                        <input type="text" readonly value="<?php echo $course->faculty_id; ?>" required name="faculty_id" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="">Teaching Duration</label>
-                                        <input type="text" required name="course_duration" class="form-control" id="exampleInputEmail1">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="">Number Of Lectures Per Week</label>
-                                        <input type="text" required name="lectures_number" class="form-control">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="">Module CAT Weight Percentage</label>
-                                        <input type="text" required name="cat_weight_percentage" class="form-control">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="">Module End Exam Weight Percentage</label>
-                                        <input type="text" required name="exam_weight_percentage" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <label for="exampleInputPassword1">Module Details</label>
-                                        <textarea required name="details" rows="10" class="form-control Summernote"></textarea>
-                                    </div>
-                                </div>
+                        <form  method="post" class="form-full-width" method="post">
+                            <div class="text-center">
+                                <h3>Personal Information</h3>
                             </div>
-                            <div class="card-footer text-right">
-                                <button type="submit" name="SignUp" class="btn btn-primary">Add Module</button>
+                            <div class="form-row">
+                                <label>Full Name</label>
+                                <input required type="text" name="name">
+                                <input type="hidden" name="id" value="<?php echo $ID; ?>">
+                            </div>
+                            <div class="form-row">
+                                <label>Email Address</label>
+                                <input required type="email" name="email">
+                            </div>
+                            <div class="form-row">
+                                <label for="form-email">Phone Number</label>
+                                <input required type="text" name="phone">
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <h3>Billing Address</h3>
+                            </div>
+                            <div class="form-row">
+                                <label>Company Name (Optional)</label>
+                                <input type="text" name="company_name">
+                            </div>
+                            <div class="form-row">
+                                <label>Country</label>
+                                <input type="text" required name="country">
+                            </div>
+                            <div class="form-row">
+                                <label>City</label>
+                                <input type="text" required name="city">
+                            </div>
+                            <div class="form-row">
+                                <label>Street Address</label>
+                                <input type="text" required name="adr">
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <h3>Account Security</h3>
+                            </div>
+                            <div class="form-row">
+                                <label>Password</label>
+                                <input required type="password" name="password">
+                            </div>
+                            <div class="form-row">
+                                <label>Confirm Password</label>
+                                <input required type="password" name="confirm_password">
+                            </div>
+
+                            <div class="form-row">
+                                <button type="submit" name="SignUp" class="button-secondary"><i class="fas fa-user-check icon-left"></i>Sign Up</button>
+                                <button class="button-secondary"><i class="fab fa-google icon-left"></i>Sign Up Using Google</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

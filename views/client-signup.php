@@ -155,23 +155,22 @@ require_once('../partials/_head.php');
             <div class="container">
                 <div class="column-row align-center">
                     <div class="column-50">
-
-                        <form class="form-full-width" method="post">
+                        <form  method="post" class="form-full-width" method="post">
                             <div class="text-center">
                                 <h3>Personal Information</h3>
                             </div>
                             <div class="form-row">
-                                <label for="">Full Name</label>
-                                <input id="" required type="text" name="name">
+                                <label>Full Name</label>
+                                <input required type="text" name="name">
                                 <input type="hidden" name="id" value="<?php echo $ID; ?>">
                             </div>
                             <div class="form-row">
-                                <label for="form-email">Email Address</label>
-                                <input id="form-email" required type="email" name="email">
+                                <label>Email Address</label>
+                                <input required type="email" name="email">
                             </div>
                             <div class="form-row">
                                 <label for="form-email">Phone Number</label>
-                                <input id="form-email" required type="text" name="phone">
+                                <input required type="text" name="phone">
                             </div>
                             <hr>
                             <div class="text-center">
@@ -198,12 +197,12 @@ require_once('../partials/_head.php');
                                 <h3>Account Security</h3>
                             </div>
                             <div class="form-row">
-                                <label for="form-password">Password</label>
-                                <input id="form-password" required type="password" name="password">
+                                <label>Password</label>
+                                <input required type="password" name="password">
                             </div>
                             <div class="form-row">
-                                <label for="form-password">Confirm Password</label>
-                                <input id="form-password" required type="password" name="confirm_password">
+                                <label>Confirm Password</label>
+                                <input required type="password" name="confirm_password">
                             </div>
 
                             <div class="form-row">
@@ -211,7 +210,6 @@ require_once('../partials/_head.php');
                                 <button class="button-secondary"><i class="fab fa-google icon-left"></i>Sign Up Using Google</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

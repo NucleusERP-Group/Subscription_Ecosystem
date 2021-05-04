@@ -13,4 +13,6 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../public/css/fontawesome.min.css">
     <link rel="stylesheet" href="../public/css/main.min.css">
+    <!-- Load Swal -->
+    <script src="../public/js/swal.js"></script>
 </head>

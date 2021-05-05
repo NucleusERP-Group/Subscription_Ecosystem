@@ -1,122 +1,80 @@
 <?php
-/*
- * Created on Mon May 03 2021
- *
- * The MIT License (MIT)
- * Copyright (c) 2021 MartDevelopers Inc
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
- * and associated documentation files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
- * TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-session_start();
-include('../config/config.php');
-
-if (isset($_POST['login'])) {
-    /* Secure Login */
-    $error = 0;
-    if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-    } else {
-        $error = 1;
-        $err = "Email Cannot  Be Empty";
-    }
-    if (isset($_POST['password']) && !empty($_POST['password'])) {
-        $password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['password']))));
-    } else {
-        $error = 1;
-        $err = "Password Cannot  Be Empty";
-    }
-    if (!$error) {
-        $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =?");
-        $stmt->bind_param('ss', $email, $password); //bind fetched parameters
-        $stmt->execute(); //execute bind
-        $stmt->bind_result($email, $password, $id); //bind result
-        $rs = $stmt->fetch();
-        $_SESSION['id'] = $id;
-        if ($rs) {
-            header("location:dashboard.php");
-        } else {
-            $err =  "Access Denied, Incorrect Email Or Password";
-        }
-    }
-}
-require_once('../partials/_head.php');
-
+require_once('../partials/_dashboard_head.php');
 ?>
 
-<body class="footer-dark">
-    <!-- Header -->
-    <?php require_once('../partials/_header.php'); ?>
-    <!-- Content -->
-    <section id="content">
-        <!-- Content Row -->
-        <section class="content-row content-row-color content-row-clouds">
-            <div class="container">
-                <header class="content-header content-header-small content-header-uppercase">
-                    <h1>
-                        NucleusSaaS ERP Client Login
-                    </h1>
-                    <p>
-                        Our customer portal uses 128-bit encryption. Your details are safe.
-                    </p>
-                </header>
-            </div>
-        </section>
-        <!-- Content Row -->
-        <section class="content-row">
-            <div class="container">
-                <div class="column-row align-center">
-                    <div class="column-50">
-                        <form  method="POST" class="form-full-width" >
-                            <div class="form-row">
-                                <label for="form-email">Email Address</label>
-                                <input id="form-email" name="email" type="text" name="email">
+<body class="application application-offset">
+    <!-- Application container -->
+    <div class="container-fluid container-application">
+        <!-- Sidenav -->
+        <!-- Content -->
+        <div class="main-content position-relative">
+
+            <!-- Page content -->
+            <div class="page-content">
+                <div class="min-vh-100 py-5 d-flex align-items-center">
+                    <div class="w-100">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-8 col-lg-4">
+                                <div class="card shadow zindex-100 mb-0">
+                                    <div class="card-body px-md-5 py-5">
+                                        <div class="mb-5">
+                                            <h6 class="h3">Login</h6>
+                                            <p class="text-muted mb-0">Sign in to your account to continue.</p>
+                                        </div>
+                                        <span class="clearfix"></span>
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Email address</label>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                    </div>
+                                                    <input type="email" class="form-control" id="input-email" placeholder="name@example.com">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-4">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <label class="form-control-label">Password</label>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <a href="#!" class="small text-muted text-underline--dashed border-primary">Lost password?</a>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-group-merge">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="far fa-key"></i></span>
+                                                    </div>
+                                                    <input type="password" class="form-control" id="input-password" placeholder="Password">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">
+                                                            <a href="#" data-toggle="password-text" data-target="#input-password">
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-4"><button type="button" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                                                    <span class="btn-inner--text">Sign in</span>
+                                                    <span class="btn-inner--icon"><i class="far fa-long-arrow-alt-right"></i></span>
+                                                </button></div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer px-md-5"><small>Not registered?</small>
+                                        <a href="#" class="small font-weight-bold">Create account</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-row">
-                                <label for="form-password">Password</label>
-                                <input id="form-password" name="password" type="password" name="password">
-                            </div>
-                            <div class="form-row">
-                                <input  type="submit" name="login" class="button-secondary" value="Sign In"><i class="fas fa-lock icon-left"></i>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Content Row -->
-        <section class="content-row content-row-gray">
-            <div class="container">
-                <div class="column-row align-center">
-                    <div class="column-50 text-align-center">
-                        <p class="text-color-gray">
-                            Having Troubles Logging Into Your Account?<br>
-                            <a href="client-reset-password.php">Password Reset<i class="fas fa-angle-right icon-right"></i></a>
-                        </p>
-                        <p class="text-color-gray">
-                            New to NucleusSaaS ERP Ecosystem?<br>
-                            <a href="client-signup.php">Create Account<i class="fas fa-angle-right icon-right"></i></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
-    <!-- Footer -->
-    <?php require_once('../partials/_footer.php'); ?>
-    <!-- Scripts -->
-    <?php require_once('../partials/_scripts.php'); ?>
+            <!-- Footer -->
+        </div>
+    </div>
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <?php require_once('../partials/_dashboard_footer.php'); ?>
 </body>
 
 </html>

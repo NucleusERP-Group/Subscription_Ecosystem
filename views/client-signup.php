@@ -83,16 +83,16 @@ if (isset($_POST['signIn'])) {
             if (mysqli_num_rows($res) > 0) {
                 $row = mysqli_fetch_assoc($res);
                 if ($email == $row['email'] || $phone == $row['phone']) {
-                    $err =  "A Client With This  $email Or  This Phone Number : $phone Already Exists";
+                    $err =  "A Client With This Email:  $email Or  This Phone Number: $phone Already Exists";
                 }
             } else {
                 /* No Error Or Duplicate */
                 $query = "INSERT INTO NucleusSAASERP_Users  (id, name, phone, email, password) VALUES (?,?,?,?,?)";
                 $stmt = $mysqli->prepare($query);
-                $rc = $stmt->bind_param('sssss', $id, $name, $phone, $email, $password);
+                $rc = $stmt->bind_param('sssss', $id, $name, $phone, $email, $new_password);
                 $stmt->execute();
                 if ($stmt) {
-                    $success = "$name Account Created, Proceed To Login";
+                    $success = "Hello $name. Your Account Has Been Created, Proceed To Login";
                 } else {
                     $info = "Please Try Again Or Try Later";
                 }
@@ -132,6 +132,8 @@ require_once('../partials/dashboard_head.php');
                                                         <span class="input-group-text"><i class="far fa-user"></i></span>
                                                     </div>
                                                     <input required type="text" name="name" class="form-control">
+                                                    <!-- Hide This -->
+                                                    <input required type="hidden" name="id" value="<?php echo $ID; ?>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -174,7 +176,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-key"></i></span>
                                                     </div>
-                                                    <input required name="confirm_passord" type="password" class="form-control" id="input-password-confirm" placeholder="********">
+                                                    <input required name="confirm_password" type="password" class="form-control" id="input-password-confirm" placeholder="********">
                                                 </div>
                                             </div>
                                             <div class="my-4">

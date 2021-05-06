@@ -19,6 +19,87 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+session_start();
+require_once('../config/config.php');
+require_once('../config/codeGen.php');
+/* Sign Up */
+if (isset($_POST['signIn'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "User ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['name']) && !empty($_POST['name'])) {
+        $name = mysqli_real_escape_string($mysqli, trim($_POST['name']));
+    } else {
+        $error = 1;
+        $err = "Name Cannot Be Empty";
+    }
+
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
+    } else {
+        $error = 1;
+        $err = "Phone Cannot Be Empty";
+    }
+
+
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    } else {
+        $error = 1;
+        $err = "Applicant Email  Cannot Be Empty";
+    }
+
+    if (isset($_POST['new_password']) && !empty($_POST['new_password'])) {
+        $new_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['new_password']))));
+    } else {
+        $error = 1;
+        $err = " Password  Cannot Be Empty";
+    }
+
+    if (isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])) {
+        $confirm_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['confirm_password']))));
+    } else {
+        $error = 1;
+        $err = "Confirm Password Cannot Be Empty";
+    }
+
+
+    if (!$error) {
+        /* Check If Passwords Match */
+        if ($new_password != $confirm_password) {
+            $err = "Passwords Do Not Match";
+        } else {
+
+            /* Prevent Double Entries */
+            $sql = "SELECT * FROM  NucleusSAASERP_Users WHERE  email = '$email' && phone = '$phone'  ";
+            $res = mysqli_query($mysqli, $sql);
+            if (mysqli_num_rows($res) > 0) {
+                $row = mysqli_fetch_assoc($res);
+                if ($email == $row['email'] || $phone == $row['phone']) {
+                    $err =  "A Client With This  $email Or  This Phone Number : $phone Already Exists";
+                }
+            } else {
+                /* No Error Or Duplicate */
+                $query = "INSERT INTO NucleusSAASERP_Users  (id, name, phone, email, password) VALUES (?,?,?,?,?)";
+                $stmt = $mysqli->prepare($query);
+                $rc = $stmt->bind_param('sssss', $id, $name, $phone, $email, $password);
+                $stmt->execute();
+                if ($stmt) {
+                    $success = "$name Account Created, Proceed To Login";
+                } else {
+                    $info = "Please Try Again Or Try Later";
+                }
+            }
+        }
+    }
+}
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -43,14 +124,14 @@ require_once('../partials/dashboard_head.php');
                                             <p class="text-muted mb-0">Sign Up To Access Client Panel.</p>
                                         </div>
                                         <span class="clearfix"></span>
-                                        <form role="form">
+                                        <form role="form" method="POST">
                                             <div class="form-group">
                                                 <label class="form-control-label">Full Name</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-user"></i></span>
                                                     </div>
-                                                    <input type="text" name="name" class="form-control">
+                                                    <input required type="text" name="name" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -59,7 +140,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-phone"></i></span>
                                                     </div>
-                                                    <input type="text" name="phone" class="form-control">
+                                                    <input required type="text" name="phone" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -68,7 +149,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-user"></i></span>
                                                     </div>
-                                                    <input type="email" name="email" class="form-control" id="input-email" placeholder="name@example.com">
+                                                    <input required type="email" name="email" class="form-control" id="input-email" placeholder="name@example.com">
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4">
@@ -77,7 +158,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-key"></i></span>
                                                     </div>
-                                                    <input name="new_password" type="password" class="form-control" id="input-password" placeholder="********">
+                                                    <input required name="new_password" type="password" class="form-control" id="input-password" placeholder="********">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
                                                             <a href="#" data-toggle="password-text" data-target="#input-password">
@@ -93,7 +174,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-key"></i></span>
                                                     </div>
-                                                    <input name="confirm_passord" type="password" class="form-control" id="input-password-confirm" placeholder="********">
+                                                    <input required name="confirm_passord" type="password" class="form-control" id="input-password-confirm" placeholder="********">
                                                 </div>
                                             </div>
                                             <div class="my-4">

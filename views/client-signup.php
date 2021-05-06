@@ -149,7 +149,7 @@ require_once('../partials/dashboard_head.php');
                                                 <label class="form-control-label">Email address</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                        <span class="input-group-text"><i class="far fa-envelope"></i></span>
                                                     </div>
                                                     <input required type="email" name="email" class="form-control" id="input-email" placeholder="name@example.com">
                                                 </div>

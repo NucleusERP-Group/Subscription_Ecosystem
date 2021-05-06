@@ -88,9 +88,8 @@ require_once('../partials/dashboard_head.php');
                                         $res = $stmt->get_result();
                                         while ($ml = $res->fetch_object()) {
                                         ?>
-                                            <div class="mb-5">
-                                                <h6 class="h3">Hello <?php echo $ml->name; ?>. Please Enter New Password </h6>
-                                                <p class="text-muted mb-0">Reset Token : <?php echo $ml->password; ?></p>
+                                            <div class="mb-5 text-center">
+                                                <h6 class="h3">Howdy <?php echo $ml->name; ?>. Please Enter New Password </h6>
                                             </div>
                                         <?php } ?>
                                         <span class="clearfix"></span>

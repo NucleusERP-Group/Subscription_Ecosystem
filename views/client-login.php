@@ -22,6 +22,7 @@
 require_once('../partials/dashboard_head.php');
 ?>
 
+
 <body class="application application-offset">
 
     <!-- Application container -->
@@ -95,9 +96,7 @@ require_once('../partials/dashboard_head.php');
     </div>
     <!-- Scripts -->
     <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
-    <script src="../public/assets/js/purpose.core.js"></script>
-    <!-- Purpose JS -->
-    <script src="../public/assets/js/purpose.js"></script>
+    <?php require_once('../partials/dashboard_scripts.php'); ?>
 </body>
 
 

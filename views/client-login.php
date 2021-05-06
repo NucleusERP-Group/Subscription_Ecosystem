@@ -43,14 +43,14 @@ require_once('../partials/dashboard_head.php');
                                             <p class="text-muted mb-0">Sign In To Access Client Panel.</p>
                                         </div>
                                         <span class="clearfix"></span>
-                                        <form role="form">
+                                        <form role="form" method="POST">
                                             <div class="form-group">
                                                 <label class="form-control-label">Email address</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-user"></i></span>
                                                     </div>
-                                                    <input type="email" name="email" class="form-control" id="input-email" placeholder="name@example.com">
+                                                    <input required type="email" name="email" class="form-control" id="input-email" placeholder="name@example.com">
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4">
@@ -66,7 +66,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-key"></i></span>
                                                     </div>
-                                                    <input type="password" name="password" class="form-control" id="input-password" placeholder="Password">
+                                                    <input required type="password" name="password" class="form-control" id="input-password" placeholder="Password">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">
                                                             <a href="#" data-toggle="password-text" data-target="#input-password">

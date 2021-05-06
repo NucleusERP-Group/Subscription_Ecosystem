@@ -19,6 +19,46 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+session_start();
+require_once('../config/config.php');
+
+if (isset($_POST['login'])) {
+    /* Error Checking */
+    $error = 0;
+
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    } else {
+        $error = 1;
+        $err = "Email  Cannot Be Empty";
+    }
+
+    if (isset($_POST['password']) && !empty($_POST['password'])) {
+        $password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['password']))));
+    } else {
+        $error = 1;
+        $err = "Password Cannot Be Empty";
+    }
+
+    if (!$error) {
+
+        $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =?");
+        $stmt->bind_param('ss', $email, $password); //bind fetched parameters
+
+        $stmt->execute(); //execute bind 
+        $stmt->bind_result($email, $password, $id); //bind result
+
+        $rs = $stmt->fetch();
+        $_SESSION['id'] = $id;
+        $_SESSION['email'] = $email;
+        
+        if ($rs) {
+            header("location:client-dashboard.php");
+        } else {
+            $err =  "Access Denied, Incorrect Email Or Password";
+        }
+    }
+}
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -76,7 +116,7 @@ require_once('../partials/dashboard_head.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="mt-4"><button type="submit" name="Login" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                                            <div class="mt-4"><button type="submit" name="login" class="btn btn-sm btn-primary btn-icon rounded-pill">
                                                     <span class="btn-inner--text">Sign in</span>
                                                     <span class="btn-inner--icon"><i class="far fa-long-arrow-alt-right"></i></span>
                                                 </button></div>

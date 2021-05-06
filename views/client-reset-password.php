@@ -21,42 +21,36 @@
  */
 session_start();
 require_once('../config/config.php');
+require_once('../config/codeGen.php');
 
-if (isset($_POST['login'])) {
-    /* Error Checking */
+if (isset($_POST['Reset_Password'])) {
     $error = 0;
-
     if (isset($_POST['email']) && !empty($_POST['email'])) {
         $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
     } else {
         $error = 1;
-        $err = "Email  Cannot Be Empty";
+        $err = "Enter Your Email Address";
     }
-
-    if (isset($_POST['password']) && !empty($_POST['password'])) {
-        $password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['password']))));
-    } else {
-        $error = 1;
-        $err = "Password Cannot Be Empty";
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $err = 'Invalid Email';
     }
+    $checkEmail = mysqli_query($mysqli, "SELECT `email` FROM `NucleusSAASERP_Users` WHERE `email` = '" . $_POST['email'] . "'") or exit(mysqli_error($mysqli));
+    if (mysqli_num_rows($checkEmail) > 0) {
 
-    if (!$error) {
-
-        $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =?");
-        $stmt->bind_param('ss', $email, $password); //bind fetched parameters
-
-        $stmt->execute(); //execute bind 
-        $stmt->bind_result($email, $password, $id); //bind result
-
-        $rs = $stmt->fetch();
-        $_SESSION['id'] = $id;
-        $_SESSION['email'] = $email;
-
-        if ($rs) {
-            header("location:client-dashboard.php");
+        $new_password = $checksum; /* Load  A Bunch Of Mumble Jumble To Represent New Password */
+        $query = "UPDATE NucleusSAASERP_Users SET  password=? WHERE email =?";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('ss', $new_password, $email);
+        $stmt->execute();
+        /* Alert */
+        if ($stmt) {
+            $_SESSION['email'] = $email;
+            $success = "Confim Your Password" && header("refresh:1; url=client-confirm-password.php");
         } else {
-            $err =  "Access Denied, Incorrect Email Or Password";
+            $err = "Password Reset Failed";
         }
+    } else {/* Ghost User */
+        $err = "Email Does Not Exist";
     }
 }
 require_once('../partials/dashboard_head.php');
@@ -79,8 +73,8 @@ require_once('../partials/dashboard_head.php');
                                 <div class="card shadow zindex-100 mb-0">
                                     <div class="card-body px-md-5 py-5">
                                         <div class="mb-5">
-                                            <h6 class="h3">Client Login Panel</h6>
-                                            <p class="text-muted mb-0">Sign In To Access Client Panel.</p>
+                                            <h6 class="h3">Client Login Reset Password Panel</h6>
+                                            <p class="text-muted mb-0">Enter Your Email To Request A Password Reset</p>
                                         </div>
                                         <span class="clearfix"></span>
                                         <form role="form" method="POST">
@@ -93,37 +87,14 @@ require_once('../partials/dashboard_head.php');
                                                     <input required type="email" name="email" class="form-control" id="input-email">
                                                 </div>
                                             </div>
-                                            <div class="form-group mb-4">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <label class="form-control-label">Password</label>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <a href="client-reset-password.php" class="small text-muted text-underline--dashed border-primary">Lost password?</a>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="far fa-key"></i></span>
-                                                    </div>
-                                                    <input required type="password" name="password" class="form-control" id="input-password">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">
-                                                            <a href="#" data-toggle="password-text" data-target="#input-password">
-                                                                <i class="far fa-eye"></i>
-                                                            </a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-4"><button type="submit" name="login" class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                                    <span class="btn-inner--text">Sign in</span>
+                                            <div class="mt-4"><button type="submit" name="Reset_Password" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                                                    <span class="btn-inner--text">Reset Password</span>
                                                     <span class="btn-inner--icon"><i class="far fa-user-lock"></i></span>
                                                 </button></div>
                                         </form>
                                     </div>
-                                    <div class="card-footer px-md-5"><small>Not registered?</small>
-                                        <a href="client-signup.php" class="small font-weight-bold">Create account</a>
+                                    <div class="card-footer px-md-5"><small>Remembered Password?</small>
+                                        <a href="client-login.php" class="small font-weight-bold">Sign In</a>
                                     </div>
                                 </div>
                             </div>

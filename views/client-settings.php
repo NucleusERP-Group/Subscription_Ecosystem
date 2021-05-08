@@ -36,7 +36,7 @@ if (isset($_POST['DeleteAccount'])) {
         $err = "Email Cannot Be Empty";
     }
     if (isset($_POST['password']) && !empty($_POST['password'])) {
-        $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
+        $password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['password']))));
     } else {
         $error = 1;
         $err = "Password Cannot Be Empty";
@@ -47,8 +47,8 @@ if (isset($_POST['DeleteAccount'])) {
         $error = 1;
         $err = "Account Status Cannot Be Empty";
     }
-    if (isset($_POST['id']) && !empty($_POST['id'])) {
-        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_SESSION['id']));
     } else {
         $error = 1;
         $err = "Account Session ID Cannot Be Empty";
@@ -56,7 +56,6 @@ if (isset($_POST['DeleteAccount'])) {
 
 
     if (!$error) {
-        $id = $_SESSION['id'];
         $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id'";
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
@@ -224,7 +223,8 @@ require_once('../partials/dashboard_head.php');
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="form-control-label text-white">You email</label>
-                                                            <input class="form-control" required name="email" type="text">
+                                                            <input class="form-control" required value="<?php echo $client->email;?>" readonly name="email" type="text">
+                                                            <input class="form-control" required name="account_status" value="1" type="hidden">
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="form-control-label text-white">To verify, type <span class="font-italic">delete my account</span> below</label>

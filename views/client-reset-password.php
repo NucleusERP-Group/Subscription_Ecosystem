@@ -34,7 +34,7 @@ if (isset($_POST['Reset_Password'])) {
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $err = 'Invalid Email';
     }
-    $checkEmail = mysqli_query($mysqli, "SELECT `email` FROM `NucleusSAASERP_Users` WHERE `email` = '" . $_POST['email'] . "'") or exit(mysqli_error($mysqli));
+    $checkEmail = mysqli_query($mysqli, "SELECT `email` FROM `NucleusSAASERP_Users` WHERE `email` = '" . $_POST['email'] . "'  AND account_status ='0'") or exit(mysqli_error($mysqli));
     if (mysqli_num_rows($checkEmail) > 0) {
 
         $new_password = $checksum; /* Load  A Bunch Of Mumble Jumble To Represent New Password */

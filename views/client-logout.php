@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Wed May 05 2021
+ * Created on Sat May 08 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -20,4 +20,9 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+session_start();
+unset($_SESSION['id']);
+unset($_SESSION['email']);
+session_destroy();
+header("Location: client-login.php");
+exit;

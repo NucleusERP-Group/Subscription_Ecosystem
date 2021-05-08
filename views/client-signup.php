@@ -78,7 +78,7 @@ if (isset($_POST['signIn'])) {
         } else {
 
             /* Prevent Double Entries */
-            $sql = "SELECT * FROM  NucleusSAASERP_Users WHERE  email = '$email' && phone = '$phone'  ";
+            $sql = "SELECT * FROM  NucleusSAASERP_Users WHERE  email = '$email' && phone = '$phone' && account_status = '1'  ";
             $res = mysqli_query($mysqli, $sql);
             if (mysqli_num_rows($res) > 0) {
                 $row = mysqli_fetch_assoc($res);

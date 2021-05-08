@@ -19,6 +19,7 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 session_start();
 require_once('../config/config.php');
 
@@ -42,7 +43,7 @@ if (isset($_POST['login'])) {
 
     if (!$error) {
 
-        $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =?");
+        $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =? AND account_status ='0' ");
         $stmt->bind_param('ss', $email, $password); //bind fetched parameters
 
         $stmt->execute(); //execute bind 
@@ -63,16 +64,15 @@ require_once('../partials/dashboard_head.php');
 ?>
 
 
-<body class="application application-offset">
+<body class="application application-offset" >
 
     <!-- Application container -->
     <div class="container-fluid container-application">
-        <!-- Sidenav -->
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
             <div class="page-content">
-                <div class="min-vh-100 py-5 d-flex align-items-center">
+                <div class="min-vh-100 py-5 d-flex align-items-center" >
                     <div class="w-100">
                         <div class="row justify-content-center">
                             <div class="col-sm-8 col-lg-6">

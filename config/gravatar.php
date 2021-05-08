@@ -22,9 +22,7 @@
 
 
 /* Get User Image Using Gravatar */
-
-
 $email_id = $client->email;
 $default = "";
-$size = 40;
+$size = 300;
 $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email_id))) . "?d=" . urlencode($default) . "&s=" . $size;

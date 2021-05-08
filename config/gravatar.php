@@ -21,13 +21,10 @@
  */
 
 
- /* Get User Image Using Gravatar */
+/* Get User Image Using Gravatar */
 
 
-$email_id = $_SESSION['email'];
+$email_id = $client->email;
 $default = "";
-$size = 200;
-
-$gravatar_url = "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
-
-header("content-type: image/jpeg");
+$size = 40;
+$grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email_id))) . "?d=" . urlencode($default) . "&s=" . $size;

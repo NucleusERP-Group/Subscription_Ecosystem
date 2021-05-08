@@ -72,7 +72,7 @@ while ($client = $res->fetch_object()) {
                     <li class="nav-item dropdown dropdown-animate">
                         <a class="nav-link pr-lg-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="avatar avatar-sm rounded-circle">
-                                <?php echo file_get_contents($gravatar_url); ?>
+                                <img alt="Image placeholder" src="<?php echo $grav_url; ?>">
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow">
@@ -137,8 +137,7 @@ while ($client = $res->fetch_object()) {
                         <a class="nav-link pr-lg-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="media media-pill align-items-center">
                                 <span class="avatar rounded-circle">
-                                    <?php echo file_get_contents($gravatar_url); ?>
-
+                                    <img alt="Image placeholder" src="<?php echo $grav_url; ?>">
                                 </span>
                                 <div class="ml-2 d-none d-lg-block">
                                     <span class="mb-0 text-sm  font-weight-bold"><?php echo $client->name; ?></span>

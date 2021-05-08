@@ -2,6 +2,14 @@
 <script src="../public/assets/js/purpose.core.js"></script>
 <!-- Purpose JS -->
 <script src="../public/assets/js/purpose.js"></script>
+<!-- Progress Bar -->
+<script src="../public/assets/libs/progressbar.js/dist/progressbar.min.js"></script>
+<!-- Apex Charts Js -->
+<script src="../public/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+<!-- Moment Js -->
+<script src="../public/assets/libs/moment/min/moment.min.js"></script>
+<!-- Full Calendar Js -->
+<script src="../public/assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
 <!-- Swal Js -->
 <script src="../public/js/swal.js"></script>
 <!-- Init Swal Js -->

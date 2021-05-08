@@ -15,4 +15,7 @@
     <link rel="stylesheet" href="../public/assets/libs/%40fortawesome/fontawesome-pro/css/all.min.css">
     <!-- Dashboard Theme CSS -->
     <link rel="stylesheet" href="../public/assets/css/purpose.css" id="stylesheet">
+    <!-- Full Calendar CSS -->
+    <link rel="stylesheet" href="../public/assets/libs/fullcalendar/dist/fullcalendar.min.css">
+
 </head>

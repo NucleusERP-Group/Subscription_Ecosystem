@@ -23,6 +23,91 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
+
+/* Update User Profile */
+if (isset($_POST['UpdateProfile'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_SESSION['id']));
+    } else {
+        $error = 1;
+        $err = "User ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['name']) && !empty($_POST['name'])) {
+        $name = mysqli_real_escape_string($mysqli, trim($_POST['name']));
+    } else {
+        $error = 1;
+        $err = "Name Cannot Be Empty";
+    }
+
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = mysqli_real_escape_string($mysqli, trim($_POST['phone']));
+    } else {
+        $error = 1;
+        $err = "Phone Cannot Be Empty";
+    }
+
+
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    } else {
+        $error = 1;
+        $err = "Email  Cannot Be Empty";
+    }
+
+    if (isset($_POST['company_name']) && !empty($_POST['company_name'])) {
+        $company_name = mysqli_real_escape_string($mysqli, trim($_POST['company_name']));
+    } else {
+        $error = 1;
+        $err = "Company Name  Cannot Be Empty";
+    }
+
+    if (isset($_POST['country']) && !empty($_POST['country'])) {
+        $country = mysqli_real_escape_string($mysqli, trim($_POST['country']));
+    } else {
+        $error = 1;
+        $err = "Country  Cannot Be Empty";
+    }
+
+    if (isset($_POST['city']) && !empty($_POST['city'])) {
+        $city = mysqli_real_escape_string($mysqli, trim($_POST['city']));
+    } else {
+        $error = 1;
+        $err = "City  Cannot Be Empty";
+    }
+
+    if (isset($_POST['adr']) && !empty($_POST['adr'])) {
+        $adr = mysqli_real_escape_string($mysqli, trim($_POST['adr']));
+    } else {
+        $error = 1;
+        $err = "Address  Cannot Be Empty";
+    }
+
+    if (isset($_POST['bio']) && !empty($_POST['bio'])) {
+        $bio = mysqli_real_escape_string($mysqli, trim($_POST['bio']));
+    } else {
+        $error = 1;
+        $err = "Bio Cannot Be Empty";
+    }
+
+    if (!$error) {
+
+        $query = "UPDATE NucleusSAASERP_Users  SET name =?, phone =?, email =?, company_name =?, country =?, city =?, adr =?, bio =? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('sssssssss', $name, $phone, $email, $company_name, $country, $city, $adr, $bio, $id);
+        $stmt->execute();
+        if ($stmt) {
+            $success = "Hello $name. Your Account Has Been Updated😉.";
+        } else {
+            $info = "Please Try Again Or Try Later";
+        }
+    }
+}
+
+
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -174,7 +259,7 @@ require_once('../partials/dashboard_head.php');
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Company Name</label>
-                                                    <input class="form-control" type="text" name="<?php echo $client->company_name; ?>" placeholder="Enter your company name">
+                                                    <input class="form-control" type="text" name="company_name" value="<?php echo $client->company_name; ?>" placeholder="Enter your company name">
                                                 </div>
                                             </div>
                                         </div>
@@ -216,7 +301,6 @@ require_once('../partials/dashboard_head.php');
                                         <hr />
                                         <!-- Save changes buttons -->
                                         <button type="submit" name="UpdateProfile" class="btn btn-sm btn-primary rounded-pill">Save changes</button>
-                                        <button type="button" class="btn btn-link text-muted">Cancel</button>
                                     </form>
                                 </div>
                             </div>

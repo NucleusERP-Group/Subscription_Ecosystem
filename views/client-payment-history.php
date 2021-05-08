@@ -135,29 +135,44 @@ require_once('../partials/dashboard_head.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">
-                                                <span class="badge badge-pill badge-soft-success">Paid</span>
-                                            </th>
-                                            <td>
-                                                <i class="far fa-calendar-alt mr-2"></i>
-                                                <span class="h6 text-sm">May 20, 2018</span>
-                                            </td>
-                                            <td>#10015</td>
-                                            <td><i class="far fa-credit-card mr-2"></i>Visa ending in 2035</td>
-                                            <td>$49.00 USD</td>
-                                            <td class="text-right">
-                                                <div class="actions">
-                                                    <div class="dropdown">
-                                                        <a class="action-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-ellipsis-h"></i></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#"><i class="far fa-file-pdf"></i>Download invoice</a>
-                                                            <a class="dropdown-item" href="#"><i class="far fa-trash-alt"></i>Delete</a>
+                                        <?php
+                                        $id = $_SESSION['id'];
+                                        $ret = "SELECT * FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id'  ";
+                                        $stmt = $mysqli->prepare($ret);
+                                        $stmt->execute(); //ok
+                                        $res = $stmt->get_result();
+                                        while ($payments = $res->fetch_object()) {
+                                        ?>
+                                            <tr>
+                                                <th scope="row">
+                                                <?php if($payments->status =='Paid'){
+                                                    echo " <span class='badge badge-pill badge-soft-success'>$payments->status</span>";
+                                                }else{
+                                                    echo " <span class='badge badge-pill badge-soft-danger'>$payments->status</span>";
+                                                }
+                                                ?>
+                                                </th>
+                                                <td>
+                                                    <i class="far fa-calendar-alt mr-2"></i>
+                                                    <span class="h6 text-sm"><?php echo date('M d Y', strtotime($payments->created_at));?></span>
+                                                </td>
+                                                <td><?php echo $payments->trans_code;?></td>
+                                                <td><i class="far fa-credit-card mr-2"></i><?php echo $payments->cc_number;?></td>
+                                                <td><?php echo $payments->amount;?></td>
+                                                <td class="text-right">
+                                                    <div class="actions">
+                                                        <div class="dropdown">
+                                                            <a class="action-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-ellipsis-h"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href="#"><i class="far fa-file-pdf"></i>Download Invoice</a>
+                                                                <a class="dropdown-item" href="#"><i class="far fa-trash-alt"></i>Delete</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        } ?>
                                     </tbody>
                                 </table>
                             </div>

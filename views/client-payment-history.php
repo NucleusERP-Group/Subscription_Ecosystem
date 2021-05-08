@@ -164,8 +164,7 @@ require_once('../partials/dashboard_head.php');
                                                         <div class="dropdown">
                                                             <a class="action-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-ellipsis-h"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#"><i class="far fa-file-pdf"></i>Download Invoice</a>
-                                                                <a class="dropdown-item" href="#"><i class="far fa-trash-alt"></i>Delete</a>
+                                                                <a class="dropdown-item" href=""><i class="far fa-file-pdf"></i>Download Invoice</a>
                                                             </div>
                                                         </div>
                                                     </div>

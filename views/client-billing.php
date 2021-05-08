@@ -93,33 +93,29 @@ if (isset($_POST['addCard'])) {
             "mastercard" => "/^5[1-5][0-9]{14}$/",
         );
 
-        if (preg_match($cardtype['visa'], $card_number)) {
-            /* Nothing */
-        } elseif (preg_match($cardtype['mastercard'], $card_number)) {
-            /* Nothing */
-        } else {
-            $err = 'Incorrect Credit Card Number';
-        }
-
-        /* Prevent Double Entries */
-        $sql = "SELECT * FROM  NucleusSAASERP_UsersCards WHERE  card_number = '$card_number' && card_cvv = '$card_cvv' ";
-        $res = mysqli_query($mysqli, $sql);
-        if (mysqli_num_rows($res) > 0) {
-            $row = mysqli_fetch_assoc($res);
-            if ($card_number == $row['card_number'] && $card_cvv == $row['card_cvv']) {
-                $err =  "Credit Card With This Number:  $card_number And This CVV: $card_cvv Already Exists";
-            }
-        } else {
-            /* No Error Or Duplicate */
-            $query = "INSERT INTO NucleusSAASERP_UsersCards  (card_id, card_holder_id, card_holder_name, card_holder_email, card_name, card_number, card_exp_date, card_cvv) VALUES (?,?,?,?,?,?,?,?)";
-            $stmt = $mysqli->prepare($query);
-            $rc = $stmt->bind_param('ssssssss', $card_id, $card_holder_id, $card_holder_name, $card_holder_email, $card_name, $card_number, $card_exp_date, $card_cvv);
-            $stmt->execute();
-            if ($stmt) {
-                $success = "$card_name Added.";
+        if (preg_match($cardtype['visa'], $card_number) && preg_match($cardtype['mastercard'], $card_number)) {
+            /* Prevent Double Entries */
+            $sql = "SELECT * FROM  NucleusSAASERP_UsersCards WHERE  card_number = '$card_number' && card_cvv = '$card_cvv' ";
+            $res = mysqli_query($mysqli, $sql);
+            if (mysqli_num_rows($res) > 0) {
+                $row = mysqli_fetch_assoc($res);
+                if ($card_number == $row['card_number'] && $card_cvv == $row['card_cvv']) {
+                    $err =  "Credit Card With This Number:  $card_number And This CVV: $card_cvv Already Exists";
+                }
             } else {
-                $info = "Please Try Again Or Try Later";
+                /* No Error Or Duplicate */
+                $query = "INSERT INTO NucleusSAASERP_UsersCards  (card_id, card_holder_id, card_holder_name, card_holder_email, card_name, card_number, card_exp_date, card_cvv) VALUES (?,?,?,?,?,?,?,?)";
+                $stmt = $mysqli->prepare($query);
+                $rc = $stmt->bind_param('ssssssss', $card_id, $card_holder_id, $card_holder_name, $card_holder_email, $card_name, $card_number, $card_exp_date, $card_cvv);
+                $stmt->execute();
+                if ($stmt) {
+                    $success = "$card_name Added.";
+                } else {
+                    $info = "Please Try Again Or Try Later";
+                }
             }
+        } else {
+            $err = "Incorrect Credit Card Number Or Unsupported Credit Card Vendor";
         }
     }
 }
@@ -214,7 +210,7 @@ require_once('../partials/dashboard_head.php');
                                                     ?>
                                                         <div class="row mb-3">
                                                             <div class="col-9">
-                                                                <?php echo $card->card_name . " " . $card->card_number . "(Expires On)" . $card->card_exp_date; ?>
+                                                                <?php echo $card->card_name . " " . $card->card_number . " Expiry: " . $card->card_exp_date; ?>
                                                             </div>
                                                             <div class="col-3 actions text-right">
                                                                 <a href="client-billing.php?delete=<?php echo $card->card_id; ?>" class="action-item" data-toggle="tooltip" data-original-title="Remove card">
@@ -290,7 +286,7 @@ require_once('../partials/dashboard_head.php');
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="button" name="addCard" class="btn btn-sm btn-primary rounded-pill">Save card</button>
+                                            <button type="submit" name="addCard" class="btn btn-sm btn-primary rounded-pill">Save card</button>
                                         </div>
                                     </form>
                                 </div>

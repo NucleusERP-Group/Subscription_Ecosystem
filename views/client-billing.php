@@ -94,7 +94,7 @@ if (isset($_POST['addCard'])) {
             "mastercard" => "/^5[1-5][0-9]{14}$/",
         );
 
-        if (preg_match($cardtype['visa'], $card_number) && preg_match($cardtype['mastercard'], $card_number)) {
+        if ((preg_match($cardtype['visa'], $card_number)) || (preg_match($cardtype['mastercard'], $card_number))) {
             /* Prevent Double Entries */
             $sql = "SELECT * FROM  NucleusSAASERP_UsersCards WHERE  card_number = '$card_number' && card_cvv = '$card_cvv' ";
             $res = mysqli_query($mysqli, $sql);
@@ -124,7 +124,7 @@ if (isset($_POST['addCard'])) {
 /* Delete Credit Cards */
 if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
-    $adn = "DELETE FROM NucleusSAASERP_UsersCards WHERE id=?";
+    $adn = "DELETE FROM NucleusSAASERP_UsersCards WHERE card_id=?";
     $stmt = $mysqli->prepare($adn);
     $stmt->bind_param('s', $delete);
     $stmt->execute();
@@ -229,11 +229,31 @@ require_once('../partials/dashboard_head.php');
                                                                 <?php echo $card->card_name . " " . $card->card_number . " Expiry: " . $card->card_exp_date; ?>
                                                             </div>
                                                             <div class="col-3 actions text-right">
-                                                                <a href="client-billing.php?delete=<?php echo $card->card_id; ?>" class="action-item" data-toggle="tooltip" data-original-title="Remove card">
+                                                                <a data-toggle="modal" href="#delete-<?php echo $card->card_id; ?>" class="action-item" data-toggle="tooltip" data-original-title="Remove card">
                                                                     <i class="far fa-trash-alt"></i>
                                                                 </a>
                                                             </div>
                                                         </div>
+                                                        <!-- Delete Card Confirmation -->
+                                                        <div class="modal fade" id="delete-<?php echo $card->card_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body text-center text-danger">
+                                                                        <h4>Delete <?php echo $card->card_name; ?> Details ?</h4>
+                                                                        <br>
+                                                                        <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                        <a href="client-billing.php?delete=<?php echo $card->card_id;?>" class="text-center btn btn-danger"> Delete </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Modal -->
                                                     <?php
                                                     } ?>
                                                 </div>

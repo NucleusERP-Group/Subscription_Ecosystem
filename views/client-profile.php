@@ -100,7 +100,7 @@ if (isset($_POST['UpdateProfile'])) {
         $rc = $stmt->bind_param('sssssssss', $name, $phone, $email, $company_name, $country, $city, $adr, $bio, $id);
         $stmt->execute();
         if ($stmt) {
-            $success = "Hello $name. Your Account Has Been Updated😉.";
+            $success = "Hello $name. Your Account Has Been Updated 😉.";
         } else {
             $info = "Please Try Again Or Try Later";
         }
@@ -137,7 +137,7 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Account settings</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Personal Details</h5>
                                 </div>
                                 <!-- Additional info -->
                             </div>
@@ -146,57 +146,8 @@ require_once('../partials/dashboard_head.php');
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 order-lg-2">
-                            <div class="card">
-                                <div class="list-group list-group-flush">
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <i class="far fa-user"></i>
-                                            <div class="media-body ml-3">
-                                                <a href="settings.html" class="stretched-link h6 mb-1">Settings</a>
-                                                <p class="mb-0 text-sm">Details about your personal information</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <i class="far fa-map-marker-alt"></i>
-                                            <div class="media-body ml-3">
-                                                <a href="addresses.html" class="stretched-link h6 mb-1">Addresses</a>
-                                                <p class="mb-0 text-sm">Faster checkout with saved addresses</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <i class="far fa-credit-card"></i>
-                                            <div class="media-body ml-3">
-                                                <a href="billing.html" class="stretched-link h6 mb-1">Billing</a>
-                                                <p class="mb-0 text-sm">Speed up your shopping experience</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <i class="far fa-file-invoice"></i>
-                                            <div class="media-body ml-3">
-                                                <a href="payment-history.html" class="stretched-link h6 mb-1">Payment history</a>
-                                                <p class="mb-0 text-sm">See previous orders and invoices</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="media">
-                                            <i class="far fa-bell"></i>
-                                            <div class="media-body ml-3">
-                                                <a href="notifications.html" class="stretched-link h6 mb-1">Notifications</a>
-                                                <p class="mb-0 text-sm">Choose what notification you will receive</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- User Profile Partial -->
+                        <?php require_once('../partials/dashboard_usersettings.php'); ?>
                         <div class="col-lg-8 order-lg-1">
                             <!-- Change avatar -->
                             <div class="card bg-gradient-warning hover-shadow-lg border-0">

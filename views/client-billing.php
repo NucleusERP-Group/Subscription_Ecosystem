@@ -19,6 +19,7 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 session_start();
 require_once('../config/config.php');
 require_once('../config/codeGen.php');
@@ -117,6 +118,21 @@ if (isset($_POST['addCard'])) {
         } else {
             $err = "Incorrect Credit Card Number Or Unsupported Credit Card Vendor";
         }
+    }
+}
+
+/* Delete Credit Cards */
+if (isset($_GET['delete'])) {
+    $delete = $_GET['delete'];
+    $adn = "DELETE FROM NucleusSAASERP_UsersCards WHERE id=?";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('s', $delete);
+    $stmt->execute();
+    $stmt->close();
+    if ($stmt) {
+        $success = "Card Record Deleted" && header("refresh:1; url=client-billing.php");
+    } else {
+        $info = "Please Try Again Or Try Later";
     }
 }
 

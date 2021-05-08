@@ -10,6 +10,12 @@
 <script src="../public/assets/libs/moment/min/moment.min.js"></script>
 <!-- Full Calendar Js -->
 <script src="../public/assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
+<!-- Flatpickr -->
+<script src="../public/assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+<!-- Select2 -->
+<script src="../public/assets/libs/select2/dist/js/select2.min.js"></script>
+<!-- Tag Input -->
+<script src="../public/assets/libs/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 <!-- Swal Js -->
 <script src="../public/js/swal.js"></script>
 <!-- Init Swal Js -->

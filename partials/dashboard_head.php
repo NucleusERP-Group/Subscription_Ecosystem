@@ -17,5 +17,9 @@
     <link rel="stylesheet" href="../public/assets/css/purpose.css" id="stylesheet">
     <!-- Full Calendar CSS -->
     <link rel="stylesheet" href="../public/assets/libs/fullcalendar/dist/fullcalendar.min.css">
+    <!-- FlatPickr CSS -->
+    <link rel="stylesheet" href="../public/assets/libs/flatpickr/dist/flatpickr.min.css">
+    <!-- Select 2 CSS -->
+    <link rel="stylesheet" href="../public/assets/libs/select2/dist/css/select2.min.css">
 
 </head>

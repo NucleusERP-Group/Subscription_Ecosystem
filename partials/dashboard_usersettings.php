@@ -28,15 +28,6 @@
                     </div>
                 </div>
             </div>
-            <div class="list-group-item">
-                <div class="media">
-                    <i class="far fa-bell"></i>
-                    <div class="media-body ml-3">
-                        <a href="client-notifications.php" class="stretched-link h6 mb-1">Mail Notifications</a>
-                        <p class="mb-0 text-sm">Choose what notification you will receive</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

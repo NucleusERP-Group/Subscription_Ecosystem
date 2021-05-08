@@ -25,7 +25,60 @@ require_once('../config/checklogin.php');
 client_login();
 
 /* Delete Account */
+if (isset($_POST['DeleteAccount'])) {
 
+    //Change Password
+    $error = 0;
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    } else {
+        $error = 1;
+        $err = "Email Cannot Be Empty";
+    }
+    if (isset($_POST['password']) && !empty($_POST['password'])) {
+        $password = mysqli_real_escape_string($mysqli, trim($_POST['password']));
+    } else {
+        $error = 1;
+        $err = "Password Cannot Be Empty";
+    }
+    if (isset($_POST['account_status']) && !empty($_POST['account_status'])) {
+        $account_status = mysqli_real_escape_string($mysqli, trim($_POST['account_status']));
+    } else {
+        $error = 1;
+        $err = "Account Status Cannot Be Empty";
+    }
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "Account Session ID Cannot Be Empty";
+    }
+
+
+    if (!$error) {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id'";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($email != $row['email']) {
+                $err =  "Please Enter Correct Account Email";
+            } elseif ($password != $row['password']) {
+                $err = "Incorrect Account Password";
+            } else {
+                $query = "UPDATE NucleusSAASERP_Users SET account_status =? WHERE id =?";
+                $stmt = $mysqli->prepare($query);
+                $rc = $stmt->bind_param('ss', $account_status, $id);
+                $stmt->execute();
+                if ($stmt) {
+                    $success = "Account Deleted"  && header("refresh:1; url=client-logout.php");;
+                } else {
+                    $err = "Please Try Again Or Try Later";
+                }
+            }
+        }
+    }
+}
 /* Change Password */
 if (isset($_POST['change_password'])) {
 

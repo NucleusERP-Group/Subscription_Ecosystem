@@ -19,8 +19,11 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+session_start();
+require_once('../config/config.php');
+require_once('../config/checklogin.php');
+client_login();
 require_once('../partials/dashboard_head.php');
-
 ?>
 
 <body class="application application-offset">
@@ -375,15 +378,15 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php');?>
+        <?php require_once('../partials/dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
-            <?php require_once('../partials/dashboard_main_nav.php');?>
+            <?php require_once('../partials/dashboard_main_nav.php'); ?>
             <!-- Page content -->
             <div class="page-content">
                 <!-- Page title -->
-                <?php require_once('../partials/dashboard_ml.php');?>
+                <?php require_once('../partials/dashboard_ml.php'); ?>
                 <div class="row">
                     <div class="col-xl-8 col-md-6">
                         <div class="card card-fluid">

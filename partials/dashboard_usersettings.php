@@ -6,7 +6,7 @@
                     <i class="far fa-user"></i>
                     <div class="media-body ml-3">
                         <a href="client-settings.php" class="stretched-link h6 mb-1">Settings</a>
-                        <p class="mb-0 text-sm">Details about your personal information</p>
+                        <p class="mb-0 text-sm">Manage Personal Information</p>
                     </div>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                     <i class="far fa-credit-card"></i>
                     <div class="media-body ml-3">
                         <a href="client-billing.php" class="stretched-link h6 mb-1">Billings</a>
-                        <p class="mb-0 text-sm">Speed up your shopping experience</p>
+                        <p class="mb-0 text-sm">Speed Up Your Billing Experience</p>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <i class="far fa-file-invoice"></i>
                     <div class="media-body ml-3">
                         <a href="client-payment-history.php" class="stretched-link h6 mb-1">Payment history</a>
-                        <p class="mb-0 text-sm">See previous orders and invoices</p>
+                        <p class="mb-0 text-sm">Manage Your Orders And Invoices</p>
                     </div>
                 </div>
             </div>

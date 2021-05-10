@@ -62,7 +62,8 @@ while ($client = $res->fetch_object()) {
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="<?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?>">
                                             <div>
-                                                <span class="avatar bg-primary text-white rounded-circle">AM</span>
+                                                <span class="avatar bg-primary text-white rounded-circle"><?php $notifdetails = "$notif->notification_from";
+                                                                                                            echo substr($notifdetails, 0, 4); ?></span>
                                             </div>
                                             <div class="flex-fill ml-3">
                                                 <div class="h6 text-sm mb-0"><?php echo $notif->notification_from; ?> <small class="float-right text-muted"><?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?></small></div>
@@ -136,7 +137,8 @@ while ($client = $res->fetch_object()) {
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="<?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?>">
                                             <div>
-                                                <span class="avatar bg-primary text-white rounded-circle"><?php $notifdetails = "$notif->notification_from"; echo substr($notifdetails, 0, 4); ?></span>
+                                                <span class="avatar bg-primary text-white rounded-circle"><?php $notifdetails = "$notif->notification_from";
+                                                                                                            echo substr($notifdetails, 0, 4); ?></span>
                                             </div>
                                             <div class="flex-fill ml-3">
                                                 <div class="h6 text-sm mb-0"><?php echo $notif->notification_from; ?> <small class="float-right text-muted"><?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?></small></div>

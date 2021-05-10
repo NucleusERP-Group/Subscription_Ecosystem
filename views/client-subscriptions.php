@@ -99,7 +99,20 @@ if (isset($_POST['PurchasePackage'])) {
         $error = 1;
         $err = "Payment Amount  Cannot Be Empty";
     }
+    /* Notifications */
+    if (isset($_POST['notification_from']) && !empty($_POST['notification_from'])) {
+        $notification_from = mysqli_real_escape_string($mysqli, trim($_POST['notification_from']));
+    } else {
+        $error = 1;
+        $err = "Notification From  Cannot Be Empty";
+    }
 
+    if (isset($_POST['notification_details']) && !empty($_POST['notification_details'])) {
+        $notification_details = mysqli_real_escape_string($mysqli, trim($_POST['notification_details']));
+    } else {
+        $error = 1;
+        $err = "Notification Details  Cannot Be Empty";
+    }
 
     if (!$error) {
         /* Prevent Double Entries */
@@ -112,12 +125,17 @@ if (isset($_POST['PurchasePackage'])) {
             }
         } else {
             /* No Error Or Duplicate */
-            $query = "INSERT INTO NucleusSAASERP_UserSubscriptions  (id, subscription_code, package_code, package_name, client_id, client_name, client_email, date_subscribed, payment_status, payment_amt) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO NucleusSAASERP_UserSubscriptions  (id, subscription_code, package_code, package_name, client_id, client_name, client_email, date_subscribed, payment_status, payment_amt) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            /* Notify User */
+            $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
             $stmt = $mysqli->prepare($query);
-            $rc = $stmt->bind_param('sssssssssss', $id, $subscription_code, $package_code, $package_name, $client_id, $client_name, $client_email, $date_subscribed, $payment_status, $payment_amt);
+            $notifstmt = $mysqli->prepare($notif);
+            $rc = $stmt->bind_param('ssssssssss', $id, $subscription_code, $package_code, $package_name, $client_id, $client_name, $client_email, $date_subscribed, $payment_status, $payment_amt);
+            $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
             $stmt->execute();
-            if ($stmt) {
-                $success = "Subscription  Added, Please Proceed To Pay For Your Subscription Package.";
+            $notifstmt->execute();
+            if ($stmt && $notifstmt) {
+                $success = "Subscription  Added. Proceed To Pay";
             } else {
                 $info = "Please Try Again Or Try Later";
             }
@@ -235,9 +253,14 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="date_subscribed" value="<?php echo date('d M Y'); ?>">
                                                 <input type="hidden" name="payment_status" value="Pending">
                                                 <input type="hidden" name="payment_amt" value="<?php echo $packages->package_monthly_price; ?>">
+                                                <!-- Notification Details -->
+                                                <input type="hidden" name="notification_from" value="NucleusSaaSERP Subscription">
+                                                <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. 
+                                                Kindly Proceed To Pay For Your <?php echo $packages->package_code . " " . $packages->package_name; ?>
+                                                Subscription Payment In Invoices Tab On Your Dashbboard.">
                                                 <button type="submit" name="PurchasePackage" class="action-item">
                                                     <i class="far fa-shopping-cart"></i>
-                                                    Purchase Package
+                                                    Subscribe Package
                                                 </button>
                                             </form>
                                         </div>

@@ -189,12 +189,41 @@ while ($client = $res->fetch_object()) {
                     <div class="col-sm-6">
                         <ul class="list-unstyled mb-0">
                             <li>
-                                <a class="list-link" href="#">
+                                <a class="list-link" href="client-profile.php">
                                     <i class="far fa-search"></i>
-                                    <span>macbook pro</span> in Laptops
+                                    <span>Profile & Settings</span>
                                 </a>
                             </li>
-
+                            <li>
+                                <a class="list-link" href="client-billing.php">
+                                    <i class="far fa-search"></i>
+                                    <span>Billings & Billing History</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-link" href="client-subscriptions.php">
+                                    <i class="far fa-search"></i>
+                                    <span>Subscriptions</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-link" href="client-erp-instance.php">
+                                    <i class="far fa-search"></i>
+                                    <span>ERP Instance</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-link" href="client-invoices.php">
+                                    <i class="far fa-search"></i>
+                                    <span>Invoices</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-link" href="client-api-keys.php">
+                                    <i class="far fa-search"></i>
+                                    <span>Market Place API Keys</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

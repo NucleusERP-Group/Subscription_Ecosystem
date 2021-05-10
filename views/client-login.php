@@ -64,7 +64,7 @@ require_once('../partials/dashboard_head.php');
 ?>
 
 
-<body class="application application-offset" >
+<body class="application application-offset">
 
     <!-- Application container -->
     <div class="container-fluid container-application">
@@ -72,7 +72,7 @@ require_once('../partials/dashboard_head.php');
         <div class="main-content position-relative">
             <!-- Main nav -->
             <div class="page-content">
-                <div class="min-vh-100 py-5 d-flex align-items-center" >
+                <div class="min-vh-100 py-5 d-flex align-items-center">
                     <div class="w-100">
                         <div class="row justify-content-center">
                             <div class="col-sm-8 col-lg-6">
@@ -85,7 +85,7 @@ require_once('../partials/dashboard_head.php');
                                         <span class="clearfix"></span>
                                         <form role="form" method="POST">
                                             <div class="form-group">
-                                                <label class="form-control-label">Email address</label>
+                                                <label class="form-control-label">Email Address</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="far fa-user"></i></span>
@@ -99,7 +99,7 @@ require_once('../partials/dashboard_head.php');
                                                         <label class="form-control-label">Password</label>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <a href="client-reset-password.php" class="small text-muted text-underline--dashed border-primary">Lost password?</a>
+                                                        <a href="client-reset-password.php" class="small text-muted text-underline--dashed border-primary">Lost Password?</a>
                                                     </div>
                                                 </div>
                                                 <div class="input-group input-group-merge">
@@ -116,10 +116,16 @@ require_once('../partials/dashboard_head.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="mt-4"><button type="submit" name="login" class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                                    <span class="btn-inner--text">Sign in</span>
+                                            <div class="mt-4">
+                                                <button type="submit" name="login" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                                                    <span class="btn-inner--text">Sign In</span>
                                                     <span class="btn-inner--icon"><i class="far fa-user-lock"></i></span>
-                                                </button></div>
+                                                </button>
+                                                <a href="client-signin-with-google.php" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                                                    <span class="btn-inner--text">Sign In With Google</span>
+                                                    <span class="btn-inner--icon"><i class="fab fa-google"></i></span>
+                                                </a>
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="card-footer px-md-5"><small>Not registered?</small>

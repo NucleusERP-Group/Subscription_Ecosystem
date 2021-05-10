@@ -25,8 +25,6 @@ require_once('../config/http.php');
 require_once('../config/codeGen.php');
 require_once('../config/google_config.php');
 
-
-
 $client = new oauth_client_class;
 
 // set the offline access only if you need to call an API
@@ -85,7 +83,6 @@ if ($success) {
             $_SESSION["name"] = $user->name;
             $_SESSION["email"] = $user->email;
             $_SESSION["new_user"] = "no";
-            $_SESSION["id"] = $user->id;
         } else {
             // Insert New User In Database
             $sql = "INSERT INTO `NucleusSAASERP_Users` (`id`, `name`, `email`) VALUES " . "(:id, :name, :email)";
@@ -100,14 +97,13 @@ if ($success) {
                 $_SESSION["email"] = $user->email;
                 $_SESSION["new_user"] = "yes";
                 $_SESSION["e_msg"] = "";
-                $_SESSION["id"] = $user->id;
             }
         }
     } catch (Exception $ex) {
         $_SESSION["e_msg"] = $ex->getMessage();
     }
 
-    $_SESSION["user_id"] = $user->id;
+    $_SESSION["id"] = $user->id;
 } else {
     $_SESSION["e_msg"] = $client->error;
 }

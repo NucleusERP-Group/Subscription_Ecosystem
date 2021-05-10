@@ -21,7 +21,8 @@
  */
 
 $id = $_SESSION['id'];
-$ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id'  ";
+$email = $_SESSION['email'];
+$ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' OR email = '$email'  ";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute(); //ok
 $res = $stmt->get_result();
@@ -43,6 +44,7 @@ while ($client = $res->fetch_object()) {
                     <li class="nav-item">
                         <a href="#" class="nav-link nav-link-icon" data-action="omnisearch-open" data-target="#omnisearch"><i class="far fa-search"></i></a>
                     </li>
+
                     <li class="nav-item dropdown dropdown-animate">
                         <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg dropdown-menu-arrow p-0">
@@ -50,25 +52,36 @@ while ($client = $res->fetch_object()) {
                                 <h5 class="heading h6 mb-0">Notifications</h5>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="2 hrs ago">
-                                        <div>
-                                            <span class="avatar bg-primary text-white rounded-circle">AM</span>
+                                <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute(); //ok
+                                $res = $stmt->get_result();
+                                while ($notif = $res->fetch_object()) {
+                                ?>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="<?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?>">
+                                            <div>
+                                                <span class="avatar bg-primary text-white rounded-circle"><?php $notifdetails = "$notif->notification_from";
+                                                                                                            echo substr($notifdetails, 0, 4); ?></span>
+                                            </div>
+                                            <div class="flex-fill ml-3">
+                                                <div class="h6 text-sm mb-0"><?php echo $notif->notification_from; ?> <small class="float-right text-muted"><?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?></small></div>
+                                                <p class="text-sm lh-140 mb-0">
+                                                    <?php echo $notif->notification_details; ?>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="flex-fill ml-3">
-                                            <div class="h6 text-sm mb-0">Alex Michael <small class="float-right text-muted">2 hrs ago</small></div>
-                                            <p class="text-sm lh-140 mb-0">
-                                                Some quick example text to build on the card title.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                <?php } ?>
+
                             </div>
                             <div class="py-3 text-center">
                                 <a href="client-notifications.php" class="link link-sm link--style-3">View all notifications</a>
                             </div>
                         </div>
                     </li>
+
                     <li class="nav-item dropdown dropdown-animate">
                         <a class="nav-link pr-lg-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="avatar avatar-sm rounded-circle">
@@ -114,19 +127,28 @@ while ($client = $res->fetch_object()) {
                                 <h5 class="heading h6 mb-0">Notifications</h5>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="2 hrs ago">
-                                        <div>
-                                            <span class="avatar bg-primary text-white rounded-circle">AM</span>
+                                <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute(); //ok
+                                $res = $stmt->get_result();
+                                while ($notif = $res->fetch_object()) {
+                                ?>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="<?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?>">
+                                            <div>
+                                                <span class="avatar bg-primary text-white rounded-circle"><?php $notifdetails = "$notif->notification_from";
+                                                                                                            echo substr($notifdetails, 0, 4); ?></span>
+                                            </div>
+                                            <div class="flex-fill ml-3">
+                                                <div class="h6 text-sm mb-0"><?php echo $notif->notification_from; ?> <small class="float-right text-muted"><?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?></small></div>
+                                                <p class="text-sm lh-140 mb-0">
+                                                    <?php echo $notif->notification_details; ?>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="flex-fill ml-3">
-                                            <div class="h6 text-sm mb-0">Alex Michael <small class="float-right text-muted">2 hrs ago</small></div>
-                                            <p class="text-sm lh-140 mb-0">
-                                                Some quick example text to build on the card title.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                <?php } ?>
                             </div>
                             <div class="py-3 text-center">
                                 <a href="client-notifications.php" class="link link-sm link--style-3">View all notifications</a>

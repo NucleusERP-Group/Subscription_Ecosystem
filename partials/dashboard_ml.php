@@ -21,7 +21,8 @@
  */
 
 $id = $_SESSION['id'];
-$ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id'  ";
+$email = $_SESSION['email'];
+$ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' OR email = '$email'  ";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute(); //ok
 $res = $stmt->get_result();

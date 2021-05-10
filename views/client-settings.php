@@ -29,8 +29,8 @@ if (isset($_POST['DeleteAccount'])) {
 
     //Change Password
     $error = 0;
-    if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_SESSION['email']));
     } else {
         $error = 1;
         $err = "Email Cannot Be Empty";
@@ -56,7 +56,7 @@ if (isset($_POST['DeleteAccount'])) {
 
 
     if (!$error) {
-        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id'";
+        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id' || email = '$email'";
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
@@ -65,9 +65,9 @@ if (isset($_POST['DeleteAccount'])) {
             } elseif ($password != $row['password']) {
                 $err = "Incorrect Account Password";
             } else {
-                $query = "UPDATE NucleusSAASERP_Users SET account_status =? WHERE id =?";
+                $query = "UPDATE NucleusSAASERP_Users SET account_status =? WHERE id =? || email = ?";
                 $stmt = $mysqli->prepare($query);
-                $rc = $stmt->bind_param('ss', $account_status, $id);
+                $rc = $stmt->bind_param('sss', $account_status, $id, $email);
                 $stmt->execute();
                 if ($stmt) {
                     $success = "Account Deleted"  && header("refresh:1; url=client-logout.php");;
@@ -83,12 +83,12 @@ if (isset($_POST['change_password'])) {
 
     //Change Password
     $error = 0;
-    if (isset($_POST['old_password']) && !empty($_POST['old_password'])) {
+    /* if (isset($_POST['old_password']) && !empty($_POST['old_password'])) {
         $old_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['old_password']))));
     } else {
         $error = 1;
         $err = "Old Password Cannot Be Empty";
-    }
+    } */
     if (isset($_POST['new_password']) && !empty($_POST['new_password'])) {
         $new_password = mysqli_real_escape_string($mysqli, trim(sha1(md5($_POST['new_password']))));
     } else {
@@ -104,20 +104,18 @@ if (isset($_POST['change_password'])) {
 
     if (!$error) {
         $id = $_SESSION['id'];
-        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id'";
+        $email = $_SESSION['email '];
+        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id' || email = '$email'";
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
-            if ($old_password != $row['password']) {
-                $err =  "Please Enter Correct Old Password";
-            } elseif ($new_password != $confirm_password) {
+            if ($new_password != $confirm_password) {
                 $err = "Confirmation Password Does Not Match";
             } else {
-                $id = $_SESSION['id'];
                 $new_password  = sha1(md5($_POST['new_password']));
-                $query = "UPDATE NucleusSAASERP_Users SET  password =? WHERE id =?";
+                $query = "UPDATE NucleusSAASERP_Users SET  password =? WHERE id =? || email = '$email'";
                 $stmt = $mysqli->prepare($query);
-                $rc = $stmt->bind_param('ss', $new_password, $id);
+                $rc = $stmt->bind_param('sss', $new_password, $id, $email);
                 $stmt->execute();
                 if ($stmt) {
                     $success = "Password Updated.";
@@ -143,7 +141,8 @@ require_once('../partials/dashboard_head.php');
             <?php require_once('../partials/dashboard_main_nav.php');
             /* Logged In Client Session */
             $id = $_SESSION['id'];
-            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id'  ";
+            $email = $_SESSION['email'];
+            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' || email = '$email' ";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute(); //ok
             $res = $stmt->get_result();
@@ -157,7 +156,7 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Account settings</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Account Settings</h5>
                                 </div>
                                 <!-- Additional info -->
                             </div>
@@ -171,34 +170,35 @@ require_once('../partials/dashboard_head.php');
                         <div class="col-lg-8 order-lg-1">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class=" h6 mb-0">Change password</h5>
+                                    <h5 class=" h6 mb-0">Change Password</h5>
                                 </div>
                                 <div class="card-body">
                                     <form method="post">
-                                        <div class="row">
+                                        <!-- 
+                                            <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Old password</label>
                                                     <input class="form-control" name="old_password" type="password">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">New password</label>
+                                                    <label class="form-control-label">New Password</label>
                                                     <input class="form-control" name="new_password" type="password">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">Confirm password</label>
+                                                    <label class="form-control-label">Confirm Password</label>
                                                     <input class="form-control" name="confirm_password" type="password">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                            <button type="submit" name="change_password" class="btn btn-sm btn-primary rounded-pill">Update password</button>
+                                            <button type="submit" name="change_password" class="btn btn-sm btn-primary rounded-pill">Update Password</button>
                                         </div>
                                     </form>
                                 </div>
@@ -218,25 +218,25 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="modal-body">
                                                         <div class="text-center">
                                                             <i class="far fa-exclamation-circle fa-3x opacity-8"></i>
-                                                            <h5 class="text-white mt-4">Should we stop now?</h5>
-                                                            <p class="text-sm text-sm">All your data will be erased. You will no longer be billed, and your username will be available to anyone.</p>
+                                                            <h5 class="text-white mt-4">Should We Stop Now?</h5>
+                                                            <p class="text-sm text-sm">All Your Data Will Be Erased. You Will No Longer Be Billed, And Your Username Will Be Available To Anyone.</p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="form-control-label text-white">You email</label>
-                                                            <input class="form-control" required value="<?php echo $client->email;?>" readonly name="email" type="text">
+                                                            <label class="form-control-label text-white">You Email</label>
+                                                            <input class="form-control" required value="<?php echo $client->email; ?>" readonly name="email" type="text">
                                                             <input class="form-control" required name="account_status" value="1" type="hidden">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="form-control-label text-white">To verify, type <span class="font-italic">delete my account</span> below</label>
+                                                            <label class="form-control-label text-white">To Verify, Type <span class="font-italic">Delete My Account</span> Below</label>
                                                             <input class="form-control" required type="text">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="form-control-label text-white">Your password</label>
+                                                            <label class="form-control-label text-white">Your Password</label>
                                                             <input class="form-control" required name="password" type="password">
                                                         </div>
                                                         <div class="mt-4">
-                                                            <button type="submit" name="DeleteAccount" class="btn btn-block btn-sm btn-white text-danger rounded-pill">Delete my account</button>
-                                                            <button type="button" class="btn btn-block btn-sm btn-link text-light mt-4" data-dismiss="modal">Not this time</button>
+                                                            <button type="submit" name="DeleteAccount" class="btn btn-block btn-sm btn-white text-danger rounded-pill">Delete My Account</button>
+                                                            <button type="button" class="btn btn-block btn-sm btn-link text-light mt-4" data-dismiss="modal">Not This Time</button>
                                                         </div>
                                                     </div>
                                                 </div>

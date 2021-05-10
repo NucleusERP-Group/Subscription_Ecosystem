@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Sat May 01 2021
+ * Created on Mon May 10 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -20,10 +20,27 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-$dbuser = "root";
-$dbpass = "";
-$host = "localhost";
-$db = "NucleusSAASERP_Subscription_Manager";
-$mysqli = new mysqli($host, $dbuser, $dbpass, $db);
+require_once('../vendor/PHPMailer/src/SMTP.php');
+require_once('../vendor/PHPMailer/src/PHPMailer.php');
+require_once('../vendor/PHPMailer/src/Exception.php');
+$mail = new PHPMailer\PHPMailer\PHPMailer();
 
-
+/* Consume Mailer And Load system settings */
+$ret = "SELECT * FROM `NucleusSAASERP_MailSettings` ";
+$stmt = $mysqli->prepare($ret);
+$stmt->execute(); //ok
+$res = $stmt->get_result();
+while ($sys = $res->fetch_object()) {
+    $mail->setFrom($sys->stmp_sent_from);
+    $mail->addAddress($_POST['client_email']);
+    $mail->Subject = $_POST['subject'];
+    $mail->Body = $_POST['message'];
+    $mail->isHTML(true);
+    $mail->IsSMTP();
+    $mail->SMTPSecure = 'ssl';
+    $mail->Host = $sys->stmp_host;
+    $mail->SMTPAuth = true;
+    $mail->Port = 465;
+    $mail->Username = $sys->stmp_username;
+    $mail->Password = $sys->stmp_password;
+}

@@ -29,8 +29,8 @@ if (isset($_POST['UpdateProfile'])) {
     //Error Handling and prevention of posting double entries
     $error = 0;
 
-    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-        $id = mysqli_real_escape_string($mysqli, trim($_SESSION['id']));
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
     } else {
         $error = 1;
         $err = "User ID Cannot Be Empty";
@@ -123,7 +123,8 @@ require_once('../partials/dashboard_head.php');
             <?php require_once('../partials/dashboard_main_nav.php');
             /* Logged In Client Session */
             $id = $_SESSION['id'];
-            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id'  ";
+            $email = $_SESSION['email'];
+            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' OR email = '$email'  ";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute(); //ok
             $res = $stmt->get_result();
@@ -187,6 +188,7 @@ require_once('../partials/dashboard_head.php');
                                                 <div class="form-group">
                                                     <label class="form-control-label">Full Name</label>
                                                     <input name="name" value="<?php echo $client->name; ?>" class="form-control" type="text" placeholder="Enter your first name">
+                                                    <input name="id" value="<?php echo $client->id; ?>" class="form-control" type="hidden" placeholder="Enter your first name">
                                                 </div>
                                             </div>
                                         </div>
@@ -194,7 +196,7 @@ require_once('../partials/dashboard_head.php');
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Email Address</label>
-                                                    <input class="form-control" type="email" name="email" value="<?php echo $client->email; ?>" placeholder="name@exmaple.com">
+                                                    <input class="form-control" type="email"  name="email" value="<?php echo $client->email; ?>" placeholder="name@exmaple.com">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

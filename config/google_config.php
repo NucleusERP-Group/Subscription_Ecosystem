@@ -42,8 +42,8 @@ try {
 }
 
 /* * ***** Google related activities start ** */
-define("CLIENT_ID", "");
-define("CLIENT_SECRET", "");
+define("CLIENT_ID", "358941079342-mnudavtr8akmvn2ppqr57nngmecscclu.apps.googleusercontent.com");
+define("CLIENT_SECRET", "Q9Hv2DDRrfbi59eHxu8iKG3o");
 define("SITE_URL", "http://127.0.0.1/NerpSubscription/views/");
 define("REDIRECT_URL", SITE_URL . "client-signin-with-google.php");
 

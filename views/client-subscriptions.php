@@ -130,10 +130,12 @@ if (isset($_POST['PurchasePackage'])) {
             $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
             $stmt->execute();
             $notifstmt->execute();
-            if ($stmt && $notifstmt) {
+            /* Load Mailer */
+            require_once('../config/mailer_config.php');
+            if ($stmt && $notifstmt && $mail->send()) {
                 $success = "Subscription  Added. Proceed To Pay";
             } else {
-                $info = "Please Try Again Or Try Later";
+                $info = "Please Try Again Or Try Later ";
             }
         }
     }
@@ -253,6 +255,11 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="notification_from" value="Package Subscription">
                                                 <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Kindly Proceed To Pay For Your <?php echo $packages->package_code . " " . $packages->package_name; ?>
                                                 Subscription Payment In Invoices Tab On Your Dashboard.">
+                                                <!-- Mail To Client -->
+                                                <input type="hidden" name="subject" value="Package Subscription">
+                                                <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>. Kindly Proceed To Pay For Your <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>
+                                                Subscription Payment In Invoices Tab On Your Dashboard.">
+
                                                 <button type="submit" name="PurchasePackage" class="action-item">
                                                     <i class="far fa-shopping-cart"></i>
                                                     Subscribe Package

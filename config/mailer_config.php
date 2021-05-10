@@ -32,7 +32,7 @@ $stmt->execute(); //ok
 $res = $stmt->get_result();
 while ($sys = $res->fetch_object()) {
     $mail->setFrom($sys->stmp_sent_from);
-    $mail->addAddress($email);
+    $mail->addAddress($_POST['client_email']);
     $mail->Subject = $_POST['subject'];
     $mail->Body = $_POST['message'];
     $mail->isHTML(true);

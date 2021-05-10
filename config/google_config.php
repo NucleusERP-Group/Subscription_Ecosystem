@@ -41,12 +41,21 @@ try {
     die;
 }
 
-/* * ***** Google related activities start ** */
-define("CLIENT_ID", "358941079342-mnudavtr8akmvn2ppqr57nngmecscclu.apps.googleusercontent.com");
-define("CLIENT_SECRET", "Q9Hv2DDRrfbi59eHxu8iKG3o");
+/* Load Client ID and Client Secret From Database */
+require_once('config.php');
+$ret = "SELECT * FROM `NucleusSAASERP_MailSettings` ";
+$stmt = $mysqli->prepare($ret);
+$stmt->execute(); //ok
+$res = $stmt->get_result();
+while ($sys = $res->fetch_object()) {
+
+    define("CLIENT_ID", "$sys->CLIENT_ID");
+    define("CLIENT_SECRET", "$sys->CLIENT_SECRET");
+}
+/* Site Urls */
 define("SITE_URL", "http://127.0.0.1/NerpSubscription/views/");
 define("REDIRECT_URL", SITE_URL . "client-signin-with-google.php");
 
-/* permission */
+/* Permissions */
 define("SCOPE", 'https://www.googleapis.com/auth/userinfo.email ' .
     'https://www.googleapis.com/auth/userinfo.profile');

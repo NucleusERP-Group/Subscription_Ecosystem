@@ -73,7 +73,6 @@ require_once('../partials/dashboard_head.php');
                                     </div>
                                 </div>
                                 <a href="#" class="btn btn-block btn-secondary mt-auto">Open insights</a>
-
                             </div>
                         </div>
                     </div>

@@ -63,13 +63,13 @@ while ($client = $res->fetch_object()) {
         </div>
         <!-- Application nav -->
         <div class="nav-application clearfix">
-            <a href="client-dashboard.php" class="btn btn-square text-sm active">
+            <a href="client-dashboard.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-home fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Home</span>
             </a>
             <a href="client-subscriptions.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-project-diagram fa-2x"></i></span>
-                <span class="btn-inner--icon d-block pt-2">Subscriptions</span>
+                <span class="btn-inner--icon d-block pt-2">NucleusSaaS Packages</span>
             </a>
             <a href="client-invoices.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-tasks fa-2x"></i></span>

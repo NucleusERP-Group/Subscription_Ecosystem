@@ -324,7 +324,7 @@ require_once('../partials/dashboard_head.php');
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="addCard" class="btn btn-sm btn-primary rounded-pill">Save card</button>
+                                            <button type="submit" name="addCard" class="btn btn-sm btn-primary rounded-pill">Save Card</button>
                                         </div>
                                     </form>
                                 </div>

@@ -29,8 +29,8 @@ if (isset($_POST['DeleteAccount'])) {
 
     //Change Password
     $error = 0;
-    if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+    if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
+        $email = mysqli_real_escape_string($mysqli, trim($_SESSION['email']));
     } else {
         $error = 1;
         $err = "Email Cannot Be Empty";
@@ -56,7 +56,7 @@ if (isset($_POST['DeleteAccount'])) {
 
 
     if (!$error) {
-        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id'";
+        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id' || email = '$email'";
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
@@ -65,9 +65,9 @@ if (isset($_POST['DeleteAccount'])) {
             } elseif ($password != $row['password']) {
                 $err = "Incorrect Account Password";
             } else {
-                $query = "UPDATE NucleusSAASERP_Users SET account_status =? WHERE id =?";
+                $query = "UPDATE NucleusSAASERP_Users SET account_status =? WHERE id =? || email = ?";
                 $stmt = $mysqli->prepare($query);
-                $rc = $stmt->bind_param('ss', $account_status, $id);
+                $rc = $stmt->bind_param('sss', $account_status, $id, $email);
                 $stmt->execute();
                 if ($stmt) {
                     $success = "Account Deleted"  && header("refresh:1; url=client-logout.php");;
@@ -104,7 +104,8 @@ if (isset($_POST['change_password'])) {
 
     if (!$error) {
         $id = $_SESSION['id'];
-        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id'";
+        $email = $_SESSION['email '];
+        $sql = "SELECT * FROM  NucleusSAASERP_Users  WHERE id = '$id' || email = '$email'";
         $res = mysqli_query($mysqli, $sql);
         if (mysqli_num_rows($res) > 0) {
             $row = mysqli_fetch_assoc($res);
@@ -113,11 +114,10 @@ if (isset($_POST['change_password'])) {
             } elseif ($new_password != $confirm_password) {
                 $err = "Confirmation Password Does Not Match";
             } else {
-                $id = $_SESSION['id'];
-                $new_password  = sha1(md5($_POST['new_password']));
-                $query = "UPDATE NucleusSAASERP_Users SET  password =? WHERE id =?";
+               $new_password  = sha1(md5($_POST['new_password']));
+                $query = "UPDATE NucleusSAASERP_Users SET  password =? WHERE id =? || email = '$email'";
                 $stmt = $mysqli->prepare($query);
-                $rc = $stmt->bind_param('ss', $new_password, $id);
+                $rc = $stmt->bind_param('sss', $new_password, $id, $email);
                 $stmt->execute();
                 if ($stmt) {
                     $success = "Password Updated.";
@@ -143,7 +143,8 @@ require_once('../partials/dashboard_head.php');
             <?php require_once('../partials/dashboard_main_nav.php');
             /* Logged In Client Session */
             $id = $_SESSION['id'];
-            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id'  ";
+            $email = $_SESSION['email'];
+            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' || email = '$email' ";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute(); //ok
             $res = $stmt->get_result();

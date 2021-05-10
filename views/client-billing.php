@@ -152,7 +152,8 @@ require_once('../partials/dashboard_head.php');
             require_once('../partials/dashboard_main_nav.php');
             /* Logged In Client Session */
             $id = $_SESSION['id'];
-            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id'  ";
+            $email = $_SESSION['email'];
+            $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' OR email = '$email'  ";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute(); //ok
             $res = $stmt->get_result();
@@ -218,7 +219,8 @@ require_once('../partials/dashboard_head.php');
                                                     <?php
                                                     /* Load Credit Card Based On The Logged In User */
                                                     $id = $_SESSION['id'];
-                                                    $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id'  ";
+                                                    $email = $_SESSION['email'];
+                                                    $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id' OR card_holder_email = '$email'  ";
                                                     $stmt = $mysqli->prepare($ret);
                                                     $stmt->execute(); //ok
                                                     $res = $stmt->get_result();

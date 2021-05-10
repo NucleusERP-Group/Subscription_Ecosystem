@@ -138,7 +138,7 @@ require_once('../partials/dashboard_head.php');
                                         <?php
                                         $id = $_SESSION['id'];
                                         $email = $_SESSION['email'];
-                                        $ret = "SELECT * FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id'  OR email = '$email' ";
+                                        $ret = "SELECT * FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id'  OR client_email = '$email' ";
                                         $stmt = $mysqli->prepare($ret);
                                         $stmt->execute(); //ok
                                         $res = $stmt->get_result();

@@ -93,12 +93,8 @@ if (isset($_POST['PurchasePackage'])) {
         $err = "Payment Status  Cannot Be Empty";
     }
 
-    if (isset($_POST['payment_amt']) && !empty($_POST['payment_amt'])) {
-        $payment_amt = mysqli_real_escape_string($mysqli, trim($_POST['payment_amt']));
-    } else {
-        $error = 1;
-        $err = "Payment Amount  Cannot Be Empty";
-    }
+    $payment_amt = mysqli_real_escape_string($mysqli, trim($_POST['payment_amt']));
+   
     /* Notifications */
     if (isset($_POST['notification_from']) && !empty($_POST['notification_from'])) {
         $notification_from = mysqli_real_escape_string($mysqli, trim($_POST['notification_from']));
@@ -254,10 +250,9 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="payment_status" value="Pending">
                                                 <input type="hidden" name="payment_amt" value="<?php echo $packages->package_monthly_price; ?>">
                                                 <!-- Notification Details -->
-                                                <input type="hidden" name="notification_from" value="NucleusSaaSERP Subscription">
-                                                <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. 
-                                                Kindly Proceed To Pay For Your <?php echo $packages->package_code . " " . $packages->package_name; ?>
-                                                Subscription Payment In Invoices Tab On Your Dashbboard.">
+                                                <input type="hidden" name="notification_from" value="Package Subscription">
+                                                <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Kindly Proceed To Pay For Your <?php echo $packages->package_code . " " . $packages->package_name; ?>
+                                                Subscription Payment In Invoices Tab On Your Dashboard.">
                                                 <button type="submit" name="PurchasePackage" class="action-item">
                                                     <i class="far fa-shopping-cart"></i>
                                                     Subscribe Package

@@ -22,6 +22,7 @@
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
+require_once('../partials/analytics.php');
 client_login();
 require_once('../partials/dashboard_head.php');
 ?>
@@ -47,7 +48,7 @@ require_once('../partials/dashboard_head.php');
                                 <div class="row">
                                     <div class="col">
                                         <h6 class="text-muted mb-1">Active Subscriptions</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">7.500</span>
+                                        <span class="h3 font-weight-bold mb-0 "><?php echo $ActiveSubscriptions;?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="progress-circle progress-sm" id="progress-circle-1" data-progress="40" data-text="40%" data-color="info"></div>
@@ -63,7 +64,7 @@ require_once('../partials/dashboard_head.php');
                                 <div class="row">
                                     <div class="col">
                                         <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">34</span>
+                                        <span class="h3 font-weight-bold mb-0 "><?php echo $StalledSubscriptions;?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="progress-circle progress-sm" id="progress-circle-2" data-progress="60" data-text="60%" data-color="dark"></div>
@@ -79,7 +80,7 @@ require_once('../partials/dashboard_head.php');
                                 <div class="row">
                                     <div class="col">
                                         <h6 class="text-muted mb-1">Unpaid Invoices</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                        <span class="h3 font-weight-bold mb-0 "><?php echo $UnpaidInvoices;?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
@@ -95,7 +96,7 @@ require_once('../partials/dashboard_head.php');
                                 <div class="row">
                                     <div class="col">
                                         <h6 class="text-muted mb-1">Linked Cards</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                        <span class="h3 font-weight-bold mb-0 "><?php echo $LinkedCards;?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
@@ -111,7 +112,7 @@ require_once('../partials/dashboard_head.php');
                                 <div class="row">
                                     <div class="col">
                                         <h6 class="text-muted mb-1">Pending Payments</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                        <span class="h3 font-weight-bold mb-0 "><?php echo $PendingPayments;?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
@@ -126,8 +127,8 @@ require_once('../partials/dashboard_head.php');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h6 class="text-muted mb-1">Paid Payments</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                        <h6 class="text-muted mb-1">Subscription Payments</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">Ksh <?php echo $Payments;?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>

@@ -197,22 +197,37 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="media align-items-center">
-                                        <div class="mr-3">
-                                            <img alt="Image placeholder" src="../assets/img/theme/light/brand-avatar-1.png" class="avatar  rounded-circle">
+                                <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$id' || client_email = '$email' AND status ='Active' ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute(); //ok
+                                $res = $stmt->get_result();
+                                while ($subscribed_packages = $res->fetch_object()) {
+                                ?>
+                                    <a href="client-subscriptions.php" class="list-group-item list-group-item-action">
+                                        <div class="media align-items-center">
+                                            <div class="mr-3">
+                                                <?php
+                                                /* Sort Image Icons Based On Subscription Packages */
+                                                if ($subscribed_packages->package_code == 'C0MM001') {
+                                                    echo '<img alt="Image placeholder" src="../public/img/icons/communities.svg" class="avatar">';
+                                                } else {
+                                                    echo '<img alt="Image placeholder" src="../public/img/icons/enterprise.svg" class="avatar">';
+                                                } ?>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="text-sm d-block text-limit mb-0"><?php echo $subscribed_packages->package_code . " " . $subscribed_packages->package_name; ?></h6>
+                                                <span class="d-block text-sm text-muted">Subscription Code: <span class="text-success"><?php echo $subscribed_packages->subscription_code; ?></span></span>
+                                            </div>
+                                            <div class="media-body text-right">
+                                                <span class="text-sm text-dark font-weight-bold ml-3">
+                                                    Payment: Ksh <?php echo $subscribed_packages->payment_amt; ?>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h6 class="text-sm d-block text-limit mb-0">Purpose Website UI</h6>
-                                            <span class="d-block text-sm text-muted">Development</span>
-                                        </div>
-                                        <div class="media-body text-right">
-                                            <span class="text-sm text-dark font-weight-bold ml-3">
-                                                $2500
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                <?php
+                                } ?>
                             </div>
                         </div>
                     </div>

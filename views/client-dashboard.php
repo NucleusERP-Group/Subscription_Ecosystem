@@ -40,50 +40,190 @@ require_once('../partials/dashboard_head.php');
                 <!-- Page title -->
                 <?php require_once('../partials/dashboard_ml.php'); ?>
                 <div class="row">
-                    <div class="col-xl-8 col-md-6">
-                        <div class="card card-fluid">
-                            <div class="card-header">
-                                <h6 class="mb-0">Active Subscriptions</h6>
-                            </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="text-muted mb-1">Active Subscriptions</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">7.500</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="progress-circle progress-sm" id="progress-circle-1" data-progress="40" data-text="40%" data-color="info"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-md-6">
-                        <div class="card card-fluid">
-                            <div class="card-body text-center d-flex flex-column justify-content-center">
-                                <h5 class="mb-4">NucleusSaaSERP APIs Status</h5>
-                                <div class="progress-circle progress-lg mx-auto" id="progress-5" data-progress="50" data-text="98" data-textclass="h1" data-color="warning"></div>
-                                <div class="d-flex mt-4">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
                                     <div class="col">
-                                        <span class="d-block badge badge-dot badge-lg h6">
-                                            <i class="bg-danger"></i>30 not sent
-                                        </span>
-                                        <span class="d-block badge badge-dot badge-lg h6">
-                                            <i class="bg-success"></i>68 success
-                                        </span>
+                                        <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">34</span>
                                     </div>
-                                    <div class="col">
-                                        <span class="d-block badge badge-dot badge-lg h6">
-                                            <i class="bg-warning"></i>38 opened
-                                        </span>
-                                        <span class="d-block badge badge-dot badge-lg h6">
-                                            <i class="bg-danger"></i>SMTP error
-                                        </span>
+                                    <div class="col-auto">
+                                        <div class="progress-circle progress-sm" id="progress-circle-2" data-progress="60" data-text="60%" data-color="dark"></div>
                                     </div>
                                 </div>
-                                <a href="#" class="btn btn-block btn-secondary mt-auto">Open insights</a>
                             </div>
                         </div>
                     </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="text-muted mb-1">Unpaid Invoices</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="text-muted mb-1">Linked Cards</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="text-muted mb-1">Pending Payments</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card card-stats">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="text-muted mb-1">Paid Payments</h6>
+                                        <span class="h3 font-weight-bold mb-0 ">68</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Subscription Payments Overview -->
+
+                    <!-- Linked Cards Overview -->
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Linked Credit And Debit Cards Overview</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <?php
+                                /* Load Credit Card Based On The Logged In User */
+                                $id = $_SESSION['id'];
+                                $email = $_SESSION['email'];
+                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id' OR card_holder_email = '$email'  ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute(); //ok
+                                $res = $stmt->get_result();
+                                while ($card = $res->fetch_object()) {
+                                ?>
+                                    <a href="client-billing.php" class="list-group-item list-group-item-action">
+                                        <div class="media align-items-center">
+                                            <div class="mr-3">
+                                                <?php
+                                                if ($card->card_name == 'Visa') {
+                                                    echo '<img alt="Image placeholder" src="../public/assets/img/icons/cards/visa.png" width="40" class="mr-2">';
+                                                } else {
+                                                    echo '<img alt="Image placeholder" src="../public/assets/img/icons/cards/mastercard.png" width="40" class="mr-2">';
+                                                } ?>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="text-sm d-block text-limit mb-0"><?php echo  $card->card_number; ?></h6>
+                                                <span class="d-block text-sm text-muted">Card CVV: <?php echo $card->card_cvv; ?></span>
+                                            </div>
+                                            <div class="media-body text-right">
+                                                <span class="text-sm text-dark font-weight-bold ml-3">
+                                                    Expiry: <?php echo $card->card_exp_date; ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php
+                                } ?>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Active Subscriptions Overview -->
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Active Subscription Packages Overview</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="media align-items-center">
+                                        <div class="mr-3">
+                                            <img alt="Image placeholder" src="../assets/img/theme/light/brand-avatar-1.png" class="avatar  rounded-circle">
+                                        </div>
+                                        <div class="media-body">
+                                            <h6 class="text-sm d-block text-limit mb-0">Purpose Website UI</h6>
+                                            <span class="d-block text-sm text-muted">Development</span>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <span class="text-sm text-dark font-weight-bold ml-3">
+                                                $2500
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- Footer -->
+                <?php require_once('../partials/dashboard_footer.php'); ?>
             </div>
-            <!-- Footer -->
-            <?php require_once('../partials/dashboard_footer.php'); ?>
         </div>
-    </div>
-    <!-- Scripts -->
-    <?php require_once('../partials/dashboard_scripts.php'); ?>
+        <!-- Scripts -->
+        <?php require_once('../partials/dashboard_scripts.php'); ?>
 
 </body>
 

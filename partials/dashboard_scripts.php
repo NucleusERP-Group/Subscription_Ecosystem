@@ -75,23 +75,7 @@
             }
         }
     }
-    /* Load More  */
-    function loadmore() {
-        var val = document.getElementById("result_no").value;
-        $.ajax({
-            type: 'post',
-            url: 'load-more-ajax.php',
-            data: {
-                getresult: val
-            },
-            success: function(response) {
-                var content = document.getElementById("results");
-                content.innerHTML = content.innerHTML + response;
-                /* Load More  */
-                document.getElementById("result_no").value = Number(val) + 5;
-            }
-        });
-    }
+    
 </script>
 <!-- Swal Js -->
 <script src="../public/js/swal.js"></script>

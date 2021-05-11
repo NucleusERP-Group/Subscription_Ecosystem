@@ -132,7 +132,7 @@ require_once('../partials/dashboard_head.php');
                                 } ?>
                             </div>
                             <div class="card-footer py-2 text-center">
-                                <button  id="load" class="btn btn-outline-success font-weight-bold">Load More</button>
+                                <button id="load" class="btn btn-outline-success font-weight-bold">Load More</button>
                                 <input type="hidden" id="result_no" value="5">
                             </div>
                         </div>
@@ -145,6 +145,25 @@ require_once('../partials/dashboard_head.php');
     </div>
     <!-- Scripts -->
     <?php require_once('../partials/dashboard_scripts.php'); ?>
+    <script>
+        /* Load More  */
+        function loadmore() {
+            var val = document.getElementById("result_no").value;
+            $.ajax({
+                type: 'post',
+                url: 'load-more-ajax.php',
+                data: {
+                    getresult: val
+                },
+                success: function(response) {
+                    var content = document.getElementById("results");
+                    content.innerHTML = content.innerHTML + response;
+                    /* Load More  */
+                    document.getElementById("result_no").value = Number(val) + 5;
+                }
+            });
+        }
+    </script>
 </body>
 
 

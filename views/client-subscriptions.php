@@ -354,7 +354,7 @@ require_once('../partials/dashboard_head.php');
                     <h5 class="text-left"> My NucleusSaaS ERP Subscribed Packages</h5>
                     <div class="row">
                         <?php
-                        $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$client->id' AND status !='Cancelled' ";
+                        $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$client->id' AND status ='Active' ";
                         $stmt = $mysqli->prepare($ret);
                         $stmt->execute(); //ok
                         $res = $stmt->get_result();
@@ -387,7 +387,7 @@ require_once('../partials/dashboard_head.php');
                                         <!-- Package Details -->
                                         <span class="clearfix"></span>
                                         <?php
-                                        if ($subscribed_packages->payment_status = 'Paid') {
+                                        if ($subscribed_packages->payment_status == 'Paid') {
                                             echo "<span class='badge badge-pill badge-success'>Package Payment: $subscribed_packages->payment_status</span>";
                                         } else {
                                             echo "

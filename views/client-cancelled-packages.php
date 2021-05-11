@@ -176,7 +176,7 @@ require_once('../partials/dashboard_head.php');
                                         <!-- Package Details -->
                                         <span class="clearfix"></span>
                                         <?php
-                                        if ($subscribed_packages->payment_status = 'Paid') {
+                                        if ($subscribed_packages->payment_status == 'Paid') {
                                             echo "<span class='badge badge-pill badge-success'>Package Payment: $subscribed_packages->payment_status</span>";
                                         } else {
                                             echo "
@@ -201,10 +201,10 @@ require_once('../partials/dashboard_head.php');
                                                 <!-- Mail To Client -->
                                                 <input type="hidden" name="subject" value="Package Subscription">
                                                 <input type="hidden" name="message" value="Hello, <?php echo $subscribed_packages->client_name; ?>. 
-                                                You Have Requested For <b><?php echo $subscribed_packages->subscription_code . "" . $subscribed_packages->package_code . "-" . $subscribed_packages->package_name;?></b> Subscription Restoration.
+                                                You Have Requested For <b><?php echo $subscribed_packages->subscription_code . " " . $subscribed_packages->package_code . "-" . $subscribed_packages->package_name;?></b> Subscription Restoration.
                                                 Our Team Will Take Care Of It, And Your Subscribed Package Will Be Restored In The Next 24Hours. Regards-NucleusSaaS ERP Team.">
                                                 <button type="submit" name="RestoreSubscription" class="action-item">
-                                                    <i class="far fa-calendar-times"></i>
+                                                    <i class="far fa-calendar-check"></i>
                                                     Request For  Package Subscription Restoration
                                                 </button>
                                             </form>

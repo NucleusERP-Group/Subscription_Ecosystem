@@ -53,7 +53,7 @@ while ($client = $res->fetch_object()) {
                             </div>
                             <div class="list-group list-group-flush">
                                 <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email' ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();

@@ -45,15 +45,17 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h6 class="text-muted mb-1">Active Subscriptions</h6>
-                                        <span class="h3 font-weight-bold mb-0 "><?php echo $ActiveSubscriptions; ?></span>
+                                <a href="client-subscriptions.php">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="text-muted mb-1">Active Subscriptions</h6>
+                                            <span class="h3 font-weight-bold mb-0 "><?php echo $ActiveSubscriptions; ?></span>
+                                        </div>
+                                        <div class="col-auto text-primary">
+                                            <i class="fas fa-user-tag fa-3x"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-auto text-primary">
-                                        <i class="fas fa-user-tag fa-3x"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -61,15 +63,17 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
-                                        <span class="h3 font-weight-bold mb-0 "><?php echo $StalledSubscriptions; ?></span>
+                                <a href="client-cancelled-packages.php">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
+                                            <span class="h3 font-weight-bold mb-0 "><?php echo $StalledSubscriptions; ?></span>
+                                        </div>
+                                        <div class="col-auto text-primary">
+                                            <i class="fas fa-user-times fa-3x"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-auto text-primary">
-                                        <i class="fas fa-user-times fa-3x"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -77,15 +81,17 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h6 class="text-muted mb-1">Unpaid Invoices</h6>
-                                        <span class="h3 font-weight-bold mb-0 "><?php echo $UnpaidInvoices; ?></span>
+                                <a href="client-invoices.php">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="text-muted mb-1">Unpaid Invoices</h6>
+                                            <span class="h3 font-weight-bold mb-0 "><?php echo $UnpaidInvoices; ?></span>
+                                        </div>
+                                        <div class="col-auto text-primary">
+                                            <i class="fas fa-funnel-dollar fa-3x"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-auto text-primary">
-                                        <i class="fas fa-funnel-dollar fa-3x"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -93,15 +99,17 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h6 class="text-muted mb-1">Linked Cards</h6>
-                                        <span class="h3 font-weight-bold mb-0 "><?php echo $LinkedCards; ?></span>
+                                <a href="client-billing.php">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="text-muted mb-1">Linked Cards</h6>
+                                            <span class="h3 font-weight-bold mb-0 "><?php echo $LinkedCards; ?></span>
+                                        </div>
+                                        <div class="col-auto text-primary">
+                                            <i class="fas fa-credit-card fa-3x"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-auto text-primary">
-                                        <i class="fas fa-credit-card fa-3x"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -109,15 +117,17 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h6 class="text-muted mb-1">Pending Payments</h6>
-                                        <span class="h3 font-weight-bold mb-0 "><?php echo $PendingPayments; ?></span>
+                                <a href="client-invoices.php">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="text-muted mb-1">Pending Payments</h6>
+                                            <span class="h3 font-weight-bold mb-0 "><?php echo $PendingPayments; ?></span>
+                                        </div>
+                                        <div class="col-auto text-primary">
+                                            <i class="fas fa-file-invoice-dollar fa-3x"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-auto text-primary">
-                                        <i class="fas fa-file-invoice-dollar fa-3x"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -125,15 +135,17 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h6 class="text-muted mb-1">Subscription Payments</h6>
-                                        <span class="h3 font-weight-bold mb-0 ">Ksh <?php echo $Payments; ?></span>
+                                <a href="client-invoices.php">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="text-muted mb-1">Subscription Payments</h6>
+                                            <span class="h3 font-weight-bold mb-0 ">Ksh <?php echo $Payments; ?></span>
+                                        </div>
+                                        <div class="col-auto text-primary">
+                                            <i class="fas fa-money-bill-alt fa-3x"></i>
+                                        </div>
                                     </div>
-                                    <div class="col-auto text-primary">
-                                        <i class="fas fa-money-bill-alt fa-3x"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>

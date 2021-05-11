@@ -167,9 +167,10 @@ require_once('../partials/dashboard_head.php');
                                             <br>
                                             Subscription Payment: Ksh <?php echo $subscribed_packages->payment_amt; ?>
                                             <br>
-                                            Subscribed On:  <?php echo  $subscribed_packages->date_subscribed; ?>
                                             <br>
-                                            Subscription Expiriy On: <?php echo  $subscribed_packages->subscription_expiriry; ?>
+                                            Subscribed On:  <?php echo  date('d M Y', strtotime($subscribed_packages->date_subscribed)); ?>
+                                            <br>
+                                            Subscription Expiriy On: <?php  echo  date('d M Y', strtotime($subscribed_packages->subscription_expiriry)); ?>
                                             <br>
 
                                         </h5>
@@ -193,7 +194,7 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="client_id" value="<?php echo $subscribed_packages->client_id; ?>">
                                                 <input type="hidden" name="client_name" value="<?php echo $subscribed_packages->client_name; ?>">
                                                 <input type="hidden" name="client_email" value="<?php echo $subscribed_packages->client_email; ?>">
-
+                                                
                                                 <input type="hidden" name="status" value="Restoration Pending">
                                                 <!-- Notification Details -->
                                                 <input type="hidden" name="notification_from" value="Package Subscription">

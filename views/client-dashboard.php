@@ -153,7 +153,7 @@ require_once('../partials/dashboard_head.php');
                                 /* Load Credit Card Based On The Logged In User */
                                 $id = $_SESSION['id'];
                                 $email = $_SESSION['email'];
-                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id' OR card_holder_email = '$email'  ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id' OR card_holder_email = '$email' LIMIT 3  ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
@@ -198,7 +198,7 @@ require_once('../partials/dashboard_head.php');
                             </div>
                             <div class="list-group list-group-flush">
                                 <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$id' || client_email = '$email' AND status ='Active' ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$id' || client_email = '$email' AND status ='Active' LIMIT 3 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
@@ -218,10 +218,16 @@ require_once('../partials/dashboard_head.php');
                                             <div class="media-body">
                                                 <h6 class="text-sm d-block text-limit mb-0"><?php echo $subscribed_packages->package_code . " " . $subscribed_packages->package_name; ?></h6>
                                                 <span class="d-block text-sm text-muted">Subscription Code: <span class="text-success"><?php echo $subscribed_packages->subscription_code; ?></span></span>
+                                                <?php
+                                                if ($subscribed_packages->payment_status == 'Paid') {
+                                                    echo "<span class='badge badge-pill badge-success'>Payment Status: $subscribed_packages->payment_status</span>";
+                                                } else {
+                                                    echo "<span class='badge badge-pill badge-warning'>Payment Status: $subscribed_packages->payment_status</span>";
+                                                } ?>
                                             </div>
                                             <div class="media-body text-right">
                                                 <span class="text-sm text-dark font-weight-bold ml-3">
-                                                    Payment: Ksh <?php echo $subscribed_packages->payment_amt; ?>
+                                                    Ksh <?php echo $subscribed_packages->payment_amt; ?>
                                                 </span>
                                             </div>
                                         </div>

@@ -109,6 +109,8 @@ if (isset($_POST['PurchasePackage'])) {
         $error = 1;
         $err = "Notification Details  Cannot Be Empty";
     }
+    /* Status */
+    $status = 'Active';
 
     if (!$error) {
         /* Prevent Double Entries */
@@ -121,12 +123,12 @@ if (isset($_POST['PurchasePackage'])) {
             }
         } else {
             /* No Error Or Duplicate */
-            $query = "INSERT INTO NucleusSAASERP_UserSubscriptions  (id, subscription_code, package_code, package_name, client_id, client_name, client_email, date_subscribed, payment_status, payment_amt) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO NucleusSAASERP_UserSubscriptions  (id, subscription_code, package_code, package_name, client_id, client_name, client_email, date_subscribed, payment_status, payment_amt, status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             /* Notify User */
             $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
             $stmt = $mysqli->prepare($query);
             $notifstmt = $mysqli->prepare($notif);
-            $rc = $stmt->bind_param('ssssssssss', $id, $subscription_code, $package_code, $package_name, $client_id, $client_name, $client_email, $date_subscribed, $payment_status, $payment_amt);
+            $rc = $stmt->bind_param('sssssssssss', $id, $subscription_code, $package_code, $package_name, $client_id, $client_name, $client_email, $date_subscribed, $payment_status, $payment_amt, $status);
             $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
             $stmt->execute();
             $notifstmt->execute();

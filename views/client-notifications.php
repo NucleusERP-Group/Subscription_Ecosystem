@@ -83,15 +83,14 @@ require_once('../partials/dashboard_head.php');
                         <!-- Notifications -->
                         <div class="card card-fluid">
                             <div class="list-group list-group-flush">
-                                <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC LIMIT 3 ";
-                                $stmt = $mysqli->prepare($ret);
-                                $stmt->execute(); //ok
-                                $res = $stmt->get_result();
-                                while ($notif = $res->fetch_object()) {
-                                ?>
-
-                                    <div id="results">
+                                <div id="results">
+                                    <?php
+                                    $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC LIMIT 0, 5 ";
+                                    $stmt = $mysqli->prepare($ret);
+                                    $stmt->execute(); //ok
+                                    $res = $stmt->get_result();
+                                    while ($notif = $res->fetch_object()) {
+                                    ?>
                                         <a href="#clear-notification-<?php echo $notif->id; ?>" data-toggle="modal" class="list-group-item list-group-item-action">
                                             <div class="d-flex align-items-center" data-toggle="tooltip" data-placement="right" data-title="<?php echo date('d M Y g:ia', strtotime($notif->created_at)); ?>">
                                                 <div>
@@ -127,13 +126,13 @@ require_once('../partials/dashboard_head.php');
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php
-                                } ?>
+                                    <?php
+                                    } ?>
+                                </div>
                             </div>
                             <div class="card-footer py-2 text-center">
-                                <button id="load" class="btn btn-outline-success font-weight-bold">Load More</button>
-                                <input type="hidden" id="result_no" value="5">
+                                <input type="hidden" id="result_no" value="3">
+                                <button id="load" class="btn btn-outline-success">Load More</button>
                             </div>
                         </div>
                     </div>
@@ -143,9 +142,18 @@ require_once('../partials/dashboard_head.php');
             } ?>
         </div>
     </div>
+
     <!-- Scripts -->
     <?php require_once('../partials/dashboard_scripts.php'); ?>
+    <!-- Load Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
+        /* Load More Script */
+        $(document).ready(function() {
+            $("#load").click(function() {
+                loadmore();
+            });
+        });
         /* Load More  */
         function loadmore() {
             var val = document.getElementById("result_no").value;

@@ -23,8 +23,10 @@
 $id = $_SESSION['id'];
 $email = $_SESSION['email'];
 
+/* Wondering Why Both Id And Email - Well Keep Wondering */
+
 /* Active Subscriptions */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$id' AND status = 'Active'  ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserSubscriptions` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Active'  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($ActiveSubscriptions);
@@ -32,7 +34,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Cancelled Subscriptions */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$id' AND status = 'Cancelled'  ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserSubscriptions` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Cancelled'  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($StalledSubscriptions);
@@ -40,7 +42,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Unpaid Invoices */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id' AND status = 'Unpaid'  ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Unpaid'  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($UnpaidInvoices);
@@ -48,7 +50,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Linked Cards */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id' ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UsersCards`  WHERE (card_holder_id = '$id' || card_holder_email = '$email') ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($LinkedCards);
@@ -56,7 +58,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Pending Payments */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id' AND status = 'Unpaid'  ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Unpaid'  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($PendingPayments);
@@ -64,7 +66,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Paid Invoices */
-$query = "SELECT SUM(amount)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id' AND status = 'Paid'  ";
+$query = "SELECT SUM(amount)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE (client_id = '$id' || client_email='$email') AND status = 'Paid'  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($Payments);

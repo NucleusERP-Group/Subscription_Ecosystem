@@ -143,7 +143,7 @@ if (isset($_POST['PurchasePackage'])) {
             $invoicestmt = $mysqli->prepare($invoice);
             $rc = $stmt->bind_param('ssssssssssss', $id, $subscription_code, $package_code, $package_name, $client_id, $client_name, $client_email, $date_subscribed, $payment_status, $payment_amt, $subscription_expiriry, $status);
             $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
-            $rc= $invoicestmt->bind_param('sssssssss', $client_id, $client_name, $client_email, $package_code, $package_name, $id, $subscription_code, $payment_amt, $invoice_code);
+            $rc = $invoicestmt->bind_param('sssssssss', $client_id, $client_name, $client_email, $package_code, $package_name, $id, $subscription_code, $payment_amt, $invoice_code);
             $stmt->execute();
             $notifstmt->execute();
             $invoicestmt->execute();
@@ -215,26 +215,26 @@ if (isset($_POST['CancelSubscription'])) {
 
     if (!$error) {
         /* Prevent Double Entries */
-        
-            /* No Error Or Duplicate */
-            $query = "UPDATE  NucleusSAASERP_UserSubscriptions SET status = ? WHERE id = ?";
-            /* Notify User */
-            $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
-            $stmt = $mysqli->prepare($query);
-            $notifstmt = $mysqli->prepare($notif);
-            $rc = $stmt->bind_param('ss', $status, $id);
-            $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
-            $stmt->execute();
-            $notifstmt->execute();
-            /* Load Mailer */
-            require_once('../config/mailer_config.php');
-            if ($stmt && $notifstmt && $mail->send()) {
-                $success = "Subscription  Cancelled.";
-            } else {
-                $info = "Please Try Again Or Try Later ";
-            }
+
+        /* No Error Or Duplicate */
+        $query = "UPDATE  NucleusSAASERP_UserSubscriptions SET status = ? WHERE id = ?";
+        /* Notify User */
+        $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
+        $stmt = $mysqli->prepare($query);
+        $notifstmt = $mysqli->prepare($notif);
+        $rc = $stmt->bind_param('ss', $status, $id);
+        $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
+        $stmt->execute();
+        $notifstmt->execute();
+        /* Load Mailer */
+        require_once('../config/mailer_config.php');
+        if ($stmt && $notifstmt && $mail->send()) {
+            $success = "Subscription  Cancelled.";
+        } else {
+            $info = "Please Try Again Or Try Later ";
         }
     }
+}
 
 
 require_once('../partials/dashboard_head.php');
@@ -339,7 +339,7 @@ require_once('../partials/dashboard_head.php');
                                                 <!-- Hidden Values -->
                                                 <input type="hidden" name="id" value="<?php echo $ID; ?>">
                                                 <input type="hidden" name="subscription_code" value="<?php echo $a . "" . $b; ?>">
-                                                <input type="hidden" name="invoice_code" value="<?php echo date('dmY'). "". $a; ?>">
+                                                <input type="hidden" name="invoice_code" value="<?php echo date('dmY') . "" . $a; ?>">
                                                 <input type="hidden" name="package_code" value="<?php echo $packages->package_code; ?>">
                                                 <input type="hidden" name="package_name" value="<?php echo $packages->package_name; ?>">
                                                 <input type="hidden" name="client_id" value="<?php echo $client->id; ?>">
@@ -398,11 +398,10 @@ require_once('../partials/dashboard_head.php');
                                             <br>
                                             Subscription Payment: Ksh <?php echo $subscribed_packages->payment_amt; ?>
                                             <br>
-                                            Subscribed On:  <?php echo  date('d M Y', strtotime($subscribed_packages->date_subscribed)); ?>
+                                            Subscribed On: <?php echo  date('d M Y', strtotime($subscribed_packages->date_subscribed)); ?>
                                             <br>
-                                            Subscription Expiry On: <?php  echo  date('d M Y', strtotime($subscribed_packages->subscription_expiriry)); ?>
+                                            Subscription Expiry On: <?php echo  date('d M Y', strtotime($subscribed_packages->subscription_expiriry)); ?>
                                             <br>
-
                                         </h5>
                                         <!-- Package Details -->
                                         <span class="clearfix"></span>
@@ -438,7 +437,6 @@ require_once('../partials/dashboard_head.php');
                                                 </button>
                                             </form>
                                             <!-- Prompt User To Cancel Subscription -->
-
                                         </div>
                                     </div>
                                 </div>

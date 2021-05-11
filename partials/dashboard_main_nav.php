@@ -53,7 +53,7 @@ while ($client = $res->fetch_object()) {
                             </div>
                             <div class="list-group list-group-flush">
                                 <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email' ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC LIMIT 3 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
@@ -102,6 +102,10 @@ while ($client = $res->fetch_object()) {
                                 <i class="far fa-credit-card"></i>
                                 <span>Billing</span>
                             </a>
+                            <a href="client-cancelled-packages.php" class="dropdown-item">
+                                <i class="far fa-calendar-times"></i>
+                                <span>Cancelled Packages</span>
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="client-logout.php" class="dropdown-item">
                                 <i class="far fa-sign-out-alt"></i>
@@ -128,7 +132,7 @@ while ($client = $res->fetch_object()) {
                             </div>
                             <div class="list-group list-group-flush">
                                 <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserNotifications` WHERE client_id = '$id' OR client_email = '$email'  ORDER BY `NucleusSAASERP_UserNotifications`.`created_at` DESC LIMIT 3 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
@@ -179,6 +183,10 @@ while ($client = $res->fetch_object()) {
                             <a href="client-billing.php" class="dropdown-item">
                                 <i class="far fa-credit-card"></i>
                                 <span>Billing</span>
+                            </a>
+                            <a href="client-cancelled-packages.php" class="dropdown-item">
+                                <i class="far fa-calendar-times"></i>
+                                <span>Cancelled Subscriptions</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="client-logout.php" class="dropdown-item">

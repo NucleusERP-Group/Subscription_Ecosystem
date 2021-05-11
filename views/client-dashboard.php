@@ -50,8 +50,8 @@ require_once('../partials/dashboard_head.php');
                                         <h6 class="text-muted mb-1">Active Subscriptions</h6>
                                         <span class="h3 font-weight-bold mb-0 "><?php echo $ActiveSubscriptions; ?></span>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="progress-circle progress-sm" id="progress-circle-1" data-progress="40" data-text="40%" data-color="info"></div>
+                                    <div class="col-auto text-primary">
+                                        <i class="fas fa-user-tag fa-3x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -66,8 +66,8 @@ require_once('../partials/dashboard_head.php');
                                         <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
                                         <span class="h3 font-weight-bold mb-0 "><?php echo $StalledSubscriptions; ?></span>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="progress-circle progress-sm" id="progress-circle-2" data-progress="60" data-text="60%" data-color="dark"></div>
+                                    <div class="col-auto text-primary">
+                                        <i class="fas fa-user-times fa-3x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -82,8 +82,8 @@ require_once('../partials/dashboard_head.php');
                                         <h6 class="text-muted mb-1">Unpaid Invoices</h6>
                                         <span class="h3 font-weight-bold mb-0 "><?php echo $UnpaidInvoices; ?></span>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    <div class="col-auto text-primary">
+                                        <i class="fas fa-funnel-dollar fa-3x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -98,8 +98,8 @@ require_once('../partials/dashboard_head.php');
                                         <h6 class="text-muted mb-1">Linked Cards</h6>
                                         <span class="h3 font-weight-bold mb-0 "><?php echo $LinkedCards; ?></span>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    <div class="col-auto text-primary">
+                                        <i class="fas fa-credit-card fa-3x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -114,8 +114,8 @@ require_once('../partials/dashboard_head.php');
                                         <h6 class="text-muted mb-1">Pending Payments</h6>
                                         <span class="h3 font-weight-bold mb-0 "><?php echo $PendingPayments; ?></span>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    <div class="col-auto text-primary">
+                                        <i class="fas fa-file-invoice-dollar fa-3x"></i>
                                     </div>
                                 </div>
                             </div>
@@ -130,8 +130,8 @@ require_once('../partials/dashboard_head.php');
                                         <h6 class="text-muted mb-1">Subscription Payments</h6>
                                         <span class="h3 font-weight-bold mb-0 ">Ksh <?php echo $Payments; ?></span>
                                     </div>
-                                    <div class="col-auto">
-                                        <div class="progress-circle progress-sm" id="progress-circle-3" data-progress="80" data-text="80%" data-color="danger"></div>
+                                    <div class="col-auto text-primary">
+                                        <i class="fas fa-money-bill-alt fa-3x"></i>
                                     </div>
                                 </div>
                             </div>

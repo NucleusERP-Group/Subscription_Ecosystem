@@ -136,8 +136,6 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
-                    <!-- Subscription Payments Overview -->
-
                     <!-- Linked Cards Overview -->
                     <div class="col-xl-6 col-md-6">
                         <div class="card">
@@ -237,14 +235,93 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
-
+                    <!-- Subscription Payments Overview -->
+                    <div class="col-xl-12 col-md-12">
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header actions-toolbar border-0">
+                                <div class="actions-search" id="actions-search">
+                                    <div class="input-group input-group-merge input-group-flush">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-transparent"><i class="far fa-search"></i></span>
+                                        </div>
+                                        <input type="text" id="SearchInput" onkeyup="search()" class="form-control form-control-flush" placeholder="Type and hit enter ...">
+                                        <div class="input-group-append">
+                                            <a href="#" class="input-group-text bg-transparent" data-action="search-close" data-target="#actions-search"><i class="far fa-times"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col">
+                                        <h6 class="d-inline-block mb-0">History</h6>
+                                    </div>
+                                    <div class="col text-right">
+                                        <div class="actions"><a href="#" class="action-item mr-3" data-action="search-open" data-target="#actions-search"><i class="far fa-search"></i></a>
+                                            <div class="dropdown mr-3">
+                                                <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="far fa-filter"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <button class="dropdown-item" onclick="sortTable()">
+                                                        <i class="far fa-sort-alpha-down"></i>Sort
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table id="DataTable" class="table align-items-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Subscription Package</th>
+                                            <th scope="col" class="sort">Credit Card No.</th>
+                                            <th scope="col" class="sort">Transaction Code</th>
+                                            <th scope="col" class="sort">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $id = $_SESSION['id'];
+                                        $email = $_SESSION['email'];
+                                        $ret = "SELECT * FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id'  OR client_email = '$email' ";
+                                        $stmt = $mysqli->prepare($ret);
+                                        $stmt->execute(); //ok
+                                        $res = $stmt->get_result();
+                                        while ($payments = $res->fetch_object()) {
+                                        ?>
+                                            <tr>
+                                                <td class="order">
+                                                    <span class="h6 text-sm font-weight-bold mb-0"><?php echo $payments->package_code; ?></span>
+                                                    <span class="d-block text-sm text-muted"><?php echo $payments->package_name; ?></span>
+                                                </td>
+                                                <td>
+                                                    <span class="client"><?php echo $payments->cc_number;?></span>
+                                                </td>
+                                                <td>
+                                                    <span class="value text-sm mb-0"><?php echo $payments->trans_code;?></span>
+                                                </td>
+                                                <td>
+                                                    <span class="value text-sm mb-0"><?php echo $payments->amount;?></span>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Footer -->
-                <?php require_once('../partials/dashboard_footer.php'); ?>
             </div>
+            <!-- Footer -->
+            <?php require_once('../partials/dashboard_footer.php'); ?>
         </div>
-        <!-- Scripts -->
-        <?php require_once('../partials/dashboard_scripts.php'); ?>
+    </div>
+    <!-- Scripts -->
+    <?php require_once('../partials/dashboard_scripts.php'); ?>
 
 </body>
 

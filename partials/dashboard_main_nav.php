@@ -102,6 +102,10 @@ while ($client = $res->fetch_object()) {
                                 <i class="far fa-credit-card"></i>
                                 <span>Billing</span>
                             </a>
+                            <a href="client-cancelled-packages.php" class="dropdown-item">
+                                <i class="far fa-calendar-times"></i>
+                                <span>Cancelled Packages</span>
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="client-logout.php" class="dropdown-item">
                                 <i class="far fa-sign-out-alt"></i>
@@ -179,6 +183,10 @@ while ($client = $res->fetch_object()) {
                             <a href="client-billing.php" class="dropdown-item">
                                 <i class="far fa-credit-card"></i>
                                 <span>Billing</span>
+                            </a>
+                            <a href="client-cancelled-packages.php" class="dropdown-item">
+                                <i class="far fa-calendar-times"></i>
+                                <span>Cancelled Subscriptions</span>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="client-logout.php" class="dropdown-item">

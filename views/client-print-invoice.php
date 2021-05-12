@@ -19,15 +19,19 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../partials/analytics.php');
 client_login();
-/* Load Invoice Composer Library */
+/* Load Barcode Library And Composer */
 require_once('../vendor/autoload.php');
 $barcode = new \Com\Tecnick\Barcode\Barcode();
+
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -133,9 +137,37 @@ require_once('../partials/dashboard_head.php');
                                     <tr class="total">
                                         <td></td>
 
-                                        <td>Total: <?php echo $invoice->subscription_amt; ?></td>
+                                        <td>Total: Ksh <?php echo $invoice->subscription_amt; ?></td>
                                     </tr>
                                 </table>
+                                <div class="text-center">
+                                    <h6>Scan To Verify</h6>
+                                    <?php
+                                    $targetPath = "../public/barcodes/";
+                                    if (!is_dir($targetPath)) {
+                                        mkdir($targetPath, 0777, true);
+                                    }
+                                    $code = $invoice->invoice_code;
+                                    $created_at = date('d M Y g:ia', strtotime($invoice->created_at));
+                                    $due = date_format($due_date, 'd M Y g:ia');
+                                    $amount = $invoice->subscription_amt;
+                                    $client = $invoice->client_name . " " . $invoice->client_email;
+                                    $qrcodedata = "Hello $client, Invoice Code: $code, Created At : $created_at , Due On: $due, Amount Invoiced: Ksh $amount.";
+                                    $bobj = $barcode->getBarcodeObj(
+                                        'QRCODE,H',
+                                        "{$qrcodedata}",
+                                        -4,
+                                        -4,
+                                        'black',
+                                        array(-2, -2, -2, -2)
+                                    )->setBackgroundColor('white');
+                                    $imageData = $bobj->getPngData();
+                                    $timestamp = time();
+                                    file_put_contents($targetPath . $timestamp . '.png', $imageData);
+                                    ?>
+                                    <!-- Dump Generated Barcode To Image -->
+                                    <img height="150" width="150" src="<?php echo $targetPath . $timestamp; ?>.png">
+                                </div>
                             </div>
                         </div>
                     </div>

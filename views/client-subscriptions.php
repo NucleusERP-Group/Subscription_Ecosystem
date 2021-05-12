@@ -354,12 +354,11 @@ require_once('../partials/dashboard_head.php');
                                                 Subscription Payment In Invoices Tab On Your Dashboard.">
                                                 <!-- Mail To Client -->
                                                 <input type="hidden" name="subject" value="Package Subscription And Invoice #:<?php echo date('dmY') . "" . $a; ?>">
-                                                <input type="hidden" name="message" value="
-                                                Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully subscribed to <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>. <br><br>
-                                                Please see attached invoice number <b><?php echo date('dmY') . "" . $a; ?></b> for <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>. <br><br>
+                                                <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully subscribed to <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>.
+                                                Please see attached invoice number <b><?php echo date('dmY') . "" . $a; ?></b> for <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b> On the invoices tab on your client dashboard.<br>
                                                 Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
                                                 Kind Regards,<br>
-                                                NucleusSaaS ERP Group<br>
+                                                <b>NucleusSaaS ERP Group</b><br>
                                                 <i>
                                                     Deploy your business operations and services on our fully redundant, 
                                                     high performance Software As Service Enterprise Resource Planning platform

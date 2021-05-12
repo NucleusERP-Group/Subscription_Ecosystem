@@ -2,6 +2,7 @@
     "require": {
         "dompdf/dompdf": "^1.0",
         "tecnickcom/tc-lib-barcode": "^1.15",
-        "mpdf/mpdf": "^8.0"
+        "mpdf/mpdf": "^8.0",
+        "spipu/html2pdf": "^5.2"
     }
 }

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '179387f4913ab77ffdf05d55acff32a5135ca3ee',
+    'reference' => 'f163faac93d44a0dec704488c5d8f9e2e156e405',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '179387f4913ab77ffdf05d55acff32a5135ca3ee',
+      'reference' => 'f163faac93d44a0dec704488c5d8f9e2e156e405',
     ),
     'dompdf/dompdf' => 
     array (
@@ -105,6 +105,15 @@
       ),
       'reference' => '6231e315f73e4f62d72b73f3d6d78ff0eed93c31',
     ),
+    'spipu/html2pdf' => 
+    array (
+      'pretty_version' => 'v5.2.2',
+      'version' => '5.2.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e6d8ca22347b6691bb8c2652212b1be2c89b3eff',
+    ),
     'tecnickcom/tc-lib-barcode' => 
     array (
       'pretty_version' => '1.15.4',
@@ -122,6 +131,15 @@
       array (
       ),
       'reference' => '83cdb57fd900901c6aa2af8cfd67202518fb69b2',
+    ),
+    'tecnickcom/tcpdf' => 
+    array (
+      'pretty_version' => '6.4.1',
+      'version' => '6.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5ba838befdb37ef06a16d9f716f35eb03cb1b329',
     ),
   ),
 );

@@ -100,7 +100,6 @@ require_once('../partials/dashboard_head.php');
                                                 </table>
                                             </td>
                                         </tr>
-
                                         <tr class="information">
                                             <td colspan="2">
                                                 <table>
@@ -177,9 +176,9 @@ require_once('../partials/dashboard_head.php');
                                         <i class="far fa-print"></i>
                                         Print
                                     </button>
-                                    <!--  <a href="client-download-invoice.php?print=<?php echo $invoice->id; ?>" target="_blank" class="action-item">
+                                     <a href="client-download-invoice.php?print=<?php echo $invoice->id; ?>" target="_blank" class="action-item">
                                         <i class="far fa-download"></i> Download PDF
-                                    </a> -->
+                                    </a>
                                 </div>
                             </div>
                         </div>

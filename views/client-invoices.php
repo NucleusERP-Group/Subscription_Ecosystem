@@ -68,7 +68,7 @@ require_once('../partials/dashboard_head.php');
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-transparent"><i class="far fa-search"></i></span>
                                     </div>
-                                    <input type="text" id="SearchInput" onkeyup="search()" class="form-control form-control-flush" placeholder="Type and hit enter ...">
+                                    <input type="text" id="SearchInput" onkeyup="search()" class="form-control form-control-flush" placeholder="Type Invoice Number ...">
                                     <div class="input-group-append">
                                         <a href="#" class="input-group-text bg-transparent" data-action="search-close" data-target="#actions-search"><i class="far fa-times"></i></a>
                                     </div>
@@ -139,7 +139,7 @@ require_once('../partials/dashboard_head.php');
                                                         </a>
                                                         ';
                                                     } ?>
-                                                    <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Print Invoice">
+                                                    <a href="client-print-invoice.php?print=<?php echo $invoices->id;?>" class="action-item mr-2" data-toggle="tooltip" title="Print Invoice">
                                                         <i class="far fa-print"></i> Print
                                                     </a>
                                                 </div>

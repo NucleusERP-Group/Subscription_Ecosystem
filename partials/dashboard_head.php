@@ -21,5 +21,7 @@
     <link rel="stylesheet" href="../public/assets/libs/flatpickr/dist/flatpickr.min.css">
     <!-- Select 2 CSS -->
     <link rel="stylesheet" href="../public/assets/libs/select2/dist/css/select2.min.css">
+    <!-- Invoice Css -->
+    <link rel="stylesheet" href="../public/assets/css/invoice.css">
 
 </head>

@@ -19,6 +19,11 @@ class ComposerStaticInitf81d80c49603f5681bc0bef7f301cdbc
         array (
             'Dompdf\\' => 7,
         ),
+        'C' => 
+        array (
+            'Com\\Tecnick\\Color\\' => 18,
+            'Com\\Tecnick\\Barcode\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -33,6 +38,14 @@ class ComposerStaticInitf81d80c49603f5681bc0bef7f301cdbc
         'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+        'Com\\Tecnick\\Color\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-color/src',
+        ),
+        'Com\\Tecnick\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-barcode/src',
         ),
     );
 

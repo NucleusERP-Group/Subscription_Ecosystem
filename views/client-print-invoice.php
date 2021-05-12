@@ -25,6 +25,9 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../partials/analytics.php');
 client_login();
+/* Load Invoice Composer Library */
+require_once('../vendor/autoload.php');
+$barcode = new \Com\Tecnick\Barcode\Barcode();
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -134,7 +137,6 @@ require_once('../partials/dashboard_head.php');
                                     </tr>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                     <!-- Footer -->

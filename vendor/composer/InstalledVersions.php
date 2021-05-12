@@ -30,7 +30,7 @@ class InstalledVersions
     'aliases' => 
     array (
     ),
-    'reference' => 'fd283721dc4932c1687ececdd738607af644db3a',
+    'reference' => '3af716066ac03c2288cd7e697e46814983c17a92',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ class InstalledVersions
       'aliases' => 
       array (
       ),
-      'reference' => 'fd283721dc4932c1687ececdd738607af644db3a',
+      'reference' => '3af716066ac03c2288cd7e697e46814983c17a92',
     ),
     'dompdf/dompdf' => 
     array (
@@ -79,6 +79,24 @@ class InstalledVersions
       array (
       ),
       'reference' => 'd217848e1396ef962fb1997cf3e2421acba7f796',
+    ),
+    'tecnickcom/tc-lib-barcode' => 
+    array (
+      'pretty_version' => '1.15.4',
+      'version' => '1.15.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '34b0224f71ebfe83adcef9f14f3d81965fb55493',
+    ),
+    'tecnickcom/tc-lib-color' => 
+    array (
+      'pretty_version' => '1.14.6',
+      'version' => '1.14.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '83cdb57fd900901c6aa2af8cfd67202518fb69b2',
     ),
   ),
 );

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Icons -->
     <link rel="apple-touch-icon-precomposed" href="../public/img/icons/apple-touch-icon.png">
-    <link rel="icon" href="../public/img/icons/favicon.ico">
+    <link rel="icon" href="../public/img/logos/Logo.png">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../public/css/fontawesome.min.css">
     <link rel="stylesheet" href="../public/css/main.min.css">

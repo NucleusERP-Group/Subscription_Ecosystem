@@ -187,6 +187,9 @@ while ($client = $res->fetch_object()) {
                     .invoice-box.rtl table tr td:nth-child(2) {
                         text-align: left;
                     }
+                    .center {
+                        text-align: center;
+                      }
                 </style>
             </head>
 
@@ -252,9 +255,9 @@ while ($client = $res->fetch_object()) {
                     <br>
                     <br>
                     <br>
-                    <div class="text-center">
+                    <div class="center">
                         <h6>Scan To Verify</h6>
-                        <img src="' . $qrbase64 . '" width="150px" height="150px">
+                        <img src="' . $qrbase64 . '" width="200px" height="200px">
                     </div>
                 </div>
             </body>

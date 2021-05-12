@@ -353,9 +353,19 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Kindly Proceed To Pay For Your <?php echo $packages->package_code . " " . $packages->package_name; ?>
                                                 Subscription Payment In Invoices Tab On Your Dashboard.">
                                                 <!-- Mail To Client -->
-                                                <input type="hidden" name="subject" value="Package Subscription">
-                                                <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>. Kindly Proceed To Pay For Your <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>
-                                                Subscription Payment In Invoices Tab On Your Dashboard.">
+                                                <input type="hidden" name="subject" value="Package Subscription And Invoice #:<?php echo date('dmY') . "" . $a; ?>">
+                                                <input type="hidden" name="message" value="
+                                                Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully subscribed to <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>. <br><br>
+                                                Please see attached invoice number <b><?php echo date('dmY') . "" . $a; ?></b> for <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>. <br><br>
+                                                Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
+                                                Kind Regards,<br>
+                                                NucleusSaaS ERP Group<br>
+                                                <i>
+                                                    Deploy your business operations and services on our fully redundant, 
+                                                    high performance Software As Service Enterprise Resource Planning platform
+                                                    and benefit from its high reliability, security and enterprise feature set.
+                                                 </i>
+                                                ">
 
                                                 <button type="submit" name="PurchasePackage" class="action-item">
                                                     <i class="far fa-shopping-cart"></i>

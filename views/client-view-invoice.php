@@ -139,8 +139,6 @@ require_once('../partials/dashboard_head.php');
                                         </tr>
                                     </table>
                                     <br>
-                                    <br>
-                                    <br>
                                     <div class="text-center">
                                         <h6>Scan To Verify</h6>
                                         <?php

@@ -29,6 +29,9 @@ require_once('../vendor/autoload.php');
 
 use Dompdf\Dompdf;
 
+$barcode = new \Com\Tecnick\Barcode\Barcode();
+
+
 $dompdf = new Dompdf();
 $$id = $_SESSION['id'];
 $email = $_SESSION['email'];
@@ -50,11 +53,42 @@ while ($client = $res->fetch_object()) {
         /* Due Date */
         $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
         $due = date_format($due_date, 'd M Y g:ia');
+
         /* Convert Logo To Base64 Image */
         $path = '../public/img/logos/Logo.png';
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+        /* Generate QR Code */
+        $targetPath = "../public/barcodes/";
+        if (!is_dir($targetPath)) {
+            mkdir($targetPath, 0777, true);
+        }
+        $code = $invoice->invoice_code;
+        $created_at = date('d M Y g:ia', strtotime($invoice->created_at));
+        $due = date_format($due_date, 'd M Y g:ia');
+        $amount = $invoice->subscription_amt;
+        $client_details = $invoice->client_name . " " . $invoice->client_email;
+        $qrcodedata = "Hello $client_details, Invoice Code: $code, Created At : $created_at , Due On: $due, Amount Invoiced: Ksh $amount.";
+        $bobj = $barcode->getBarcodeObj(
+            'QRCODE,H',
+            "{$qrcodedata}",
+            -4,
+            -4,
+            'black',
+            array(-2, -2, -2, -2)
+        )->setBackgroundColor('white');
+        $imageData = $bobj->getPngData();
+        $timestamp = time();
+        file_put_contents($targetPath . $timestamp . '.png', $imageData);
+
+        /* Convert This QR Code To Base 64 Image */
+        $qrpath = $targetPath . $timestamp . '.png';
+        $qrtype = pathinfo($path, PATHINFO_EXTENSION);
+        $qrdata = file_get_contents($qrpath);
+        $qrbase64 = 'data:image/' . $qrtype . ';base64,' . base64_encode($qrdata);
+
         $html = '
         <!DOCTYPE html>
         <html>
@@ -214,6 +248,14 @@ while ($client = $res->fetch_object()) {
                             <td>Total: Ksh ' . $invoice->subscription_amt . '</td>
                         </tr>
                     </table>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="text-center">
+                        <h6>Scan To Verify</h6>
+                        <img src="' . $qrbase64 . '" width="150px" height="150px">
+                    </div>
                 </div>
             </body>
         </html>

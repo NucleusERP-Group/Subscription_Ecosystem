@@ -44,13 +44,24 @@ while ($client = $res->fetch_object()) {
     $stmt->execute(); //ok
     $res = $stmt->get_result();
     while ($invoice = $res->fetch_object()) {
+        /* Date Invoice Created */
+        $created_at = date('d M Y g:ia', strtotime($invoice->created_at));
+        $created = date_create(date('y-m-d g:ia', strtotime($invoice->created_at)));
+        /* Due Date */
+        $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
+        $due = date_format($due_date, 'd M Y g:ia');
+        /* Convert Logo To Base64 Image */
+        $path = '../public/img/logos/Logo.png';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         $html = '
         <!DOCTYPE html>
         <html>
             <head>
                 <meta charset="utf-8" />
                 
-                <title> Invoice #' .$invoice->invoice_code. '</title>
+                <title> Invoice #' . $invoice->invoice_code . '</title>
                 <style>
                     .invoice-box {
                         margin: auto;
@@ -153,19 +164,18 @@ while ($client = $res->fetch_object()) {
                                 <table>
                                     <tr>
                                         <td class="title">
-                                        
+                                            <img src="' . $base64 . '" height="150" width="150" />
                                         </td>
 
                                         <td>
-                                            Invoice #:'.$invoice->invoice_code.'<br />
-                                            Created:'.$created_at.'<br />
-                                            Due: '.$due.'
+                                            Invoice #: ' . $invoice->invoice_code . '<br />
+                                            Created: ' . $created_at . '<br />
+                                            Due: ' . $due . '
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-
                         <tr class="information">
                             <td colspan="2">
                                 <table>
@@ -177,9 +187,9 @@ while ($client = $res->fetch_object()) {
                                     </td>
 
                                         <td>
-                                            '.$invoice->client_name.'<br />
-                                            '.$invoice->client_email.'<br />
-                                            '.$client->phone.'
+                                            ' . $invoice->client_name . '<br />
+                                            ' . $invoice->client_email . '<br />
+                                            ' . $client->phone . '
                                         </td>
                                     </tr>
                                 </table>
@@ -193,15 +203,15 @@ while ($client = $res->fetch_object()) {
                         </tr>
 
                         <tr class="item">
-                            <td>'.$invoice->package_code.'<br>'. $invoice->package_name.' Subscription </td>
+                            <td>' . $invoice->package_code . '<br>' . $invoice->package_name . ' Subscription </td>
 
-                            <td>Ksh '.$invoice->subscription_amt.'</td>
+                            <td>Ksh ' . $invoice->subscription_amt . '</td>
                         </tr>
 
                         <tr class="total">
                             <td></td>
 
-                            <td>Total: Ksh '.$invoice->subscription_amt.'</td>
+                            <td>Total: Ksh ' . $invoice->subscription_amt . '</td>
                         </tr>
                     </table>
                 </div>
@@ -210,10 +220,12 @@ while ($client = $res->fetch_object()) {
 ';
         $dompdf = new Dompdf();
         $dompdf->load_html($html);
-        //$dompdf->set_paper('A4','landscape');
         $dompdf->set_paper('A4');
         $dompdf->set_option('isHtml5ParserEnabled', true);
         $dompdf->render();
         $dompdf->stream("$invoice->invoice_code", array("Attachment" => 1));
+        $options = $dompdf->getOptions();
+        $options->setDefaultFont('');
+        $dompdf->setOptions($options);
     }
 }

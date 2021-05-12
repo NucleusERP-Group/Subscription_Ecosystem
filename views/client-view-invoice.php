@@ -57,6 +57,7 @@ require_once('../partials/dashboard_head.php');
                 $stmt->execute(); //ok
                 $res = $stmt->get_result();
                 while ($invoice = $res->fetch_object()) {
+                    
             ?>
 
                     <!-- Page content -->

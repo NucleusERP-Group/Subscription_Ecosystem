@@ -81,6 +81,7 @@ require_once('../partials/dashboard_head.php');
                                                     </td>
                                                     <td>
                                                         Invoice #: <?php echo $invoice->invoice_code; ?><br />
+                                                        Subscription #: <?php echo $invoice->subscription_code; ?><br />
                                                         Created: <?php echo date('d M Y g:ia', strtotime($invoice->created_at)); ?><br />
                                                         Due:
                                                         <?php
@@ -100,31 +101,19 @@ require_once('../partials/dashboard_head.php');
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        Sparksuite, Inc.<br />
-                                                        12345 Sunny Road<br />
-                                                        Sunnyville, CA 12345
+                                                        NucleusSaaS ERP Group.<br />
+                                                        120-90125.<br />
+                                                        Machakos.
                                                     </td>
 
                                                     <td>
-                                                        Acme Corp.<br />
-                                                        John Doe<br />
-                                                        john@example.com
+                                                        <?php echo $invoice->client_name; ?><br />
+                                                        <?php echo $invoice->client_email; ?><br />
+                                                        <?php echo $client->phone; ?>
                                                     </td>
                                                 </tr>
                                             </table>
                                         </td>
-                                    </tr>
-
-                                    <tr class="heading">
-                                        <td>Payment Method</td>
-
-                                        <td>Check #</td>
-                                    </tr>
-
-                                    <tr class="details">
-                                        <td>Check</td>
-
-                                        <td>1000</td>
                                     </tr>
 
                                     <tr class="heading">
@@ -134,27 +123,14 @@ require_once('../partials/dashboard_head.php');
                                     </tr>
 
                                     <tr class="item">
-                                        <td>Website design</td>
+                                        <td><?php echo $invoice->package_code . " <br> " .  $invoice->package_name; ?> Subscription </td>
 
-                                        <td>$300.00</td>
+                                        <td>Ksh <?php echo $invoice->subscription_amt; ?></td>
                                     </tr>
-
-                                    <tr class="item">
-                                        <td>Hosting (3 months)</td>
-
-                                        <td>$75.00</td>
-                                    </tr>
-
-                                    <tr class="item last">
-                                        <td>Domain name (1 year)</td>
-
-                                        <td>$10.00</td>
-                                    </tr>
-
                                     <tr class="total">
                                         <td></td>
 
-                                        <td>Total: $385.00</td>
+                                        <td>Total: <?php echo $invoice->subscription_amt; ?></td>
                                     </tr>
                                 </table>
                             </div>

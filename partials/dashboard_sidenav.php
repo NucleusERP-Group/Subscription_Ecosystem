@@ -33,8 +33,8 @@ while ($client = $res->fetch_object()) {
     <div class="sidenav" id="sidenav-main">
         <!-- Sidenav header -->
         <div class="sidenav-header d-flex align-items-center">
-            <a class="navbar-brand" href="client-dashboard.php">
-                <img src="../public/img/logos/header-light.png" class="navbar-brand-img" alt="...">
+            <a class="navbar-bran" href="client-dashboard.php">
+                <img src="../public/img/logos/Logo.png" height="100" width="100" class="navbar-brand-img" alt="...">
             </a>
             <div class="ml-auto">
                 <!-- Sidenav toggler -->

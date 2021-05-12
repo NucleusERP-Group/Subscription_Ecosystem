@@ -1,7 +1,7 @@
 <header id="header" class="header-dynamic header-shadow-scroll">
     <div class="container">
-        <a class="logo" href="index.php">
-            <img src="../public/img/logos/header-light.png" alt="">
+        <a class="log" href="index.php">
+            <img src="../public/img/logos/Logo.png" alt="" height="70" width="70">
         </a>
         <nav>
             <ul class="nav-primary">

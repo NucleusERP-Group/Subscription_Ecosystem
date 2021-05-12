@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'fd283721dc4932c1687ececdd738607af644db3a',
+    'reference' => 'f163faac93d44a0dec704488c5d8f9e2e156e405',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'fd283721dc4932c1687ececdd738607af644db3a',
+      'reference' => 'f163faac93d44a0dec704488c5d8f9e2e156e405',
     ),
     'dompdf/dompdf' => 
     array (
@@ -28,6 +28,37 @@
       array (
       ),
       'reference' => '8768448244967a46d6e67b891d30878e0e15d25c',
+    ),
+    'mpdf/mpdf' => 
+    array (
+      'pretty_version' => 'v8.0.10',
+      'version' => '8.0.10.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1333a962cd2f7ae1a127b7534b7734b58179186f',
+    ),
+    'myclabs/deep-copy' => 
+    array (
+      'pretty_version' => '1.10.2',
+      'version' => '1.10.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '776f831124e9c62e1a2c601ecc52e776d8bb7220',
+      'replaced' => 
+      array (
+        0 => '1.10.2',
+      ),
+    ),
+    'paragonie/random_compat' => 
+    array (
+      'pretty_version' => 'v9.99.100',
+      'version' => '9.99.100.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
     'phenx/php-font-lib' => 
     array (
@@ -47,6 +78,15 @@
       ),
       'reference' => '5fa61b65e612ce1ae15f69b3d223cb14ecc60e32',
     ),
+    'psr/log' => 
+    array (
+      'pretty_version' => '1.1.4',
+      'version' => '1.1.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
+    ),
     'sabberworm/php-css-parser' => 
     array (
       'pretty_version' => '8.3.1',
@@ -55,6 +95,51 @@
       array (
       ),
       'reference' => 'd217848e1396ef962fb1997cf3e2421acba7f796',
+    ),
+    'setasign/fpdi' => 
+    array (
+      'pretty_version' => 'v2.3.6',
+      'version' => '2.3.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6231e315f73e4f62d72b73f3d6d78ff0eed93c31',
+    ),
+    'spipu/html2pdf' => 
+    array (
+      'pretty_version' => 'v5.2.2',
+      'version' => '5.2.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e6d8ca22347b6691bb8c2652212b1be2c89b3eff',
+    ),
+    'tecnickcom/tc-lib-barcode' => 
+    array (
+      'pretty_version' => '1.15.4',
+      'version' => '1.15.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '34b0224f71ebfe83adcef9f14f3d81965fb55493',
+    ),
+    'tecnickcom/tc-lib-color' => 
+    array (
+      'pretty_version' => '1.14.6',
+      'version' => '1.14.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '83cdb57fd900901c6aa2af8cfd67202518fb69b2',
+    ),
+    'tecnickcom/tcpdf' => 
+    array (
+      'pretty_version' => '6.4.1',
+      'version' => '6.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5ba838befdb37ef06a16d9f716f35eb03cb1b329',
     ),
   ),
 );

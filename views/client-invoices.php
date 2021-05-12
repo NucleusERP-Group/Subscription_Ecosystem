@@ -139,8 +139,8 @@ require_once('../partials/dashboard_head.php');
                                                         </a>
                                                         ';
                                                     } ?>
-                                                    <a href="client-print-invoice.php?print=<?php echo $invoices->id;?>" class="action-item mr-2" data-toggle="tooltip" title="Print Invoice">
-                                                        <i class="far fa-print"></i> Print
+                                                    <a href="client-view-invoice.php?print=<?php echo $invoices->id;?>" class="action-item mr-2" data-toggle="tooltip" title="View Invoice Details">
+                                                        <i class="far fa-eye"></i> View Invoice
                                                     </a>
                                                 </div>
                                             </td>

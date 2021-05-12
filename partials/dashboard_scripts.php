@@ -75,6 +75,14 @@
             }
         }
     }
+    /* Print Contents In Div */
+    function printContent(el) {
+        var restorepage = $('body').html();
+        var printcontent = $('#' + el).clone();
+        $('body').empty().html(printcontent);
+        window.print();
+        $('body').html(restorepage);
+    }
 </script>
 <!-- Swal Js -->
 <script src="../public/js/swal.js"></script>

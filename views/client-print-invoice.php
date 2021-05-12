@@ -77,12 +77,18 @@ require_once('../partials/dashboard_head.php');
                                             <table>
                                                 <tr>
                                                     <td class="title">
-                                                        <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
+                                                        <img src="../public/img/logos/Logo.png" height="150" width="150" />
                                                     </td>
                                                     <td>
-                                                        Invoice #: 123<br />
-                                                        Created: January 1, 2015<br />
-                                                        Due: February 1, 2015
+                                                        Invoice #: <?php echo $invoice->invoice_code; ?><br />
+                                                        Created: <?php echo date('d M Y g:ia', strtotime($invoice->created_at)); ?><br />
+                                                        Due:
+                                                        <?php
+                                                        /* All NucleusSaaSERP Invoices Are Due In 20 Days */
+                                                        $created_at = date_create(date('y-m-d g:ia', strtotime($invoice->created_at)));
+                                                        $due_date = date_add($created_at, date_interval_create_from_date_string('20 days'));
+                                                        echo date_format($due_date, 'd M Y g:ia');
+                                                        ?>
                                                     </td>
                                                 </tr>
                                             </table>

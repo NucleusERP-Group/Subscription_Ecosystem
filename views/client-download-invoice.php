@@ -89,6 +89,13 @@ while ($client = $res->fetch_object()) {
         $qrdata = file_get_contents($qrpath);
         $qrbase64 = 'data:image/' . $qrtype . ';base64,' . base64_encode($qrdata);
 
+        /* Payment Status */
+        if ($invoice->status == 'Paid') {
+            $payment_status = '<span class="badge badge-pill badge-success">Paid</span>';
+        } else {
+            $payment_status = '<span class="badge badge-pill badge-danger">UnPaid</span>';
+        } 
+
         $html = '
         <!DOCTYPE html>
         <html>
@@ -207,7 +214,8 @@ while ($client = $res->fetch_object()) {
                                         <td>
                                             Invoice #: ' . $invoice->invoice_code . '<br />
                                             Created: ' . $created_at . '<br />
-                                            Due: ' . $due . '
+                                            Due: ' . $due . ' <br/ >
+                                            Payment Status: '.$payment_status. '
                                         </td>
                                     </tr>
                                 </table>

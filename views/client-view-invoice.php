@@ -57,7 +57,7 @@ require_once('../partials/dashboard_head.php');
                 $stmt->execute(); //ok
                 $res = $stmt->get_result();
                 while ($invoice = $res->fetch_object()) {
-                    
+
             ?>
 
                     <!-- Page content -->
@@ -94,8 +94,14 @@ require_once('../partials/dashboard_head.php');
                                                             /* All NucleusSaaSERP Invoices Are Due In 20 Days */
                                                             $created_at = date_create(date('y-m-d g:ia', strtotime($invoice->created_at)));
                                                             $due_date = date_add($created_at, date_interval_create_from_date_string('20 days'));
-                                                            echo date_format($due_date, 'd M Y g:ia');
-                                                            ?>
+                                                            echo date_format($due_date, 'd M Y g:ia'); ?>
+                                                            <br />
+                                                            <?php
+                                                            if ($invoice->status == 'Paid') {
+                                                                echo "Payment Status: <span class='badge badge-pill badge-success'>Paid</span>";
+                                                            } else {
+                                                                echo "Payment Status: <span class='badge badge-pill badge-danger'>UnPaid</span>";
+                                                            } ?>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -123,13 +129,11 @@ require_once('../partials/dashboard_head.php');
 
                                         <tr class="heading">
                                             <td>Item</td>
-
                                             <td>Price</td>
                                         </tr>
 
                                         <tr class="item">
                                             <td><?php echo $invoice->package_code . " <br> " .  $invoice->package_name; ?> Subscription </td>
-
                                             <td>Ksh <?php echo $invoice->subscription_amt; ?></td>
                                         </tr>
                                         <tr class="total">
@@ -175,9 +179,25 @@ require_once('../partials/dashboard_head.php');
                                         <i class="far fa-print"></i>
                                         Print
                                     </button>
-                                     <a href="client-download-invoice.php?print=<?php echo $invoice->id; ?>" target="_blank" class="action-item">
+                                    <a href="client-download-invoice.php?print=<?php echo $invoice->id; ?>" target="_blank" class="action-item">
                                         <i class="far fa-download"></i> Download PDF
                                     </a>
+                                    <?php
+                                    if ($invoice->status == 'Paid') {
+                                        echo 
+                                        '
+                                            <a href="client-payment-history.php" class="action-item">
+                                                <i class="far fa-download"></i> View Payment Records
+                                            </a>
+                                        ';
+                                    } else {
+                                        echo 
+                                        '
+                                            <a href="#pay-invoice" data_toggle="modal" class="action-item">
+                                                <i class="far fa-plus"></i> Add Payment
+                                            </a>
+                                        ';
+                                    } ?>
                                 </div>
                             </div>
                         </div>

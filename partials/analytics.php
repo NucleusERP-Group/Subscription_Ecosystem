@@ -42,7 +42,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Unpaid Invoices */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Unpaid'  ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserInvoices` WHERE (client_id = '$id' || client_email = '$email') AND status = ''  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($UnpaidInvoices);

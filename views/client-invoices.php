@@ -97,11 +97,12 @@ require_once('../partials/dashboard_head.php');
                             <table id="DataTable" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Invoice Code</th>
-                                        <th scope="col" class="sort">Subscription Package</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col" class="sort">Package</th>
                                         <th scope="col" class="sort">Invoiced Amount</th>
-                                        <th scope="col" class="sort">Date Invoices</th>
-                                        <th scope="col">Manage Invoices</th>
+                                        <th scope="col" class="sort">Date Invoiced</th>
+                                        <th scope="col" class="sort">Due Date</th>
+                                        <th scope="col">Payment Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,10 +112,19 @@ require_once('../partials/dashboard_head.php');
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
                                     while ($invoices = $res->fetch_object()) {
+                                        /* Date Invoice Created */
+                                        $created_at = date('d M Y g:ia', strtotime($invoices->created_at));
+                                        $created = date_create(date('y-m-d g:ia', strtotime($invoices->created_at)));
+                                        /* Due Date */
+                                        $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
+                                        $due = date_format($due_date, 'd M Y g:ia');
                                     ?>
+
                                         <tr>
                                             <td>
-                                                <span class="client"><?php echo $invoices->invoice_code; ?></span>
+                                                <a href="client-view-invoice.php?print=<?php echo $invoices->id; ?>" data-toggle="tooltip" title="View Invoice Details">
+                                                    <span class="client"><?php echo $invoices->invoice_code; ?></span>
+                                                </a>
                                             </td>
                                             <td class="order">
                                                 <span class="h6 text-sm font-weight-bold mb-0"><?php echo $invoices->package_code; ?></span>
@@ -124,25 +134,18 @@ require_once('../partials/dashboard_head.php');
                                                 <span class="client">Ksh <?php echo $invoices->subscription_amt; ?></span>
                                             </td>
                                             <td>
-                                                <span class="client"><?php echo date('d M Y g:ia', strtotime($invoices->created_at)); ?></span>
+                                                <span class="client"><?php echo $created_at; ?></span>
                                             </td>
                                             <td>
-
-                                                <div class="actions ml-3">
-                                                    <?php
-                                                    if ($invoices->status != '') {
-                                                        /* Nothing */                                                        
-                                                    } else {
-                                                        echo '
-                                                        <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Pay Inoice">
-                                                            <i class="far fa-file-invoice-dollar"></i> Pay Invoice
-                                                        </a>
-                                                        ';
-                                                    } ?>
-                                                    <a href="client-view-invoice.php?print=<?php echo $invoices->id;?>" class="action-item mr-2" data-toggle="tooltip" title="View Invoice Details">
-                                                        <i class="far fa-eye"></i> View Invoice
-                                                    </a>
-                                                </div>
+                                                <span class="client"><?php echo $due; ?></span>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($invoices->status == 'Paid') {
+                                                    echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                } else {
+                                                    echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                } ?>
                                             </td>
                                         </tr>
                                     <?php

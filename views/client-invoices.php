@@ -113,11 +113,11 @@ require_once('../partials/dashboard_head.php');
                                     $res = $stmt->get_result();
                                     while ($invoices = $res->fetch_object()) {
                                         /* Date Invoice Created */
-                                        $created_at = date('d M Y g:ia', strtotime($invoices->created_at));
-                                        $created = date_create(date('y-m-d g:ia', strtotime($invoices->created_at)));
+                                        $created_at = date('d M Y ', strtotime($invoices->created_at));
+                                        $created = date_create(date('y-m-d ', strtotime($invoices->created_at)));
                                         /* Due Date */
                                         $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
-                                        $due = date_format($due_date, 'd M Y g:ia');
+                                        $due = date_format($due_date, 'd M Y');
                                     ?>
 
                                         <tr>

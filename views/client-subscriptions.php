@@ -440,12 +440,31 @@ require_once('../partials/dashboard_head.php');
                                                 <!-- Mail To Client -->
                                                 <input type="hidden" name="subject" value="Package Subscription">
                                                 <input type="hidden" name="message" value="Hello, <?php echo $subscribed_packages->client_name; ?>. You Have Cancelled Your <b><?php echo $subscribed_packages->package_code . " " . $subscribed_packages->package_name; ?></b> Subscription.">
-                                                <button type="submit" name="CancelSubscription" class="action-item">
+                                                <a href="#cancel-subscription" data-toggle="modal" class="action-item">
                                                     <i class="far fa-calendar-times"></i>
                                                     Cancel Package Subscription
-                                                </button>
+                                                    </button>
+                                                    <div class="modal fade" id="cancel-subscription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">CONFIRM CANCELLATION</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body text-center text-danger">
+                                                                    <h4>Cancel Subscribed Package</h4>
+                                                                    <br>
+                                                                    <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                    <input type="submit" name="CancelSubscription" class="text-center btn btn-danger" value="Cancel Subsciption">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </form>
                                             <!-- Prompt User To Cancel Subscription -->
+
                                         </div>
                                     </div>
                                 </div>

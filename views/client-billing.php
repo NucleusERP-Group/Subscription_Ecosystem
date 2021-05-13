@@ -250,7 +250,7 @@ require_once('../partials/dashboard_head.php');
                                                                         <h4>Delete <?php echo $card->card_name; ?> Details ?</h4>
                                                                         <br>
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                        <a href="client-billing.php?delete=<?php echo $card->card_id;?>" class="text-center btn btn-danger"> Delete </a>
+                                                                        <a href="client-billing.php?delete=<?php echo $card->card_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                                     </div>
                                                                 </div>
                                                             </div>

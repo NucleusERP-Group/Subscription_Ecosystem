@@ -339,7 +339,7 @@ require_once('../partials/dashboard_head.php');
                                                 <!-- Hidden Values -->
                                                 <input type="hidden" name="id" value="<?php echo $ID; ?>">
                                                 <input type="hidden" name="subscription_code" value="<?php echo $a . "" . $b; ?>">
-                                                <input type="hidden" name="invoice_code" value="<?php echo date('dmY') . "" . $a; ?>">
+                                                <input type="hidden" name="invoice_code" value="<?php echo date('dmY') . "" . $b; ?>">
                                                 <input type="hidden" name="package_code" value="<?php echo $packages->package_code; ?>">
                                                 <input type="hidden" name="package_name" value="<?php echo $packages->package_name; ?>">
                                                 <input type="hidden" name="client_id" value="<?php echo $client->id; ?>">
@@ -353,9 +353,9 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Kindly Proceed To Pay For Your <?php echo $packages->package_code . " " . $packages->package_name; ?>
                                                 Subscription Payment In Invoices Tab On Your Dashboard.">
                                                 <!-- Mail To Client -->
-                                                <input type="hidden" name="subject" value="Package Subscription And Invoice #:<?php echo date('dmY') . "" . $a; ?>">
+                                                <input type="hidden" name="subject" value="Package Subscription And Invoice #:<?php echo date('dmY') . "" . $b; ?>">
                                                 <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully subscribed to <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>.
-                                                Please see attached invoice number <b><?php echo date('dmY') . "" . $a; ?></b> for <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b> On the invoices tab on your client dashboard.<br>
+                                                Please see attached invoice number <b><?php echo date('dmY') . "" . $b; ?></b> for <b><?php echo $packages->package_code . " " . $packages->package_name; ?></b> On the invoices tab on your client dashboard.<br>
                                                 Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
                                                 Kind Regards,<br>
                                                 <b>NucleusSaaS ERP Group</b><br>

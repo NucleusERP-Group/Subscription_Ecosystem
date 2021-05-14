@@ -209,7 +209,7 @@ require_once('../partials/dashboard_head.php');
                             </div>
                             <div class="list-group list-group-flush">
                                 <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE client_id = '$id' || client_email = '$email' AND status ='Active' LIMIT 3 ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Active' LIMIT 3 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
@@ -266,7 +266,7 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col">
-                                        <h6 class="d-inline-block mb-0">History</h6>
+                                        <h6 class="d-inline-block mb-0">Subscriptions Payment History</h6>
                                     </div>
                                     <div class="col text-right">
                                         <div class="actions"><a href="#" class="action-item mr-3" data-action="search-open" data-target="#actions-search"><i class="far fa-search"></i></a>
@@ -317,7 +317,7 @@ require_once('../partials/dashboard_head.php');
                                                     <span class="value text-sm mb-0"><?php echo $payments->trans_code; ?></span>
                                                 </td>
                                                 <td>
-                                                    <span class="value text-sm mb-0"><?php echo $payments->amount; ?></span>
+                                                    <span class="value text-sm mb-0">Ksh <?php echo $payments->amount; ?></span>
                                                 </td>
                                             </tr>
                                         <?php

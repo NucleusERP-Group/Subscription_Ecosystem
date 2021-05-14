@@ -111,12 +111,9 @@ if (isset($_POST['payInvoice'])) {
         $err = "Payment Transaction Code Cannot Be Empty";
     }
 
-    if (isset($_POST['amount']) && !empty($_POST['amount'])) {
-        $amount  = mysqli_real_escape_string($mysqli, trim($_POST['amount']));
-    } else {
-        $error = 1;
-        $err = "Payment Amount Cannot Be Empty";
-    }
+    /* Null Amounts */
+    $amount  = mysqli_real_escape_string($mysqli, trim($_POST['amount']));
+
 
     if (isset($_POST['subscription_id']) && !empty($_POST['subscription_id'])) {
         $subscription_id  = mysqli_real_escape_string($mysqli, trim($_POST['subscription_id']));
@@ -327,8 +324,9 @@ require_once('../partials/dashboard_head.php');
                                         $created_at = date('d M Y g:ia', strtotime($invoice->created_at));
                                         $due = date_format($due_date, 'd M Y g:ia');
                                         $amount = $invoice->subscription_amt;
+                                        $invoice_payment_status = $invoice->status;
                                         $client_details = $invoice->client_name . " " . $invoice->client_email;
-                                        $qrcodedata = "Hello $client_details, Invoice Code: $code, Created At : $created_at , Due On: $due, Amount Invoiced: Ksh $amount.";
+                                        $qrcodedata = "Hello $client_details, Invoice Code: $code, Created At : $created_at , Due On: $due, Amount Invoiced: Ksh $amount. Payment Status: $invoice_payment_status";
                                         $bobj = $barcode->getBarcodeObj(
                                             'QRCODE,H',
                                             "{$qrcodedata}",
@@ -422,8 +420,8 @@ require_once('../partials/dashboard_head.php');
                                                                     <input type="hidden" name="notification_from" value="Invoice Payment">
                                                                     <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. You Have Successfully Paid Invoiced Subscription For This Package: <?php echo $invoice->package_code . " " . $invoice->package_name; ?>">
                                                                     <!-- Mail To Client -->
-                                                                    <input type="hidden" name="subject" value="Invoice #:<?php echo $invoice->invoice_code;?> Payment">
-                                                                    <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully paid Ksh <?php echo $invoice->subscription_amt;?> for  subscribed package :<b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>.
+                                                                    <input type="hidden" name="subject" value="Invoice #:<?php echo $invoice->invoice_code; ?> Payment">
+                                                                    <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully paid Ksh <?php echo $invoice->subscription_amt; ?> for  subscribed package :<b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>.
                                                                     Kindly proceed to view your attached paid invoice on Invoices Tab on your dashboard.<br>
                                                                     Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
                                                                     Kind Regards,<br>
@@ -445,6 +443,10 @@ require_once('../partials/dashboard_head.php');
                                                             <button type="submit" name="payInvoice" class="btn btn-primary">Pay Invoice</button>
                                                         </div>
                                                     </form>
+                                                    <!-- To Do 
+                                                    1.Verify Payments 
+                                                    2. Add Other Payments Gateways LIke Paypal, Lipa Na Mpesa ETC
+                                                    -->
                                                 </div>
                                                 <div class="modal-footer justify-content-between">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

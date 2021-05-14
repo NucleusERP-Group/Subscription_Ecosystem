@@ -88,7 +88,7 @@ while ($client = $res->fetch_object()) {
             if ($client->access_level == 'Admin') {
                 echo
                 '
-                <a href="dashboard.php" class="btn btn-square text-sm">
+                <a target="_blank" href="dashboard.php" class="btn btn-square text-sm">
                     <span class="btn-inner--icon d-block"><i class="far fa-user-secret fa-2x"></i></span>
                     <span class="btn-inner--icon d-block pt-2">Admin Dashboard</span>
                 </a>

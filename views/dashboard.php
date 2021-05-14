@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Sat May 08 2021
+ * Created on Fri May 14 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -19,6 +19,7 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
@@ -160,15 +161,14 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                             </div>
                             <div class="list-group list-group-flush">
-                                <?php
-                                /* Load Credit Card Based On All Users */
-                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards`   ";
+                            <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` LIMIT 5 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
                                 while ($card = $res->fetch_object()) {
                                 ?>
-                                    <a href="cards.php">
+                                    <a href="cards.php" class="list-group-item list-group-item-action">
                                         <div class="media align-items-center">
                                             <div class="mr-3">
                                                 <?php
@@ -191,7 +191,6 @@ require_once('../partials/dashboard_head.php');
                                     </a>
                                 <?php
                                 } ?>
-
                             </div>
                         </div>
                     </div>

@@ -121,7 +121,7 @@ require_once('../partials/dashboard_head.php');
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Pending Payments</h6>
-                                            <span class="h3 font-weight-bold mb-0 "><?php echo $PendingPayments; ?></span>
+                                            <span class="h3 font-weight-bold mb-0 ">Ksh <?php echo $PendingPayments; ?></span>
                                         </div>
                                         <div class="col-auto text-primary">
                                             <i class="fas fa-file-invoice-dollar fa-3x"></i>

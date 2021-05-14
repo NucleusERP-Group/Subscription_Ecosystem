@@ -58,7 +58,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Pending Payments */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_SubscriptionsPayments` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Unpaid'  ";
+$query = "SELECT SUM(subscription_amt)  FROM `NucleusSAASERP_UserInvoices` WHERE (client_id = '$id' || client_email = '$email') AND status = ''  ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($PendingPayments);

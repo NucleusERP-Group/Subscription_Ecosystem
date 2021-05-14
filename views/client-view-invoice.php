@@ -24,6 +24,7 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../partials/analytics.php');
+require_once('../config/codeGen.php');
 client_login();
 /* Load Barcode Library And Composer */
 require_once('../vendor/autoload.php');
@@ -131,7 +132,6 @@ if (isset($_POST['payInvoice'])) {
         $err = "Invoice ID Cannot Be Empty";
     }
 
-
     /* Notifications */
     if (isset($_POST['notification_from']) && !empty($_POST['notification_from'])) {
         $notification_from = mysqli_real_escape_string($mysqli, trim($_POST['notification_from']));
@@ -232,7 +232,6 @@ require_once('../partials/dashboard_head.php');
                 while ($invoice = $res->fetch_object()) {
 
             ?>
-
                     <!-- Page content -->
                     <div class="page-content">
                         <!-- Page title -->
@@ -408,8 +407,9 @@ require_once('../partials/dashboard_head.php');
                                                                     <input type="hidden" required name="client_id" value="<?php echo $client->id; ?>" class="form-control">
                                                                     <input type="hidden" required name="client_name" value="<?php echo $client->name; ?>" class="form-control">
                                                                     <input type="hidden" required name="client_email" value="<?php echo $client->email; ?>" class="form-control">
-                                                                    <input type="hidden" required name="trans_code" value="<?php echo $paycde; ?>" class="form-control">
+                                                                    <input type="hidden" required name="trans_code" value="<?php echo $paycode; ?>" class="form-control">
                                                                     <input type="hidden" required name="subscription_id" value="<?php echo $invoice->subscription_id; ?>" class="form-control">
+                                                                    <input type="hidden" required name="subscription_code" value="<?php echo $invoice->subscription_code; ?>" class="form-control">
                                                                     <input type="hidden" required name="package_code" value="<?php echo $invoice->package_code; ?>" class="form-control">
                                                                     <input type="hidden" required name="package_name" value="<?php echo $invoice->package_name; ?>" class="form-control">
                                                                     <input type="hidden" required name="amount" value="<?php echo $invoice->subscription_amt; ?>" class="form-control">

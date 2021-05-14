@@ -83,6 +83,20 @@ while ($client = $res->fetch_object()) {
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>
             </a>
+            <!-- Based On User Previledges Access Admin Dashboard -->
+            <?php
+            if ($client->access_level == 'Admin') {
+                echo
+                '
+                <a href="dashboard.php" class="btn btn-square text-sm">
+                    <span class="btn-inner--icon d-block"><i class="far fa-user-secret fa-2x"></i></span>
+                    <span class="btn-inner--icon d-block pt-2">Admin Dashboard</span>
+                </a>
+                ';
+            } else {
+                /* Silence Sometimes Is The Best Answer */
+            }
+            ?>
             <a href="client-logout.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-power-off fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Log Out</span>

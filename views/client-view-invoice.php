@@ -146,7 +146,7 @@ if (isset($_POST['payInvoice'])) {
         $error = 1;
         $err = "Notification Details  Cannot Be Empty";
     }
-   
+
 
     if (!$error) {
         /* Prevent Double Entries */
@@ -185,7 +185,7 @@ if (isset($_POST['payInvoice'])) {
             /* Bind Invoice Payment Status */
             $rc = $invoicestmt->bind_param('ss', $status, $invoice_id);
             /* Bind User Subscription Status */
-            $rc = $usersubscriptionstmt ->bind_param('ss', $payment_status, $subscription_id);
+            $rc = $usersubscriptionstmt->bind_param('ss', $payment_status, $subscription_id);
             /* Execute Binds */
             $stmt->execute();
             $notifstmt->execute();
@@ -417,8 +417,23 @@ require_once('../partials/dashboard_head.php');
                                                                     <input type="hidden" required name="payment_status" value="Paid" class="form-control">
                                                                     <!-- Update On User Invoices -->
                                                                     <input type="hidden" required name="status" value="Paid" class="form-control">
-                                                                    <input type="hidden" required name="invoice_id" value="<?php echo $invoice->id;?>" class="form-control">
-
+                                                                    <input type="hidden" required name="invoice_id" value="<?php echo $invoice->id; ?>" class="form-control">
+                                                                    <!-- Notification Details -->
+                                                                    <input type="hidden" name="notification_from" value="Invoice Payment">
+                                                                    <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. You Have Successfully Paid Invoiced Subscription For This Package: <?php echo $invoice->package_code . " " . $invoice->package_name; ?>">
+                                                                    <!-- Mail To Client -->
+                                                                    <input type="hidden" name="subject" value="Invoice #:<?php echo $invoice->invoice_code;?> Payment">
+                                                                    <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully paid Ksh <?php echo $invoice->subscription_amt;?> for  subscribed package :<b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>.
+                                                                    Kindly proceed to view your attached paid invoice on Invoices Tab on your dashboard.<br>
+                                                                    Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
+                                                                    Kind Regards,<br>
+                                                                    <b>NucleusSaaS ERP Group</b><br>
+                                                                    <i>
+                                                                        Deploy your business operations and services on our fully redundant, 
+                                                                        high performance Software As Service Enterprise Resource Planning platform
+                                                                        and benefit from its high reliability, security and enterprise feature set.
+                                                                    </i>
+                                                                    ">
                                                                 </div>
                                                                 <div class="form-group col-md-12">
                                                                     <label for="">Invoice Amount (Ksh)</label>

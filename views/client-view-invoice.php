@@ -28,7 +28,179 @@ client_login();
 /* Load Barcode Library And Composer */
 require_once('../vendor/autoload.php');
 $barcode = new \Com\Tecnick\Barcode\Barcode();
+
 /* Add Invoice Payment */
+if (isset($_POST['payInvoice'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['subscription_code']) && !empty($_POST['subscription_code'])) {
+        $subscription_code = mysqli_real_escape_string($mysqli, trim($_POST['subscription_code']));
+    } else {
+        $error = 1;
+        $err = "Subscription Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_code']) && !empty($_POST['package_code'])) {
+        $package_code = mysqli_real_escape_string($mysqli, trim($_POST['package_code']));
+    } else {
+        $error = 1;
+        $err = "Package Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_name']) && !empty($_POST['package_name'])) {
+        $package_name = mysqli_real_escape_string($mysqli, trim($_POST['package_name']));
+    } else {
+        $error = 1;
+        $err = "Package Name  Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_id']) && !empty($_POST['client_id'])) {
+        $client_id = mysqli_real_escape_string($mysqli, trim($_POST['client_id']));
+    } else {
+        $error = 1;
+        $err = "Client ID  Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_name']) && !empty($_POST['client_name'])) {
+        $client_name = mysqli_real_escape_string($mysqli, trim($_POST['client_name']));
+    } else {
+        $error = 1;
+        $err = "Client Name  Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_email']) && !empty($_POST['client_email'])) {
+        $client_email = mysqli_real_escape_string($mysqli, trim($_POST['client_email']));
+    } else {
+        $error = 1;
+        $err = "Client Email  Cannot Be Empty";
+    }
+
+    if (isset($_POST['cc_number']) && !empty($_POST['cc_number'])) {
+        $cc_number = mysqli_real_escape_string($mysqli, trim($_POST['cc_number']));
+    } else {
+        $error = 1;
+        $err = "Credit Card Number Cannot Be Empty";
+    }
+
+    if (isset($_POST['payment_status']) && !empty($_POST['payment_status'])) {
+        $payment_status = mysqli_real_escape_string($mysqli, trim($_POST['payment_status']));
+    } else {
+        $error = 1;
+        $err = "Payment Status  Cannot Be Empty";
+    }
+
+    if (isset($_POST['status']) && !empty($_POST['status'])) {
+        $status = mysqli_real_escape_string($mysqli, trim($_POST['status']));
+    } else {
+        $error = 1;
+        $err = "Payment Status  Cannot Be Empty";
+    }
+
+    if (isset($_POST['trans_code']) && !empty($_POST['trans_code'])) {
+        $trans_code = mysqli_real_escape_string($mysqli, trim($_POST['trans_code']));
+    } else {
+        $error = 1;
+        $err = "Payment Transaction Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['amount']) && !empty($_POST['amount'])) {
+        $amount  = mysqli_real_escape_string($mysqli, trim($_POST['amount']));
+    } else {
+        $error = 1;
+        $err = "Payment Amount Cannot Be Empty";
+    }
+
+    if (isset($_POST['subscription_id']) && !empty($_POST['subscription_id'])) {
+        $subscription_id  = mysqli_real_escape_string($mysqli, trim($_POST['subscription_id']));
+    } else {
+        $error = 1;
+        $err = "Subscription ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['invoice_id']) && !empty($_POST['invoice_id'])) {
+        $invoice_id  = mysqli_real_escape_string($mysqli, trim($_POST['invoice_id']));
+    } else {
+        $error = 1;
+        $err = "Invoice ID Cannot Be Empty";
+    }
+
+
+    /* Notifications */
+    if (isset($_POST['notification_from']) && !empty($_POST['notification_from'])) {
+        $notification_from = mysqli_real_escape_string($mysqli, trim($_POST['notification_from']));
+    } else {
+        $error = 1;
+        $err = "Notification From  Cannot Be Empty";
+    }
+
+    if (isset($_POST['notification_details']) && !empty($_POST['notification_details'])) {
+        $notification_details = mysqli_real_escape_string($mysqli, trim($_POST['notification_details']));
+    } else {
+        $error = 1;
+        $err = "Notification Details  Cannot Be Empty";
+    }
+   
+
+    if (!$error) {
+        /* Prevent Double Entries */
+        $sql = "SELECT * FROM  NucleusSAASERP_SubscriptionsPayments WHERE  subscription_code = '$subscription_code' && trans_code = '$trans_code'   ";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($subscription_code == $row['subscription_code'] && $trans_code == $row['trans_code']) {
+                $err =  "An Invoiced Subscription Code: $subscription_code Is Paid";
+            }
+        } else {
+            /* No Error Or Duplicate */
+
+            /* Pay Invoice */
+            $query = "INSERT INTO NucleusSAASERP_SubscriptionsPayments  (id, client_id, client_name, client_email, cc_number, amount, trans_code, status, subscription_id, subscription_code, package_code, package_name) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            /* Notify User */
+            $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
+            /* Update Invoiced Invoice Status To Paid User */
+            $invoice = "UPDATE  NucleusSAASERP_UserInvoices SET status = ? WHERE id = ? ";
+            /* Update User Subscription Status To Paid */
+            $usersubscription = "UPDATE  NucleusSAASERP_UserSubscriptions SET payment_status = ? WHERE id = ? ";
+
+            /* Prepare Invoice Payment  */
+            $stmt = $mysqli->prepare($query);
+            /* Prepare Notification */
+            $notifstmt = $mysqli->prepare($notif);
+            /* Prepare Invoice Status */
+            $invoicestmt = $mysqli->prepare($invoice);
+            /* Prepare Subscription Status */
+            $usersubscriptionstmt = $mysqli->prepare($usersubscription);
+
+            /* Bind Invoice Payment */
+            $rc = $stmt->bind_param('ssssssssssss', $id, $client_id, $client_name, $client_email, $cc_number, $amount, $trans_code, $status, $subscription_id, $subscription_code, $package_code, $package_name);
+            /* Bind Notification */
+            $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
+            /* Bind Invoice Payment Status */
+            $rc = $invoicestmt->bind_param('ss', $status, $invoice_id);
+            /* Bind User Subscription Status */
+            $rc = $usersubscriptionstmt ->bind_param('ss', $payment_status, $subscription_id);
+            /* Execute Binds */
+            $stmt->execute();
+            $notifstmt->execute();
+            $invoicestmt->execute();
+            $usersubscriptionstmt->execute();
+            /* Load Mailer */
+            require_once('../config/mailer_config.php');
+            if ($stmt && $notifstmt &&  $invoicestmt && $usersubscriptionstmt && $mail->send()) {
+                $success = "Invoiced Subscription Paid.";
+            } else {
+                $info = "Please Try Again Or Try Later ";
+            }
+        }
+    }
+}
 
 require_once('../partials/dashboard_head.php');
 ?>
@@ -245,6 +417,8 @@ require_once('../partials/dashboard_head.php');
                                                                     <input type="hidden" required name="payment_status" value="Paid" class="form-control">
                                                                     <!-- Update On User Invoices -->
                                                                     <input type="hidden" required name="status" value="Paid" class="form-control">
+                                                                    <input type="hidden" required name="invoice_id" value="<?php echo $invoice->id;?>" class="form-control">
+
                                                                 </div>
                                                                 <div class="form-group col-md-12">
                                                                     <label for="">Invoice Amount (Ksh)</label>
@@ -253,7 +427,7 @@ require_once('../partials/dashboard_head.php');
                                                             </div>
                                                         </div>
                                                         <div class="card-footer text-right">
-                                                            <button type="submit" name="paySubscription" class="btn btn-primary">Pay Invoice</button>
+                                                            <button type="submit" name="payInvoice" class="btn btn-primary">Pay Invoice</button>
                                                         </div>
                                                     </form>
                                                 </div>

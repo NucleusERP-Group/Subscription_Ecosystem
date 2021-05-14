@@ -195,23 +195,10 @@ require_once('../partials/dashboard_head.php');
                         <div class="col-lg-8 order-lg-1">
                             <div class="card">
                                 <div class="card-header">
-                                    <span class="h6">Summary</span>
+                                    <span class="h6">Linked Cards Details</span>
                                 </div>
                                 <div>
                                     <ul class="list-group list-group-flush">
-                                        <!-- Load This Based On User Subscription -->
-                                        <li class="list-group-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-sm-4"><small class="h6 text-sm mb-3 mb-sm-0">Plan</small></div>
-                                                <div class="col-sm-5">
-                                                    <strong>Free</strong> Plan, Unlimited Public Repositories.
-                                                </div>
-                                                <div class="col-sm-3 text-sm-right">
-                                                    <a href="#" class="btn btn-sm btn-primary rounded-pill mt-3 mt-sm-0">Upgrade</a>
-                                                </div>
-                                            </div>
-                                        </li>
-
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-sm-4"><small class="h6 text-sm mb-3 mb-sm-0">My Credit Or Debit Cards</small></div>
@@ -228,7 +215,7 @@ require_once('../partials/dashboard_head.php');
                                                     ?>
                                                         <div class="row mb-3">
                                                             <div class="col-9">
-                                                                <?php echo $card->card_name . " " . $card->card_number . " Expiry: " . $card->card_exp_date; ?>
+                                                                <?php echo $card->card_name . ": " . $card->card_number . "<br> Expiry: " . $card->card_exp_date; ?>
                                                             </div>
                                                             <div class="col-3 actions text-right">
                                                                 <a data-toggle="modal" href="#delete-<?php echo $card->card_id; ?>" class="action-item" data-toggle="tooltip" data-original-title="Remove card">
@@ -270,7 +257,7 @@ require_once('../partials/dashboard_head.php');
                                     <div class="row">
                                         <div class="col-5 col-lg-8">
                                             <span class="h6">Add New Card</span>
-                                            <p class="text-muted text-sm mt-2 mb-0 d-none d-lg-block">Safe Money Transfer Using Your Bank Account. We support Mastercard, Visa, PayPal and Stripe.</p>
+                                            <p class="text-muted text-sm mt-2 mb-0 d-none d-lg-block">Safe Money Transfer Using Your Bank Account. We support Mastercard And Visa</p>
                                         </div>
                                         <div class="col-7 col-lg-4 text-right">
                                             <img alt="Image placeholder" src="../public/assets/img/icons/cards/mastercard.png" width="40" class="mr-2">

@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Sat May 08 2021
+ * Created on Fri May 14 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -19,10 +19,11 @@
  * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
-require_once('../partials/analytics.php');
+require_once('../partials/dashboard_analytics.php');
 client_login();
 require_once('../partials/dashboard_head.php');
 ?>
@@ -155,22 +156,19 @@ require_once('../partials/dashboard_head.php');
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="mb-0">Linked Credit And Debit Cards Overview</h6>
+                                        <h6 class="mb-0">Recent Linked Credit And Debit Cards Overview</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="list-group list-group-flush">
-                                <?php
-                                /* Load Credit Card Based On The Logged In User */
-                                $id = $_SESSION['id'];
-                                $email = $_SESSION['email'];
-                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` WHERE card_holder_id = '$id' OR card_holder_email = '$email' LIMIT 3  ";
+                            <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` LIMIT 5 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
                                 while ($card = $res->fetch_object()) {
                                 ?>
-                                    <a href="client-billing.php" class="list-group-item list-group-item-action">
+                                    <a href="cards.php" class="list-group-item list-group-item-action">
                                         <div class="media align-items-center">
                                             <div class="mr-3">
                                                 <?php
@@ -193,7 +191,6 @@ require_once('../partials/dashboard_head.php');
                                     </a>
                                 <?php
                                 } ?>
-
                             </div>
                         </div>
                     </div>
@@ -203,19 +200,19 @@ require_once('../partials/dashboard_head.php');
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="mb-0">Active Subscription Packages Overview</h6>
+                                        <h6 class="mb-0">Recent Active Subscription Packages Overview</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="list-group list-group-flush">
                                 <?php
-                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE (client_id = '$id' || client_email = '$email') AND status = 'Active' LIMIT 3 ";
+                                $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions` WHERE  status = 'Active'  ORDER BY `NucleusSAASERP_UserSubscriptions`.`date_subscribed` DESC LIMIT 5  ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
                                 while ($subscribed_packages = $res->fetch_object()) {
                                 ?>
-                                    <a href="client-subscriptions.php" class="list-group-item list-group-item-action">
+                                    <a href="subscriptions.php" class="list-group-item list-group-item-action">
                                         <div class="media align-items-center">
                                             <div class="mr-3">
                                                 <?php
@@ -266,7 +263,7 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col">
-                                        <h6 class="d-inline-block mb-0">Subscriptions Payment History</h6>
+                                        <h6 class="d-inline-block mb-0">Recent Subscriptions Payment History</h6>
                                     </div>
                                     <div class="col text-right">
                                         <div class="actions"><a href="#" class="action-item mr-3" data-action="search-open" data-target="#actions-search"><i class="far fa-search"></i></a>
@@ -297,9 +294,7 @@ require_once('../partials/dashboard_head.php');
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $id = $_SESSION['id'];
-                                        $email = $_SESSION['email'];
-                                        $ret = "SELECT * FROM `NucleusSAASERP_SubscriptionsPayments` WHERE client_id = '$id'  OR client_email = '$email' ";
+                                        $ret = "SELECT * FROM `NucleusSAASERP_SubscriptionsPayments`  ORDER BY `NucleusSAASERP_SubscriptionsPayments`.`created_at` DESC ";
                                         $stmt = $mysqli->prepare($ret);
                                         $stmt->execute(); //ok
                                         $res = $stmt->get_result();

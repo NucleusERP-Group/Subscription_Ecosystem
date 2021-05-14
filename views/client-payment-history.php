@@ -61,7 +61,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                             <!-- Page title + Go Back button -->
                             <div class="d-inline-block">
-                                <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Payment History</h5>
+                                <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Linked Cards Usage History</h5>
                             </div>
                             <!-- Additional info -->
                         </div>
@@ -103,7 +103,7 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col">
-                                        <h6 class="d-inline-block mb-0">History</h6>
+                                        <h6 class="d-inline-block mb-0">Linked Cards Payments History</h6>
                                     </div>
                                     <div class="col text-right">
                                         <div class="actions"><a href="#" class="action-item mr-3" data-action="search-open" data-target="#actions-search"><i class="far fa-search"></i></a>
@@ -126,12 +126,10 @@ require_once('../partials/dashboard_head.php');
                                 <table id="DataTable" class="table table-hover align-items-center">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Status</th>
                                             <th scope="col">Date</th>
-                                            <th scope="col">Order</th>
+                                            <th scope="col">Code</th>
                                             <th scope="col">Used card</th>
                                             <th scope="col">Amount</th>
-                                            <th>Manage</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -145,31 +143,13 @@ require_once('../partials/dashboard_head.php');
                                         while ($payments = $res->fetch_object()) {
                                         ?>
                                             <tr>
-                                                <th scope="row">
-                                                <?php if($payments->status =='Paid'){
-                                                    echo " <span class='badge badge-pill badge-soft-success'>$payments->status</span>";
-                                                }else{
-                                                    echo " <span class='badge badge-pill badge-soft-danger'>$payments->status</span>";
-                                                }
-                                                ?>
-                                                </th>
                                                 <td>
                                                     <i class="far fa-calendar-alt mr-2"></i>
-                                                    <span class="h6 text-sm"><?php echo date('M d Y', strtotime($payments->created_at));?></span>
+                                                    <span class="h6 text-sm"><?php echo date('M d Y g:ia', strtotime($payments->created_at));?></span>
                                                 </td>
                                                 <td><?php echo $payments->trans_code;?></td>
                                                 <td><i class="far fa-credit-card mr-2"></i><?php echo $payments->cc_number;?></td>
-                                                <td><?php echo $payments->amount;?></td>
-                                                <td class="text-right">
-                                                    <div class="actions">
-                                                        <div class="dropdown">
-                                                            <a class="action-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-ellipsis-h"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href=""><i class="far fa-file-pdf"></i>Download Invoice</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <td>Ksh <?php echo $payments->amount;?></td>
                                             </tr>
                                         <?php
                                         } ?>

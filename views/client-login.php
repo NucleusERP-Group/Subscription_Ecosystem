@@ -42,7 +42,7 @@ if (isset($_POST['login'])) {
     }
 
     if (!$error) {
-
+        /* Login Client  */
         $stmt = $mysqli->prepare("SELECT email, password, id  FROM NucleusSAASERP_Users  WHERE email =? AND password =? AND account_status ='0' ");
         $stmt->bind_param('ss', $email, $password); //bind fetched parameters
 
@@ -56,7 +56,7 @@ if (isset($_POST['login'])) {
         if ($rs) {
             header("location:client-dashboard.php");
         } else {
-            $err =  "Access Denied, Incorrect Email Or Password";
+            $err =  "Incorrect Email Or Password";
         }
     }
 }

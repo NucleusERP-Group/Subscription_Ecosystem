@@ -67,27 +67,27 @@ while ($client = $res->fetch_object()) {
                 <span class="btn-inner--icon d-block"><i class="far fa-home fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Home</span>
             </a>
-            <a href="subscriptions.php" class="btn btn-square text-sm">
+            <a href="admin-subscriptions.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-project-diagram fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">NucleusSaaS Packages</span>
             </a>
-            <a href="clients.php" class="btn btn-square text-sm">
+            <a href="admin-clients.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-users fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Clients</span>
             </a>
-            <a href="invoices.php" class="btn btn-square text-sm">
+            <a href="admin-invoices.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-tasks fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Invoices</span>
             </a>
-            <a href="erp-instance.php" class="btn btn-square text-sm">
+            <a href="admin-erp-instance.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-columns fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">ERP Instace</span>
             </a>
-            <a href="api-keys.php" class="btn btn-square text-sm">
+            <a href="admin-api-keys.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>
             </a>
-            <a href="system-settings.php" class="btn btn-square text-sm">
+            <a href="admin-system-settings.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cog fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">System Settings</span>
             </a>

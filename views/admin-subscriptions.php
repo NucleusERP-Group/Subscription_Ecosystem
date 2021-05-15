@@ -25,6 +25,88 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 client_login();
+/* Add Package */
+if (isset($_POST['PurchasePackage'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_code']) && !empty($_POST['package_code'])) {
+        $package_code = mysqli_real_escape_string($mysqli, trim($_POST['package_code']));
+    } else {
+        $error = 1;
+        $err = "Package Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_name']) && !empty($_POST['package_name'])) {
+        $package_name = mysqli_real_escape_string($mysqli, trim($_POST['package_name']));
+    } else {
+        $error = 1;
+        $err = "Package Name Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_details']) && !empty($_POST['package_details'])) {
+        $package_details = mysqli_real_escape_string($mysqli, trim($_POST['package_details']));
+    } else {
+        $error = 1;
+        $err = "Package Details  Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_monthly_price ']) && !empty($_POST['package_monthly_price '])) {
+        $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price ']));
+    } else {
+        $error = 1;
+        $err = "Packet Monthly Price  Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_yearly_price']) && !empty($_POST['package_yearly_price'])) {
+        $package_yearly_price = mysqli_real_escape_string($mysqli, trim($_POST['package_yearly_price']));
+    } else {
+        $error = 1;
+        $err = "Package Yearly Price  Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_status']) && !empty($_POST['package_status'])) {
+        $package_status = mysqli_real_escape_string($mysqli, trim($_POST['package_status']));
+    } else {
+        $error = 1;
+        $err = "Package Status  Cannot Be Empty";
+    }
+    
+
+    if (!$error) {
+        /* Prevent Double Entries */
+        $sql = "SELECT * FROM  NucleusSAASERP_Packages WHERE   package_code = '$package_code'    ";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($package_code == $row['package_code']) {
+                $err =  "A Subscription Package  With This Code:  $package_code Exists.";
+            }
+        } else {
+            /* No Error Or Duplicate */
+            $query = "INSERT INTO NucleusSAASERP_Packages  (id, package_code, package_name, package_details, package_monthly_price, package_yearly_price, package_status ) VALUES (?,?,?,?,?,?,?)";
+            $stmt = $mysqli->prepare($query);
+            $rc = $stmt->bind_param('sssssss', $id, $package_code, $package_name, $package_details, $package_monthly_price, $package_yearly_price, $package_status);
+            $stmt->execute();
+            if ($stmt) {
+                $success = "Subscription Package Added";
+            } else {
+                $info = "Please Try Again Or Try Later ";
+            }
+        }
+    }
+}
+
+/* Update Package */
+
+/* Delete Package */
+
 require_once('../partials/dashboard_head.php');
 ?>
 

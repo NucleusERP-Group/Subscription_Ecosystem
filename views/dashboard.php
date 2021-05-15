@@ -32,7 +32,7 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php'); ?>
+        <?php require_once('../partials/admin_dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
@@ -46,7 +46,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="client-subscriptions.php">
+                                <a href="subscriptions.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Active Subscriptions</h6>
@@ -60,11 +60,12 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-xl-4 col-md-6">
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="client-cancelled-packages.php">
+                                <a href="cancelled-packages.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
@@ -82,7 +83,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="client-invoices.php">
+                                <a href="invoices.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Unpaid Invoices</h6>
@@ -100,7 +101,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="client-billing.php">
+                                <a href="billing.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Linked Cards</h6>
@@ -118,7 +119,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="client-invoices.php">
+                                <a href="invoices.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Pending Payments</h6>
@@ -136,7 +137,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="client-invoices.php">
+                                <a href="invoices.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Subscription Payments</h6>

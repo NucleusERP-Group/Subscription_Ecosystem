@@ -183,6 +183,11 @@ require_once('../partials/dashboard_head.php');
                                 $stmt->execute(); //ok
                                 $res = $stmt->get_result();
                                 while ($users = $res->fetch_object()) {
+                                    /* User Gravatar Url */
+                                    $email_id = $users->email;
+                                    $default = "";
+                                    $size = 300;
+                                    $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email_id))) . "?d=" . urlencode($default) . "&s=" . $size;
                                 ?>
 
                                     <tr>
@@ -216,23 +221,6 @@ require_once('../partials/dashboard_head.php');
                                                 <i class="fas fa-trash"></i> Delete
                                             </a>
                                         </td>
-                                        <!-- User Details -->
-                                        <div class="modal fade" id="user-<?php echo $users->id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <div class="card">
-                                                            <div class="card-head">
-                                                                <h5 class="card-title text-center"><?php echo $packages->package_code . " " . $packages->package_name; ?> Features</h5>
-                                                            </div>
-                                                            <ul class="list-group list-group-flush">
-                                                                <li class="list-group-item"><?php echo $packages->package_details; ?></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- End User Details -->
                                         <!-- Update User -->
                                         <div class="modal fade" id="update-user-<?php echo $users->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -346,6 +334,37 @@ require_once('../partials/dashboard_head.php');
                                             </div>
                                         </div>
                                         <!-- End Delete User -->
+                                        <div class="modal fade" id="user-<?php echo $users->id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="card">
+                                                            <div class="card-head">
+                                                                <h5 class="card-title text-center"><?php echo $users->name; ?> Profile</h5>
+                                                            </div>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-auto">
+                                                                    <a href="#" class="avatar rounded-circle">
+                                                                        <img alt="Image placeholder" src="<?php echo $grav_url; ?>" class="avatar rounded-circle">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col ml-md-n2">
+                                                                    <p class="d-block h6 mb-0">Full Name : <?php echo $users->name; ?></p>
+                                                                    <p class="d-block h6 mb-0">Mobile : <?php echo $users->phone; ?></p>
+                                                                    <p class="d-block h6 mb-0">Email : <?php echo $users->email; ?></p>
+                                                                    <p class="d-block h6 mb-0">Country : <?php echo $users->country; ?></p>
+                                                                    <p class="d-block h6 mb-0">City : <?php echo $users->city; ?></p>
+                                                                    <p class="d-block h6 mb-0">Company : <?php echo $users->company_name; ?></p>
+                                                                    <p class="d-block h6 mb-0">Address : <?php echo $users->adr; ?></p>
+                                                                    <h6 class="d-block h6 mb-0">Bio</h6>
+                                                                    <div class="d-block h6 mb-0"><?php echo $users->bio; ?></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </tr>
                                 <?php
                                 } ?>

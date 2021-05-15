@@ -215,7 +215,7 @@ require_once('../partials/dashboard_head.php');
                                                     ?>
                                                         <div class="row mb-3">
                                                             <div class="col-9">
-                                                                <?php echo $card->card_name . ": " . $card->card_number . "<br> Expiry: " . $card->card_exp_date; ?>
+                                                                <?php echo $card->card_name . ": " . substr($card->card_number, 0,5)  . "******<br> Expiry: " . $card->card_exp_date; ?>
                                                             </div>
                                                             <div class="col-3 actions text-right">
                                                                 <a data-toggle="modal" href="#delete-<?php echo $card->card_id; ?>" class="action-item" data-toggle="tooltip" data-original-title="Remove card">

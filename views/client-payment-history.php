@@ -148,7 +148,7 @@ require_once('../partials/dashboard_head.php');
                                                     <span class="h6 text-sm"><?php echo date('M d Y g:ia', strtotime($payments->created_at));?></span>
                                                 </td>
                                                 <td><?php echo $payments->trans_code;?></td>
-                                                <td><i class="far fa-credit-card mr-2"></i><?php echo $payments->cc_number;?></td>
+                                                <td><i class="far fa-credit-card mr-2"></i><?php echo substr($payments->cc_number, 0,5);?>******</td>
                                                 <td>Ksh <?php echo $payments->amount;?></td>
                                             </tr>
                                         <?php

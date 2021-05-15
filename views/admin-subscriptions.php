@@ -51,26 +51,10 @@ if (isset($_POST['addPackage'])) {
         $err = "Package Name Cannot Be Empty";
     }
 
-    if (isset($_POST['package_details']) && !empty($_POST['package_details'])) {
-        $package_details = mysqli_real_escape_string($mysqli, trim($_POST['package_details']));
-    } else {
-        $error = 1;
-        $err = "Package Details  Cannot Be Empty";
-    }
+    $package_details = $_POST['package_details'];
+    $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price']));
+    $package_yearly_price = mysqli_real_escape_string($mysqli, trim($_POST['package_yearly_price']));
 
-    if (isset($_POST['package_monthly_price ']) && !empty($_POST['package_monthly_price '])) {
-        $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price ']));
-    } else {
-        $error = 1;
-        $err = "Packet Monthly Price  Cannot Be Empty";
-    }
-
-    if (isset($_POST['package_yearly_price']) && !empty($_POST['package_yearly_price'])) {
-        $package_yearly_price = mysqli_real_escape_string($mysqli, trim($_POST['package_yearly_price']));
-    } else {
-        $error = 1;
-        $err = "Package Yearly Price  Cannot Be Empty";
-    }
 
     if (isset($_POST['package_status']) && !empty($_POST['package_status'])) {
         $package_status = mysqli_real_escape_string($mysqli, trim($_POST['package_status']));
@@ -129,14 +113,8 @@ if (isset($_POST['UpdatePackage'])) {
         $err = "Package Name Cannot Be Empty";
     }
 
-    if (isset($_POST['package_details']) && !empty($_POST['package_details'])) {
-        $package_details = mysqli_real_escape_string($mysqli, trim($_POST['package_details']));
-    } else {
-        $error = 1;
-        $err = "Package Details  Cannot Be Empty";
-    }
-
-    $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price ']));
+    $package_details = $_POST['package_details'];
+    $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price']));
     $package_yearly_price = mysqli_real_escape_string($mysqli, trim($_POST['package_yearly_price']));
 
     if (isset($_POST['package_status']) && !empty($_POST['package_status'])) {
@@ -229,23 +207,23 @@ require_once('../partials/dashboard_head.php');
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Package Code</label>
-                                                                <input type="text" value="<?php echo $a . "". $b;?> class="form-control" name="package_code">
-                                                                <input type="hidden" value="<?php echo $ID; ?>" class="form-control" name="id">
+                                                                <input type="text" required value="<?php echo $a . "" . $b; ?>" class="form-control" name="package_code">
+                                                                <input type="hidden" required value="<?php echo $ID; ?>" class="form-control" name="id">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="form-label">Package Name</label>
-                                                                <input type="text"  class="form-control" name="package_name">
+                                                                <input type="text" required class="form-control" name="package_name">
                                                             </div>
                                                         </div>
                                                         <br>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Package Monthly Payment (Ksh)</label>
-                                                                <input type="text" class="form-control" name="package_monthly_price">
+                                                                <input type="text" required class="form-control" name="package_monthly_price">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Package Yearly Payment (Ksh)</label>
-                                                                <input type="text" class="form-control" name="package_yearly_price">
+                                                                <input type="text" required class="form-control" name="package_yearly_price">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Package Status</label>
@@ -259,12 +237,12 @@ require_once('../partials/dashboard_head.php');
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <label class="form-label">Package Features</label>
-                                                                <textarea type="text" class="form-control summernote" rows="4" name="package_details"></textarea>
+                                                                <textarea type="text" required class="form-control summernote" rows="4" name="package_details"></textarea>
                                                             </div>
                                                         </div>
                                                         <br>
                                                         <div class="text-right">
-                                                            <button type="submit" name="addPackage" class="btn btn-primary">Add  Package</button>
+                                                            <button type="submit" name="addPackage" class="btn btn-primary">Add Package</button>
                                                         </div>
                                                     </form>
                                                 </div>

@@ -320,7 +320,7 @@ require_once('../partials/dashboard_head.php');
                                         <!-- Package Details -->
                                         <span class="clearfix"></span>
                                         <?php
-                                        if ($packages->package_status = 'Active') {
+                                        if ($packages->package_status == 'Active') {
                                             echo "<span class='badge badge-pill badge-success'>Package Status: $packages->package_status</span>";
                                         } else {
                                             echo "

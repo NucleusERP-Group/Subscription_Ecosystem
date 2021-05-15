@@ -101,7 +101,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-billing.php">
+                                <a href="admin-cards.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Linked Cards</h6>
@@ -180,7 +180,7 @@ require_once('../partials/dashboard_head.php');
                                                 } ?>
                                             </div>
                                             <div class="media-body">
-                                                <h6 class="text-sm d-block text-limit mb-0"><?php echo  $card->card_number; ?></h6>
+                                                <h6 class="text-sm d-block text-limit mb-0"><?php echo  substr($card->card_number, 0, 5); ?>*******</h6>
                                                 <span class="d-block text-sm text-muted">Card CVV: <?php echo $card->card_cvv; ?></span>
                                             </div>
                                             <div class="media-body text-right">
@@ -307,7 +307,7 @@ require_once('../partials/dashboard_head.php');
                                                     <span class="d-block text-sm text-muted"><?php echo $payments->package_name; ?></span>
                                                 </td>
                                                 <td>
-                                                    <span class="client"><?php echo $payments->cc_number; ?></span>
+                                                    <span class="client"><?php echo substr($payments->cc_number, 0, 5); ?>********</span>
                                                 </td>
                                                 <td>
                                                     <span class="value text-sm mb-0"><?php echo $payments->trans_code; ?></span>

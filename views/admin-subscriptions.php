@@ -25,6 +25,135 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 require_once('../config/codeGen.php');
 client_login();
+
+/* Add Package */
+if (isset($_POST['addPackage'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_code']) && !empty($_POST['package_code'])) {
+        $package_code = mysqli_real_escape_string($mysqli, trim($_POST['package_code']));
+    } else {
+        $error = 1;
+        $err = "Package Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_name']) && !empty($_POST['package_name'])) {
+        $package_name = mysqli_real_escape_string($mysqli, trim($_POST['package_name']));
+    } else {
+        $error = 1;
+        $err = "Package Name Cannot Be Empty";
+    }
+
+    $package_details = $_POST['package_details'];
+    $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price']));
+    $package_yearly_price = mysqli_real_escape_string($mysqli, trim($_POST['package_yearly_price']));
+
+
+    if (isset($_POST['package_status']) && !empty($_POST['package_status'])) {
+        $package_status = mysqli_real_escape_string($mysqli, trim($_POST['package_status']));
+    } else {
+        $error = 1;
+        $err = "Package Status  Cannot Be Empty";
+    }
+
+
+    if (!$error) {
+        /* Prevent Double Entries */
+        $sql = "SELECT * FROM  NucleusSAASERP_Packages WHERE   package_code = '$package_code'    ";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($package_code == $row['package_code']) {
+                $err =  "A Subscription Package  With This Code:  $package_code Exists.";
+            }
+        } else {
+            /* No Error Or Duplicate */
+            $query = "INSERT INTO NucleusSAASERP_Packages  (id, package_code, package_name, package_details, package_monthly_price, package_yearly_price, package_status ) VALUES (?,?,?,?,?,?,?)";
+            $stmt = $mysqli->prepare($query);
+            $rc = $stmt->bind_param('sssssss', $id, $package_code, $package_name, $package_details, $package_monthly_price, $package_yearly_price, $package_status);
+            $stmt->execute();
+            if ($stmt) {
+                $success = "Subscription Package Added";
+            } else {
+                $info = "Please Try Again Or Try Later ";
+            }
+        }
+    }
+}
+
+/* Update Package */
+if (isset($_POST['UpdatePackage'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_code']) && !empty($_POST['package_code'])) {
+        $package_code = mysqli_real_escape_string($mysqli, trim($_POST['package_code']));
+    } else {
+        $error = 1;
+        $err = "Package Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_name']) && !empty($_POST['package_name'])) {
+        $package_name = mysqli_real_escape_string($mysqli, trim($_POST['package_name']));
+    } else {
+        $error = 1;
+        $err = "Package Name Cannot Be Empty";
+    }
+
+    $package_details = $_POST['package_details'];
+    $package_monthly_price  = mysqli_real_escape_string($mysqli, trim($_POST['package_monthly_price']));
+    $package_yearly_price = mysqli_real_escape_string($mysqli, trim($_POST['package_yearly_price']));
+
+    if (isset($_POST['package_status']) && !empty($_POST['package_status'])) {
+        $package_status = mysqli_real_escape_string($mysqli, trim($_POST['package_status']));
+    } else {
+        $error = 1;
+        $err = "Package Status  Cannot Be Empty";
+    }
+
+
+    if (!$error) {
+        /* No Error Or Duplicate */
+        $query = "UPDATE NucleusSAASERP_Packages  SET package_code =?, package_name =?, package_details =?, package_monthly_price =?, package_yearly_price =?, package_status =? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('sssssss', $package_code, $package_name, $package_details, $package_monthly_price, $package_yearly_price, $package_status, $id);
+        $stmt->execute();
+        if ($stmt) {
+            $success = "Subscription Package Updated";
+        } else {
+            $info = "Please Try Again Or Try Later ";
+        }
+    }
+}
+
+/* Delete Package */
+if (isset($_GET['delete'])) {
+    $delete = $_GET['delete'];
+    $adn = "DELETE FROM NucleusSAASERP_Packages WHERE id=?";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('s', $delete);
+    $stmt->execute();
+    $stmt->close();
+    if ($stmt) {
+        $success = "Deleted" && header("refresh:1; url=admin-subscriptions.php");
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
+
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -58,167 +187,234 @@ require_once('../partials/dashboard_head.php');
                                     <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Subscription Packages</h5>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Listing -->
-                    <div class="card">
-                        <div class="table-responsive card-body">
-                            <table id="AdminDashboardDataTables" class="table ">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Package Code</th>
-                                        <th scope="col" class="sort">Package Name</th>
-                                        <th scope="col" class="sort">Monthly Price</th>
-                                        <th scope="col" class="sort">Yearly Price</th>
-                                        <th scope="col" class="sort">Package Status</th>
-                                        <th scope="col" class="sort">Manage Packages</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_Packages`  ";
-                                    $stmt = $mysqli->prepare($ret);
-                                    $stmt->execute(); //ok
-                                    $res = $stmt->get_result();
-                                    while ($packages = $res->fetch_object()) {
-                                    ?>
-
-                                        <tr>
-                                            <td>
-                                                <a href="#package-<?php echo $packages->id; ?>" data-toggle="modal">
-                                                    <?php echo $packages->package_code; ?>
-                                                </a>
-                                            </td>
-                                            <td class="order">
-                                                <span class="d-block text-sm text-muted"><?php echo $packages->package_name; ?></span>
-                                            </td>
-                                            <td>
-                                                <span class="client">Ksh <?php echo $packages->package_monthly_price; ?></span>
-                                            </td>
-                                            <td>
-                                                <span class="client">Ksh <?php echo $packages->package_yearly_price; ?></span>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                if ($packages->package_status == 'Active') {
-                                                    echo "<span class='badge badge-pill badge-success'>Active</span>";
-                                                } else {
-                                                    echo "<span class='badge badge-pill badge-warning'>InActive</span>";
-                                                } ?>
-                                            </td>
-                                            <td>
-                                                <a href="#update-package-<?php echo $packages->id; ?>" data-toggle="modal" class="badge badge-pill badge-warning">
-                                                    <i class="fas fa-edit"></i> Update
-                                                </a>
-                                                <a href="#delete-package-<?php echo $packages->id; ?>" data-toggle="modal" class="badge badge-pill badge-danger">
-                                                    <i class="fas fa-trash"></i> Delete
-                                                </a>
-                                            </td>
-                                            <!-- Package Details -->
-                                            <div class="modal fade" id="package-<?php echo $packages->id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body">
-                                                            <div class="card">
-                                                                <div class="card-head">
-                                                                    <h5 class="card-title text-center"><?php echo $packages->package_code . " " . $packages->package_name; ?> Features</h5>
-                                                                </div>
-                                                                <ul class="list-group list-group-flush">
-                                                                    <li class="list-group-item"><?php echo $packages->package_details; ?></li>
-                                                                </ul>
+                            <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-end">
+                                <div class="actions actions-dark d-inline-block">
+                                    <a href="#add-package" data-toggle="modal" class="action-item ml-md-4">
+                                        <i class="far fa-plus mr-2"></i>Add Subscription Package
+                                    </a>
+                                    <!-- Add Package Modal -->
+                                    <div class="modal fade" id="add-package" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-center" id="exampleModalLabel">Create New Subscription Package</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Package Code</label>
+                                                                <input type="text" required value="<?php echo $a . "" . $b; ?>" class="form-control" name="package_code">
+                                                                <input type="hidden" required value="<?php echo $ID; ?>" class="form-control" name="id">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">Package Name</label>
+                                                                <input type="text" required class="form-control" name="package_name">
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Package Monthly Payment (Ksh)</label>
+                                                                <input type="text" required class="form-control" name="package_monthly_price">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Package Yearly Payment (Ksh)</label>
+                                                                <input type="text" required class="form-control" name="package_yearly_price">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Package Status</label>
+                                                                <select name="package_status" class="form-control">
+                                                                    <option>Active</option>
+                                                                    <option>InActive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label class="form-label">Package Features</label>
+                                                                <textarea type="text" required class="form-control summernote" rows="4" name="package_details"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="text-right">
+                                                            <button type="submit" name="addPackage" class="btn btn-primary">Add Package</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            <!-- End Package Details -->
-                                            <!-- Update Package -->
-                                            <div class="modal fade" id="update-package-<?php echo $packages->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title text-center" id="exampleModalLabel">Update <?php echo $packages->package_code  . " " . $packages->package_name; ?></h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="POST">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Package Code</label>
-                                                                        <input type="text" value="<?php echo $packages->package_code; ?>" class="form-control" name="package_code">
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label class="form-label">Package Name</label>
-                                                                        <input type="text" value="<?php echo $packages->package_name; ?>" class="form-control" name="package_name">
-                                                                    </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                    <div class="col-md-4">
-                                                                        <label class="form-label">Package Monthly Payment (Ksh)</label>
-                                                                        <input type="text" value="<?php echo $packages->package_monthly_price; ?>" class="form-control" name="package_monthly_price">
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label class="form-label">Package Yearly Payment (Ksh)</label>
-                                                                        <input type="text" value="<?php echo $packages->package_yearly_price; ?>" class="form-control" name="package_yearly_price">
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <label class="form-label">Package Status</label>
-                                                                        <select name="package_status" class="form-control">
-                                                                            <option><?php echo $packages->package_status; ?></option>
-                                                                            <option>Active</option>
-                                                                            <option>InActive</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <label class="form-label">Package Features</label>
-                                                                        <textarea type="text" class="form-control summernote" rows="4" name="package_details"><?php echo $packages->package_details; ?></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <br>
-                                                                <div class="text-right">
-                                                                    <button type="submit" name="UpdatePackage" class="btn btn-primary">Update Package</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Update Package -->
-                                            <!-- Delete Package -->
-                                            <div class="modal fade" id="delete-package-<?php echo $packages->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body text-center text-danger">
-                                                            <h4>Delete <?php echo $packages->package_code . "<br>" . $packages->package_name; ?> ?</h4>
-                                                            <p>
-                                                                Hey There You Are About To Delete A Subscription Package.
-                                                                This Operation Is Irrevessible All Subscriptions, Payments And Invoices Linked To This Package Will Be Deleted.
-                                                            </p>
-                                                            <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                            <a href="admin-subscriptions.php?delete=<?php echo $packages->id; ?>" class="text-center btn btn-danger">Yes Delete Package</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Delete Package -->
-                                        </tr>
-                                    <?php
-                                    } ?>
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- End Add Package Modal -->
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <br>
+                <!-- Listing -->
+                <div class="card">
+                    <div class="table-responsive card-body">
+                        <table id="AdminDashboardDataTables" class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Package Code</th>
+                                    <th scope="col" class="sort">Package Name</th>
+                                    <th scope="col" class="sort">Monthly Price</th>
+                                    <th scope="col" class="sort">Yearly Price</th>
+                                    <th scope="col" class="sort">Package Status</th>
+                                    <th scope="col" class="sort">Manage Packages</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_Packages`  ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute(); //ok
+                                $res = $stmt->get_result();
+                                while ($packages = $res->fetch_object()) {
+                                ?>
+
+                                    <tr>
+                                        <td>
+                                            <a href="#package-<?php echo $packages->id; ?>" data-toggle="modal">
+                                                <?php echo $packages->package_code; ?>
+                                            </a>
+                                        </td>
+                                        <td class="order">
+                                            <span class="d-block text-sm text-muted"><?php echo $packages->package_name; ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="client">Ksh <?php echo $packages->package_monthly_price; ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="client">Ksh <?php echo $packages->package_yearly_price; ?></span>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($packages->package_status == 'Active') {
+                                                echo "<span class='badge badge-pill badge-success'>Active</span>";
+                                            } else {
+                                                echo "<span class='badge badge-pill badge-warning'>InActive</span>";
+                                            } ?>
+                                        </td>
+                                        <td>
+                                            <a href="#update-package-<?php echo $packages->id; ?>" data-toggle="modal" class="badge badge-pill badge-warning">
+                                                <i class="fas fa-edit"></i> Update
+                                            </a>
+                                            <a href="#delete-package-<?php echo $packages->id; ?>" data-toggle="modal" class="badge badge-pill badge-danger">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                        <!-- Package Details -->
+                                        <div class="modal fade" id="package-<?php echo $packages->id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="card">
+                                                            <div class="card-head">
+                                                                <h5 class="card-title text-center"><?php echo $packages->package_code . " " . $packages->package_name; ?> Features</h5>
+                                                            </div>
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group-item"><?php echo $packages->package_details; ?></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Package Details -->
+                                        <!-- Update Package -->
+                                        <div class="modal fade" id="update-package-<?php echo $packages->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title text-center" id="exampleModalLabel">Update <?php echo $packages->package_code  . " " . $packages->package_name; ?></h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Package Code</label>
+                                                                    <input type="text" value="<?php echo $packages->package_code; ?>" class="form-control" name="package_code">
+                                                                    <input type="hidden" value="<?php echo $packages->id; ?>" class="form-control" name="id">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Package Name</label>
+                                                                    <input type="text" value="<?php echo $packages->package_name; ?>" class="form-control" name="package_name">
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">Package Monthly Payment (Ksh)</label>
+                                                                    <input type="text" value="<?php echo $packages->package_monthly_price; ?>" class="form-control" name="package_monthly_price">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">Package Yearly Payment (Ksh)</label>
+                                                                    <input type="text" value="<?php echo $packages->package_yearly_price; ?>" class="form-control" name="package_yearly_price">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">Package Status</label>
+                                                                    <select name="package_status" class="form-control">
+                                                                        <option><?php echo $packages->package_status; ?></option>
+                                                                        <option>Active</option>
+                                                                        <option>InActive</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label class="form-label">Package Features</label>
+                                                                    <textarea type="text" class="form-control summernote" rows="4" name="package_details"><?php echo $packages->package_details; ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="text-right">
+                                                                <button type="submit" name="UpdatePackage" class="btn btn-primary">Update Package</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Update Package -->
+                                        <!-- Delete Package -->
+                                        <div class="modal fade" id="delete-package-<?php echo $packages->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-center text-danger">
+                                                        <h4>Delete <?php echo $packages->package_code . "<br>" . $packages->package_name; ?> ?</h4>
+                                                        <p>
+                                                            Hey There You Are About To Delete A Subscription Package.
+                                                            This Operation Is Irrevessible All Subscriptions, Payments And Invoices Linked To This Package Will Be Deleted.
+                                                        </p>
+                                                        <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                        <a href="admin-subscriptions.php?delete=<?php echo $packages->id; ?>" class="text-center btn btn-danger">Yes Delete Package</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Delete Package -->
+                                    </tr>
+                                <?php
+                                } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- Footer -->

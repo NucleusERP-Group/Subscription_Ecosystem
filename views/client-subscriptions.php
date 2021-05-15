@@ -305,17 +305,13 @@ require_once('../partials/dashboard_head.php');
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
-                                                        <!-- Project name -->
-                                                        <div class="form-group">
-                                                            <label class="form-control-label">
-                                                                <?php echo $packages->package_name; ?> Features
-                                                            </label>
-                                                        </div>
-                                                        <!-- Project description -->
-                                                        <div class="form-group">
-                                                            <label class="form-control-label mb-0">
-                                                                <?php echo $packages->package_details; ?>
-                                                            </label>
+                                                        <div class="card">
+                                                            <div class="card-head">
+                                                                <h5 class="card-title text-center"><?php echo $packages->package_code . " " . $packages->package_name; ?> Features</h5>
+                                                            </div>
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group-item"><?php echo $packages->package_details; ?></li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>

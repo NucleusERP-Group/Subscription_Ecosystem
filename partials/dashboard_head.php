@@ -23,5 +23,9 @@
     <link rel="stylesheet" href="../public/assets/libs/select2/dist/css/select2.min.css">
     <!-- Invoice Css -->
     <link rel="stylesheet" href="../public/assets/css/invoice.css">
+    <!-- Admin Dashboard Datatable CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <!-- Summernote css -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
 </head>

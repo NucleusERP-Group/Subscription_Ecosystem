@@ -396,7 +396,7 @@ require_once('../partials/dashboard_head.php');
                                                                         $res = $stmt->get_result();
                                                                         while ($card = $res->fetch_object()) {
                                                                         ?>
-                                                                            <option><?php echo $card->card_number; ?></option>
+                                                                            <option value="<?php echo $card->card_number;?>"><?php echo substr($card->card_number, 0, 5); ?>*******</option>
                                                                         <?php
                                                                         } ?>
                                                                     </select>

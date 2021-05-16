@@ -30,7 +30,7 @@ $stmt->fetch();
 $stmt->close();
 
 /* Cancelled Subscriptions */
-$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserSubscriptions` WHERE status = 'Cancelled'  ";
+$query = "SELECT COUNT(*)  FROM `NucleusSAASERP_UserSubscriptions` WHERE status != 'Active'   ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($StalledSubscriptions);

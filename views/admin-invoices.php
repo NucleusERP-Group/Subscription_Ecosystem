@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri May 14 2021
+ * Created on Sun May 16 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -32,11 +32,12 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php'); ?>
+        <?php require_once('../partials/admin_dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
             <?php
+
             require_once('../partials/dashboard_main_nav.php');
             $id = $_SESSION['id'];
             $email = $_SESSION['email'];
@@ -54,45 +55,66 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Subscribed Clients Invoices</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Listing -->
                     <div class="card">
-                        <!-- Table -->
                         <div class="table-responsive card-body">
                             <table id="AdminDashboardDataTables" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Subscription Code</th>
-                                        <th scope="col" class="sort">Package Details</th>
-                                        <th scope="col">ERP Instance</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col" class="sort">Package</th>
+                                        <th scope="col" class="sort">Invoiced Amount</th>
+                                        <th scope="col" class="sort">Date Invoiced</th>
+                                        <th scope="col" class="sort">Due Date</th>
+                                        <th scope="col">Payment Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_ERPInstances` WHERE client_id = '$id' OR client_email = '$email' ";
+                                    $ret = "SELECT * FROM `NucleusSAASERP_UserInvoices` ORDER BY `NucleusSAASERP_UserInvoices`.`created_at` ASC ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($instances = $res->fetch_object()) {
+                                    while ($invoices = $res->fetch_object()) {
+                                        /* Date Invoice Created */
+                                        $created_at = date('d M Y ', strtotime($invoices->created_at));
+                                        $created = date_create(date('y-m-d ', strtotime($invoices->created_at)));
+                                        /* Due Date */
+                                        $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
+                                        $due = date_format($due_date, 'd M Y');
                                     ?>
 
                                         <tr>
                                             <td>
-                                                <?php echo $instances->subscription_code; ?>
+                                                <a href="admin-view-invoice.php?print=<?php echo $invoices->id; ?>" data-toggle="tooltip" title="View Invoice Details">
+                                                    <span class="client"><?php echo $invoices->invoice_code; ?></span>
+                                                </a>
                                             </td>
                                             <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $instances->package_code; ?></span>
-                                                <span class="d-block text-sm text-muted"><?php echo $instances->package_name; ?></span>
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $invoices->package_code; ?></span>
+                                                <span class="d-block text-sm text-muted"><?php echo $invoices->package_name; ?></span>
                                             </td>
                                             <td>
-                                                <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" target="_blank">
-                                                    <i class="fas fa-open"></i>
-                                                    Access ERP Instance
-                                                </a>
+                                                <span class="client">Ksh <?php echo $invoices->subscription_amt; ?></span>
+                                            </td>
+                                            <td>
+                                                <span class="client"><?php echo $created_at; ?></span>
+                                            </td>
+                                            <td>
+                                                <span class="client"><?php echo $due; ?></span>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($invoices->status == 'Paid') {
+                                                    echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                } else {
+                                                    echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                } ?>
                                             </td>
                                         </tr>
                                     <?php

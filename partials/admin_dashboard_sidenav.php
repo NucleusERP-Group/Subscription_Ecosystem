@@ -71,6 +71,14 @@ while ($client = $res->fetch_object()) {
                 <span class="btn-inner--icon d-block"><i class="far fa-project-diagram fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">NucleusSaaS Packages</span>
             </a>
+            <a href="admin-client-subscriptions.php" class="btn btn-square text-sm">
+                <span class="btn-inner--icon d-block"><i class="far fa-calendar-check fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Clients Subscriptions</span>
+            </a>
+            <a href="admin-client-cancelled-subscriptions.php" class="btn btn-square text-sm">
+                <span class="btn-inner--icon d-block"><i class="far fa-calendar-times fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Cancelled Subscriptions</span>
+            </a>
             <a href="admin-clients.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-users fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Clients</span>
@@ -81,7 +89,7 @@ while ($client = $res->fetch_object()) {
             </a>
             <a href="admin-erp-instance.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-columns fa-2x"></i></span>
-                <span class="btn-inner--icon d-block pt-2">ERP Instace</span>
+                <span class="btn-inner--icon d-block pt-2">ERP Instaces</span>
             </a>
             <a href="admin-api-keys.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>

@@ -46,7 +46,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-subscriptions.php">
+                                <a href="admin-client-subscriptions.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Active Subscriptions</h6>
@@ -65,7 +65,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-cancelled-packages.php">
+                                <a href="admin-client-cancelled-subscriptions.php">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
@@ -185,7 +185,7 @@ require_once('../partials/dashboard_head.php');
                                             </div>
                                             <div class="media-body text-right">
                                                 <span class="text-sm text-dark font-weight-bold ml-3">
-                                                    Expiry: <?php echo $card->card_exp_date; ?>
+                                                    Expiry: <?php echo date('M Y ', strtotime($card->card_exp_date)); ?>
                                                 </span>
                                             </div>
                                         </div>
@@ -251,40 +251,15 @@ require_once('../partials/dashboard_head.php');
                         <div class="card">
                             <!-- Card header -->
                             <div class="card-header actions-toolbar border-0">
-                                <div class="actions-search" id="actions-search">
-                                    <div class="input-group input-group-merge input-group-flush">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-transparent"><i class="far fa-search"></i></span>
-                                        </div>
-                                        <input type="text" id="SearchInput" onkeyup="search()" class="form-control form-control-flush" placeholder="Type and hit enter ...">
-                                        <div class="input-group-append">
-                                            <a href="#" class="input-group-text bg-transparent" data-action="search-close" data-target="#actions-search"><i class="far fa-times"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col">
                                         <h6 class="d-inline-block mb-0">Recent Subscriptions Payment History</h6>
                                     </div>
-                                    <div class="col text-right">
-                                        <div class="actions"><a href="#" class="action-item mr-3" data-action="search-open" data-target="#actions-search"><i class="far fa-search"></i></a>
-                                            <div class="dropdown mr-3">
-                                                <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="far fa-filter"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <button class="dropdown-item" onclick="sortTable()">
-                                                        <i class="far fa-sort-alpha-down"></i>Sort
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <!-- Table -->
-                            <div class="table-responsive">
-                                <table id="DataTable" class="table align-items-center">
+                            <div class="table-responsive card-body">
+                                <table id="AdminDashboardDataTables" class="table align-items-center">
                                     <thead>
                                         <tr>
                                             <th scope="col">Subscription Package</th>

@@ -83,27 +83,26 @@ if (isset($_POST['RestoreSubscription'])) {
     }
 
     if (!$error) {
-        
-            /* No Error Or Duplicate */
-            $query = "UPDATE  NucleusSAASERP_UserSubscriptions SET status = ? WHERE id = ?";
-            /* Notify User */
-            $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
-            $stmt = $mysqli->prepare($query);
-            $notifstmt = $mysqli->prepare($notif);
-            $rc = $stmt->bind_param('ss', $status, $id);
-            $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
-            $stmt->execute();
-            $notifstmt->execute();
-            /* Load Mailer */
-            require_once('../config/mailer_config.php');
-            if ($stmt && $notifstmt && $mail->send()) {
-                $success = "Cancelled Subscription Restoration Request Submitted.";
-            } else {
-                $info = "Please Try Again Or Try Later ";
-            }
+
+        /* No Error Or Duplicate */
+        $query = "UPDATE  NucleusSAASERP_UserSubscriptions SET status = ? WHERE id = ?";
+        /* Notify User */
+        $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
+        $stmt = $mysqli->prepare($query);
+        $notifstmt = $mysqli->prepare($notif);
+        $rc = $stmt->bind_param('ss', $status, $id);
+        $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
+        $stmt->execute();
+        $notifstmt->execute();
+        /* Load Mailer */
+        require_once('../config/mailer_config.php');
+        if ($stmt && $notifstmt && $mail->send()) {
+            $success = "Cancelled Subscription Restoration Request Submitted.";
+        } else {
+            $info = "Please Try Again Or Try Later ";
         }
     }
-
+}
 
 require_once('../partials/dashboard_head.php');
 ?>
@@ -168,9 +167,9 @@ require_once('../partials/dashboard_head.php');
                                             Subscription Payment: Ksh <?php echo $subscribed_packages->payment_amt; ?>
                                             <br>
                                             <br>
-                                            Subscribed On:  <?php echo  date('d M Y', strtotime($subscribed_packages->date_subscribed)); ?>
+                                            Subscribed On: <?php echo  date('d M Y', strtotime($subscribed_packages->date_subscribed)); ?>
                                             <br>
-                                            Subscription Expiriy On: <?php  echo  date('d M Y', strtotime($subscribed_packages->subscription_expiriry)); ?>
+                                            Subscription Expiriy On: <?php echo  date('d M Y', strtotime($subscribed_packages->subscription_expiriry)); ?>
                                             <br>
 
                                         </h5>
@@ -194,19 +193,19 @@ require_once('../partials/dashboard_head.php');
                                                 <input type="hidden" name="client_id" value="<?php echo $subscribed_packages->client_id; ?>">
                                                 <input type="hidden" name="client_name" value="<?php echo $subscribed_packages->client_name; ?>">
                                                 <input type="hidden" name="client_email" value="<?php echo $subscribed_packages->client_email; ?>">
-                                                
+
                                                 <input type="hidden" name="status" value="Restoration Pending">
                                                 <!-- Notification Details -->
                                                 <input type="hidden" name="notification_from" value="Package Subscription">
-                                                <input type="hidden" name="notification_details" value="Hello, <?php echo $subscribed_packages->client_name; ?>. You Have Requested For <b><?php echo $subscribed_packages->subscription_code . "" . $subscribed_packages->package_code . "-" . $subscribed_packages->package_name;?></b> Subscription Restoration.">
+                                                <input type="hidden" name="notification_details" value="Hello, <?php echo $subscribed_packages->client_name; ?>. You Have Requested For <b><?php echo $subscribed_packages->subscription_code . "" . $subscribed_packages->package_code . "-" . $subscribed_packages->package_name; ?></b> Subscription Restoration.">
                                                 <!-- Mail To Client -->
                                                 <input type="hidden" name="subject" value="Package Subscription">
                                                 <input type="hidden" name="message" value="Hello, <?php echo $subscribed_packages->client_name; ?>. 
-                                                You Have Requested For <b><?php echo $subscribed_packages->subscription_code . " " . $subscribed_packages->package_code . "-" . $subscribed_packages->package_name;?></b> Subscription Restoration.
+                                                You Have Requested For <b><?php echo $subscribed_packages->subscription_code . " " . $subscribed_packages->package_code . "-" . $subscribed_packages->package_name; ?></b> Subscription Restoration.
                                                 Our Team Will Take Care Of It, And Your Subscribed Package Will Be Restored In The Next 24Hours. Regards-NucleusSaaS ERP Team.">
                                                 <button type="submit" name="RestoreSubscription" class="action-item">
                                                     <i class="far fa-calendar-check"></i>
-                                                    Request For  Package Subscription Restoration
+                                                    Request For Package Subscription Restoration
                                                 </button>
                                             </form>
                                             <!-- Prompt User To Cancel Subscription -->

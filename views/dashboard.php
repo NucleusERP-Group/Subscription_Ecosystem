@@ -185,7 +185,7 @@ require_once('../partials/dashboard_head.php');
                                             </div>
                                             <div class="media-body text-right">
                                                 <span class="text-sm text-dark font-weight-bold ml-3">
-                                                    Expiry: <?php echo $card->card_exp_date; ?>
+                                                    Expiry: <?php echo date('M Y ', strtotime($card->card_exp_date)); ?>
                                                 </span>
                                             </div>
                                         </div>

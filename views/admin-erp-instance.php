@@ -25,9 +25,56 @@ require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
 /* Update ERP Instance */
+if (isset($_POST['UpdateInstance'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    
+    if (isset($_POST['instance_url']) && !empty($_POST['instance_url'])) {
+        $instance_url = mysqli_real_escape_string($mysqli, trim($_POST['instance_url']));
+    } else {
+        $error = 1;
+        $err = "Instance URL  Cannot Be Empty";
+    }
 
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "Instance ID  Cannot Be Empty";
+    }
+
+    if (!$error) {
+        $query = "UPDATE  NucleusSAASERP_ERPInstances SET instance_url = ? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('ss', $instance_url, $id);
+        /* To Do:  Mail User */
+        $stmt->execute();
+        if ($stmt) {
+            $success = "Subscription ERP Instance Configrations Updated.";
+        } else {
+            $info = "Please Try Again Or Try Later ";
+        }
+    }
+}
 /* Delete Instance */
-
+if (isset($_GET['delete'])) {
+    $delete = $_GET['delete'];
+    $subscription_code = $_GET['subscription_code'];
+    $adn = "DELETE FROM NucleusSAASERP_UserSubscriptions WHERE id=?";
+    $status = "UPDATE NucleusSAASERP_UserSubscriptions SET instance_status = '' WHERE subscription_code = '$subscription_code'";
+    $stmt = $mysqli->prepare($adn);
+    $statusstmt = $mysqli->prepare($status);
+    $stmt->bind_param('s', $delete);
+    $stmt->execute();
+    $statusstmt->execute();
+    $stmt->close();
+    $stmt->close();
+    if ($stmt && $statusstmt) {
+        $success = "Deleted" && header("refresh:1; url=admin-erp-instance.php");
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -116,7 +163,7 @@ require_once('../partials/dashboard_head.php');
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <label class="form-label">NucleusSaaS ERP Instance URL</label>
-                                                                            <input type="text" required class="form-control" value="<?php echo $instances->instance_url;?>" name="instance_url">
+                                                                            <input type="text" required class="form-control" value="<?php echo $instances->instance_url; ?>" name="instance_url">
                                                                             <input type="id" required value="<?php echo $instances->id; ?>" class="form-control" name="client_id">
                                                                         </div>
                                                                     </div>
@@ -148,7 +195,7 @@ require_once('../partials/dashboard_head.php');
                                                                     This Operation Is Irrevessible All Clients ERP Data Will Be Deleted.
                                                                 </p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="admin-erp-instance.php?delete=<?php echo $instances->id; ?>&subscription_code=<?php echo $instances->subscription_code;?>" class="text-center btn btn-danger">Yes Delete</a>
+                                                                <a href="admin-erp-instance.php?delete=<?php echo $instances->id; ?>&subscription_code=<?php echo $instances->subscription_code; ?>" class="text-center btn btn-danger">Yes Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>

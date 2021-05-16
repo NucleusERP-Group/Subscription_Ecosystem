@@ -197,7 +197,7 @@ require_once('../partials/dashboard_head.php');
                                                 if ($subscriptions->instance_status == '') {
                                                     echo
                                                     "
-                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Configure ERP Instance</a>
+                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Configure ERP Instance</a> <br>
                                                 ";
                                                 } else {
                                                     /* Nothing */

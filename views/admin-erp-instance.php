@@ -60,14 +60,15 @@ if (isset($_POST['UpdateInstance'])) {
 if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
     $subscription_code = $_GET['subscription_code'];
-    $adn = "DELETE FROM NucleusSAASERP_UserSubscriptions WHERE id=?";
-    $status = "UPDATE NucleusSAASERP_UserSubscriptions SET instance_status = '' WHERE subscription_code = '$subscription_code'";
+    $adn = "DELETE FROM NucleusSAASERP_ERPInstances WHERE id=?";
+    $status = "UPDATE NucleusSAASERP_UserSubscriptions SET instance_status = '' WHERE subscription_code = ?";
     $stmt = $mysqli->prepare($adn);
     $statusstmt = $mysqli->prepare($status);
     $stmt->bind_param('s', $delete);
+    $statusstmt->bind_param('s', $subscription_code);
     $stmt->execute();
     $statusstmt->execute();
-    $stmt->close();
+    $statusstmt->close();
     $stmt->close();
     if ($stmt && $statusstmt) {
         $success = "Deleted" && header("refresh:1; url=admin-erp-instance.php");
@@ -149,7 +150,7 @@ require_once('../partials/dashboard_head.php');
                                             <td>
                                                 <a href="#update-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-warning'>Edit</a>
                                                 <!-- Update Instance -->
-                                                <div class="modal fade" id="configure-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="update-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -164,7 +165,7 @@ require_once('../partials/dashboard_head.php');
                                                                         <div class="col-md-12">
                                                                             <label class="form-label">NucleusSaaS ERP Instance URL</label>
                                                                             <input type="text" required class="form-control" value="<?php echo $instances->instance_url; ?>" name="instance_url">
-                                                                            <input type="id" required value="<?php echo $instances->id; ?>" class="form-control" name="client_id">
+                                                                            <input type="hidden" required value="<?php echo $instances->id; ?>" class="form-control" name="id">
                                                                         </div>
                                                                     </div>
                                                                     <br>

@@ -254,7 +254,7 @@ require_once('../partials/dashboard_head.php');
                                                                 <p>
                                                                     Hey There You Are About To Delete A Client Subscription Details. <br>
                                                                     This Operation Is Irrevessible All Payments, <br>
-                                                                    Invoices And ERP Instances Linked To This Card Will Be Deleted.
+                                                                    Invoices And ERP Instances Linked To Subscription Will Be Deleted.
                                                                 </p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                 <a href="admin-client-subscriptions.php?delete=<?php echo $subscriptions->id; ?>" class="text-center btn btn-danger">Yes Delete</a>

@@ -97,8 +97,8 @@ require_once('../partials/dashboard_head.php');
                             <table id="DataTable" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Package Code</th>
-                                        <th scope="col" class="sort">Package Name</th>
+                                        <th scope="col">Subscription Code</th>
+                                        <th scope="col" class="sort">Package Details</th>
                                         <th scope="col">ERP Instance</th>
                                     </tr>
                                 </thead>
@@ -113,7 +113,11 @@ require_once('../partials/dashboard_head.php');
 
                                         <tr>
                                             <td>
-                                                <?php echo $instances->package_code; ?>
+                                                <?php echo $instances->subscription_code; ?>
+                                            </td>
+                                            <td class="order">
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $instances->package_code; ?></span>
+                                                <span class="d-block text-sm text-muted"><?php echo $instances->package_name; ?></span>
                                             </td>
                                             <td>
                                                 <?php echo $instances->package_name; ?>

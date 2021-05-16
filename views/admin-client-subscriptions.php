@@ -65,12 +65,10 @@ require_once('../partials/dashboard_head.php');
                             <table id="AdminDashboardDataTables" class="table align-items-center">
                                 <thead>
                                     <tr>
+                                        <th scope="col" class="sort">Subscription Details</th>
                                         <th scope="col">Client Details</th>
                                         <th scope="col" class="sort">Package Details</th>
-                                        <th scope="col" class="sort">Subscription Code</th>
-                                        <th scope="col" class="sort">Date Subscribed</th>
-                                        <th scope="col" class="sort">Expiriry Date</th>
-                                        <th scope="col">Payment Status</th>
+                                        <th scope="col">Manage</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,6 +81,20 @@ require_once('../partials/dashboard_head.php');
                                     ?>
 
                                         <tr>
+                                            <td>
+                                                <span class="client"><?php echo $subscriptions->subscription_code; ?></span>
+                                                <span class="d-block text-sm text-muted">Subscribed On:<?php echo date('d M Y', strtotime($subscriptions->date_subscribed)); ?></span>
+                                                <span class="d-block text-sm text-muted">Valid Till :<?php echo date('d M Y', strtotime($subscriptions->subscription_expiriry)); ?></span>
+                                                <span class="d-block text-sm text-muted">Payment Status:
+                                                    <?php
+                                                    if ($subscriptions->payment_status == 'Paid') {
+                                                        echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                    } else {
+                                                        echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                    } ?>
+                                                </span>
+
+                                            </td>
                                             <td class="order">
                                                 <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->client_name; ?></span>
                                                 <span class="d-block text-sm text-muted"><?php echo $subscriptions->client_email; ?></span>
@@ -93,21 +105,77 @@ require_once('../partials/dashboard_head.php');
                                                 <span class="d-block text-sm text-muted">Ksh <?php echo $subscriptions->payment_amt; ?></span>
                                             </td>
                                             <td>
-                                                <span class="client"><?php echo $subscriptions->subscription_code; ?></span>
-                                            </td>
-                                            <td>
-                                                <span class="client"><?php echo date('d M Y', strtotime($subscriptions->date_subscribed)); ?></span>
-                                            </td>
-                                            <td>
-                                                <span class="client"><?php echo date('d M Y', strtotime($subscriptions->subscription_expiriry)); ?></span>
-                                            </td>
-                                            <td>
                                                 <?php
-                                                if ($subscriptions->payment_status == 'Paid') {
-                                                    echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                /* Only Configure SUbscriptions With No ERP Instance */
+                                                if ($subscriptions->instance_status == '') {
+                                                    echo
+                                                    "
+                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Configure ERP Instance</a>
+                                                ";
                                                 } else {
-                                                    echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
-                                                } ?>
+                                                    /* Nothing */
+                                                }
+                                                ?>
+                                                <!-- Configure ERP Instance -->
+                                                <div class="modal fade" id="configure-<?php echo $subscriptions->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Configure ERP Instance For Subscription Code : <?php echo $subscriptions->subscription_code; ?></h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="POST">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <label class="form-label">NucleusSaaS ERP Instance URL</label>
+                                                                            <input type="text" required class="form-control" name="instance_url ">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->client_id; ?>" class="form-control" name="client_id">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->client_email; ?>" class="form-control" name="client_email">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->client_name; ?>" class="form-control" name="client_name">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->package_code; ?>" class="form-control" name="package_code ">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->subscription_code; ?>" class="form-control" name="subscription_code">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->package_name; ?>" class="form-control" name="package_name">
+                                                                            <input type="hidden" required value="Has Instance" class="form-control" name="instance_status">
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="addInstance" class="btn btn-primary">Save Instance</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Configuration -->
+                                                <a href="#delete-<?php echo $subscriptions->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'>Delete</a>
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="delete-<?php echo $subscriptions->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-center text-danger">
+                                                                <h4>Delete This Subscription Record?</h4>
+                                                                <p>
+                                                                    Hey There You Are About To Delete A Client Subscription Details. <br>
+                                                                    This Operation Is Irrevessible All Payments, <br>
+                                                                    Invoices And ERP Instances Linked To This Card Will Be Deleted.
+                                                                </p>
+                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
+                                                                <a href="admin-client-subscriptions.php?delete=<?php echo $subscriptions->id; ?>" class="text-center btn btn-danger">Yes Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Delete Modal -->
                                             </td>
                                         </tr>
                                     <?php

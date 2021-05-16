@@ -24,6 +24,7 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
+
 /* Restore Client Subscription  */
 if (isset($_POST['RestoreSubscription'])) {
     //Error Handling and prevention of posting double entries
@@ -191,7 +192,7 @@ require_once('../partials/dashboard_head.php');
                                                 if ($subscriptions->status == 'Cancelled') {
                                                     echo "<span class='badge badge-pill badge-success'>Cancelled</span>";
                                                 } else {
-                                                    echo "<a href='#restore-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-warning'>Restore Subscription</aa>";
+                                                    echo "<a href='#restore-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-warning'>Restore Subscription</a>";
                                                 } ?>
                                                 <form method="POST">
                                                     <!-- Hidden Values -->

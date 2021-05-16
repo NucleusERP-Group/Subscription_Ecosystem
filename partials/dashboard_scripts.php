@@ -22,6 +22,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <!-- Search Data In Data Tables -->
 <script>
+    
     /* Print Contents In Div */
     function printContent(el) {
         var restorepage = $('body').html();

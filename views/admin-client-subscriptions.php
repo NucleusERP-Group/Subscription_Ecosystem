@@ -208,7 +208,7 @@ require_once('../partials/dashboard_head.php');
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Configure ERP Instance For Subscription Code : <?php echo $subscriptions->subscription_code; ?></h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Configure ERP Instance</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -218,11 +218,11 @@ require_once('../partials/dashboard_head.php');
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <label class="form-label">NucleusSaaS ERP Instance URL</label>
-                                                                            <input type="text" required class="form-control" name="instance_url ">
+                                                                            <input type="text" required class="form-control" name="instance_url">
                                                                             <input type="hidden" required value="<?php echo $subscriptions->client_id; ?>" class="form-control" name="client_id">
                                                                             <input type="hidden" required value="<?php echo $subscriptions->client_email; ?>" class="form-control" name="client_email">
                                                                             <input type="hidden" required value="<?php echo $subscriptions->client_name; ?>" class="form-control" name="client_name">
-                                                                            <input type="hidden" required value="<?php echo $subscriptions->package_code; ?>" class="form-control" name="package_code ">
+                                                                            <input type="hidden" required value="<?php echo $subscriptions->package_code; ?>" class="form-control" name="package_code">
                                                                             <input type="hidden" required value="<?php echo $subscriptions->subscription_code; ?>" class="form-control" name="subscription_code">
                                                                             <input type="hidden" required value="<?php echo $subscriptions->package_name; ?>" class="form-control" name="package_name">
                                                                             <input type="hidden" required value="Has Instance" class="form-control" name="instance_status">

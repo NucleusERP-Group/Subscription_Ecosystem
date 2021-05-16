@@ -24,6 +24,93 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
+
+/* Configure ERP Instance */
+if (isset($_POST['addInstance'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    if (isset($_POST['package_code']) && !empty($_POST['package_code'])) {
+        $package_code = mysqli_real_escape_string($mysqli, trim($_POST['package_code']));
+    } else {
+        $error = 1;
+        $err = "Package Code Cannot Be Empty";
+    }
+
+    if (isset($_POST['package_name']) && !empty($_POST['package_name'])) {
+        $package_name = mysqli_real_escape_string($mysqli, trim($_POST['package_name']));
+    } else {
+        $error = 1;
+        $err = "Package Name Cannot Be Empty";
+    }
+
+    if (isset($_POST['instance_status']) && !empty($_POST['instance_status'])) {
+        $instance_status = mysqli_real_escape_string($mysqli, trim($_POST['instance_status']));
+    } else {
+        $error = 1;
+        $err = "Instance  Status  Cannot Be Empty";
+    }
+
+    if (isset($_POST['subscription_code']) && !empty($_POST['subscription_code'])) {
+        $subscription_code = mysqli_real_escape_string($mysqli, trim($_POST['subscription_code']));
+    } else {
+        $error = 1;
+        $err = "Subscription Code  Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_id']) && !empty($_POST['client_id'])) {
+        $client_id = mysqli_real_escape_string($mysqli, trim($_POST['client_id']));
+    } else {
+        $error = 1;
+        $err = "Client ID  Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_email']) && !empty($_POST['client_email'])) {
+        $client_email = mysqli_real_escape_string($mysqli, trim($_POST['client_email']));
+    } else {
+        $error = 1;
+        $err = "Client Email  Cannot Be Empty";
+    }
+
+    if (isset($_POST['instance_url']) && !empty($_POST['instance_url'])) {
+        $instance_url = mysqli_real_escape_string($mysqli, trim($_POST['instance_url']));
+    } else {
+        $error = 1;
+        $err = "Instance URL  Cannot Be Empty";
+    }
+
+    if (!$error) {
+        $query = "INSERT INTO NucleusSAASERP_ERPInstances  (client_id, client_email, instance_url, package_code, package_name, subscription_code) VALUES (?,?,?,?,?,?)";
+        $instancestatus = "UPDATE NucleusSAASERP_UserSubscriptions SET instance_status = ? WHERE  subscription_code = ? ";
+        $stmt = $mysqli->prepare($query);
+        $instancestmt = $mysqli->prepare($instancestatus);
+        $rc = $stmt->bind_param('ssssss', $client_id, $client_email, $instance_url, $package_code, $package_name, $subscription_code);
+        $rc = $instancestmt->bind_param('ss', $instance_status, $subscription_code);
+        /* To Do:  Mail User */
+        $stmt->execute();
+        $instancestmt->execute();
+        if ($stmt && $instancestmt) {
+            $success = "Subscription ERP Instance Configured.";
+        } else {
+            $info = "Please Try Again Or Try Later ";
+        }
+    }
+}
+
+
+/* Delete Subscription */
+if (isset($_GET['delete'])) {
+    $delete = $_GET['delete'];
+    $adn = "DELETE FROM NucleusSAASERP_UserSubscriptions WHERE id=?";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('s', $delete);
+    $stmt->execute();
+    $stmt->close();
+    if ($stmt) {
+        $success = "Deleted" && header("refresh:1; url=admin-client-subscriptions.php");
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
 require_once('../partials/dashboard_head.php');
 ?>
 

@@ -57,6 +57,53 @@ require_once('../partials/dashboard_head.php');
                                     <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances API Keys</h5>
                                 </div>
                             </div>
+                            <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-end">
+                                <div class="actions actions-dark d-inline-block">
+                                    <a href="#add-apikey" data-toggle="modal" class="action-item ml-md-4">
+                                        <i class="far fa-plus mr-2"></i>Add API Keys
+                                    </a>
+                                    <!-- Add Package Modal -->
+                                    <div class="modal fade" id="add-apikey" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-center" id="exampleModalLabel">Create New Subscription Package</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">API Key</label>
+                                                                <input type="text" required class="form-control"  name="api_key">
+                                                                <input type="hidden" required value="<?php echo $ID; ?>" class="form-control" name="id">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="form-label">API Key Status</label>
+                                                                <select class="form-control" name="status">
+                                                                    <option>Active</option>
+                                                                    <option>Revoked</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label class="form-label">API Key Details</label>
+                                                                <textarea type="text" required class="form-control summernote" name="details"><</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="text-right">
+                                                            <button type="submit" name="AddAPIKey" class="btn btn-primary">Save API Key</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Add Package Modal -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Listing -->

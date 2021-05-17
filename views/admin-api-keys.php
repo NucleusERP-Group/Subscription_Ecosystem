@@ -101,7 +101,7 @@ if (isset($_POST['UpdateAPIKey'])) {
 
         $query = "UPDATE  NucleusSAASERP_APIKeys SET api_key = ?, status = ?, details = ? WHERE id = ?";
         $stmt = $mysqli->prepare($query);
-        $rc = $stmt->bind_param('ssss', $api_key, $status, $details, $id);
+        $rc = $stmt->bind_param('sssi', $api_key, $status, $details, $id);
         $stmt->execute();
         if ($stmt) {
             $success = "Key Updated";
@@ -116,7 +116,7 @@ if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
     $adn = "DELETE FROM NucleusSAASERP_APIKeys WHERE id=?";
     $stmt = $mysqli->prepare($adn);
-    $stmt->bind_param('s', $delete);
+    $stmt->bind_param('i', $delete);
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
@@ -214,10 +214,8 @@ require_once('../partials/dashboard_head.php');
                             <table id="AdminDashboardDataTables" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="sort">API Key</th>
-                                        <th scope="col" class="sort">Key Status</th>
-                                        <th scope="col" class="sort">Key Details</th>
-                                        <th scope="col">Date Created</th>
+                                        <th scope="col" class="sort">API Key Details </th>
+                                        <th scope="col" class="sort">Key Description</th>
                                         <th scope="col">Manage Keys</th>
                                     </tr>
                                 </thead>
@@ -230,29 +228,27 @@ require_once('../partials/dashboard_head.php');
                                     while ($apiKeys = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <?php echo $apiKeys->api_key; ?>
-                                            </td>
-                                            <td>
+                                            <td class="order">
+                                                <span class="h6 text-sm font-weight-bold mb-0">Key: <?php echo $apiKeys->api_key; ?></span>
+                                                <span class="d-block text-sm text-muted">Key Status: 
                                                 <?php
-                                                if ($apiKeys->status = 'Active') {
+                                                if ($apiKeys->status == 'Active') {
                                                     echo "<span class='badge badge-pill badge-success'>Active</span>";
                                                 } else {
                                                     echo "<span class='badge badge-pill badge-danger'>Revoked</span>";
                                                 }
                                                 ?>
+                                                <span class="d-block text-sm text-muted">Generated On: <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?></span>
+                                                </span>
                                             </td>
                                             <td>
                                                 <?php echo $apiKeys->details; ?>
                                             </td>
                                             <td>
-                                                <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?>
-                                            </td>
-                                            <td>
                                                 <a href="#update-<?php echo $apiKeys->id; ?>" data-toggle="modal" class='badge badge-pill badge-warning'><i class="fas fa-edit"></i> Edit</a>
                                                 <!-- Update Instance -->
                                                 <div class="modal fade" id="update-<?php echo $apiKeys->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Update API Keys</h5>

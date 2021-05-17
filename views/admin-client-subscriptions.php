@@ -263,8 +263,7 @@ require_once('../partials/dashboard_head.php');
                                                                             <input type="hidden" name="notification_details" value="Hello, <?php echo $subscriptions->client_name; ?>. Your NucleusSaaS ERP Instance For  Subscription  <b><?php echo $subscriptions->subscription_code . "" . $subscriptions->package_code . "-" . $subscriptions->package_name; ?></b> Is Being Configured. Come Back In The Next 24Hrs.">
                                                                             <!-- Mail To Client -->
                                                                             <input type="hidden" name="subject" value="NucleusSaaS ERP Instance">
-                                                                            <input type="hidden" name="message" value="Hello, <?php echo $subscriptions->client_name; ?>. 
-                                                                            Your NucleusSaaS ERP Instance for <b><?php echo $subscriptions->subscription_code . " " . $subscriptions->package_code . "-" . $subscriptions->package_name; ?></b> is being set up. It be propagated in the next 24 Hrs.<br>
+                                                                            <input type="hidden" name="message" value="Hello, <?php echo $subscriptions->client_name; ?>. Your NucleusSaaS ERP Instance for <b><?php echo $subscriptions->subscription_code . " " . $subscriptions->package_code . "-" . $subscriptions->package_name; ?></b> is being set up. It be propagated in the next 24 Hrs.<br>
                                                                             Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
                                                                             Kind Regards,<br>
                                                                             <b>NucleusSaaS ERP Group</b><br>

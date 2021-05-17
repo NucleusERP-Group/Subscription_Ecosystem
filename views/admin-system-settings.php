@@ -68,7 +68,7 @@ if (isset($_POST['updateMailSettings'])) {
     if (!$error) {
         $query = "UPDATE  NucleusSAASERP_MailSettings SET stmp_sent_from = ?, stmp_host = ?, stmp_username = ?, stmp_password =? WHERE id = ?";
         $stmt = $mysqli->prepare($query);
-        $rc = $stmt->bind_param('ssSsi', $stmp_sent_from, $stmp_host, $stmp_username, $stmp_password, $id);
+        $rc = $stmt->bind_param('ssssi', $stmp_sent_from, $stmp_host, $stmp_username, $stmp_password, $id);
         $stmt->execute();
         if ($stmt) {
             $success = "STMP Mailer Settings Updated";
@@ -179,14 +179,17 @@ require_once('../partials/dashboard_head.php');
                                                     <input type="text" required class="form-control" value="<?php echo $settings->stmp_sent_from; ?>" name="stmp_sent_from">
                                                     <input type="hidden" required value="<?php echo $settings->id; ?>" class="form-control" name="id">
                                                 </div>
+                                                <br>
                                                 <div class="col-md-6">
                                                     <label class="form-label">STMP Host</label>
                                                     <input type="text" required class="form-control" value="<?php echo $settings->stmp_host; ?>" name="stmp_host">
                                                 </div>
+                                                <br>
                                                 <div class="col-md-6">
                                                     <label class="form-label">STMP Username</label>
                                                     <input type="text" required class="form-control" value="<?php echo $settings->stmp_username; ?>" name="stmp_username">
                                                 </div>
+                                                <br>
                                                 <div class="col-md-6">
                                                     <label class="form-label">STMP Password</label>
                                                     <input type="password" required class="form-control" value="<?php echo $settings->stmp_password; ?>" name="stmp_password">
@@ -216,6 +219,7 @@ require_once('../partials/dashboard_head.php');
                                                     <input type="text" required class="form-control" value="<?php echo $oAuth->CLIENT_ID; ?>" name="CLIENT_ID">
                                                     <input type="hidden" required value="<?php echo $oAuth->id; ?>" class="form-control" name="id">
                                                 </div>
+                                                <br>
                                                 <div class="col-md-12">
                                                     <label class="form-label">Oauth Client Secret</label>
                                                     <input type="text" required class="form-control" value="<?php echo $oAuth->CLIENT_SECRET; ?>" name="CLIENT_SECRET">

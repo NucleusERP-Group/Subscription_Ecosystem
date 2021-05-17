@@ -64,6 +64,8 @@
 
         });
     });
+
+
     /* Initiate And Plot Few Charts */
     // Make monochrome colors
     var pieColors = (function() {
@@ -78,6 +80,7 @@
         }
         return colors;
     }());
+
     Highcharts.chart('Subscription_Payments', {
         chart: {
             plotBackgroundColor: null,
@@ -86,7 +89,7 @@
             type: 'pie'
         },
         title: {
-            text: 'Subscriptions Per Package'
+            text: 'Percentage Subscriptions Per Package'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -126,32 +129,7 @@
             ]
         }]
     });
-
-    Highcharts.chart('payments_overview', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'Subscriptions Income Overview'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Ksh',
-        data: [
-            ['Paid Invoices', <?php echo $paid_invoices;?>],
-            ['Unpaid Invoices', <?php echo $unpaid_invoices;?>]
-        ]
-    }]
-});
+  
 </script>
 <!-- Swal Js -->
 <script src="../public/js/swal.js"></script>

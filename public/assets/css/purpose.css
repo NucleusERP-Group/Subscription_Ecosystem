@@ -25297,12 +25297,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 	height: 300px;
 }
 
-#payments_overview {
+#Payments_Overview {
 	height: 300px;
 }
 
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 100px; 
-    max-width: 400px;
+    min-width: 300px; 
+    max-width: 700px;
     margin: 1em auto;
 }

@@ -20,11 +20,11 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
-
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -38,6 +38,7 @@ require_once('../partials/dashboard_head.php');
         <div class="main-content position-relative">
             <!-- Main nav -->
             <?php
+
             require_once('../partials/dashboard_main_nav.php');
             $id = $_SESSION['id'];
             $email = $_SESSION['email'];
@@ -55,7 +56,7 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Clients Subscriptions Advanced Reports</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Subscribed Clients Invoices Reports</h5>
                                 </div>
                             </div>
                         </div>
@@ -66,68 +67,59 @@ require_once('../partials/dashboard_head.php');
                             <table id="ReportsDataTable" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="sort">Subscription Details</th>
-                                        <th scope="col">Client Details</th>
-                                        <th scope="col" class="sort">Package Details</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col" class="sort">Package</th>
+                                        <th scope="col" class="sort">Invoiced Amount</th>
+                                        <th scope="col" class="sort">Date Invoiced</th>
+                                        <th scope="col" class="sort">Due Date</th>
+                                        <th scope="col">Payment Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions`  ";
+                                    $ret = "SELECT * FROM `NucleusSAASERP_UserInvoices` ORDER BY `NucleusSAASERP_UserInvoices`.`created_at` ASC ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($subscriptions = $res->fetch_object()) {
+                                    while ($invoices = $res->fetch_object()) {
+                                        /* Date Invoice Created */
+                                        $created_at = date('d M Y ', strtotime($invoices->created_at));
+                                        $created = date_create(date('y-m-d ', strtotime($invoices->created_at)));
+                                        /* Due Date */
+                                        $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
+                                        $due = date_format($due_date, 'd M Y');
                                     ?>
 
                                         <tr>
                                             <td>
-                                                <span class="client"><?php echo $subscriptions->subscription_code; ?></span>
-                                                <span class="d-block text-sm text-muted">Subscribed On:<?php echo date('d M Y', strtotime($subscriptions->date_subscribed)); ?></span>
-                                                <span class="d-block text-sm text-muted">Valid Till :<?php echo date('d M Y', strtotime($subscriptions->subscription_expiriry)); ?></span>
-                                                <span class="d-block text-sm text-muted">Payment Status:
-                                                    <?php
-                                                    if ($subscriptions->payment_status == 'Paid') {
-                                                        echo "<span class='badge badge-pill badge-success'>Paid</span>";
-                                                    } else {
-                                                        echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
-                                                    } ?>
-                                                </span>
-                                                <span class="d-block text-sm text-muted">Subscription Status:
-                                                    <?php
-                                                    if ($subscriptions->status == 'Active') {
-                                                        echo "<span class='badge badge-pill badge-success'>Active</span>";
-                                                    } elseif ($subscriptions->status == 'Cancelled') {
-                                                        echo "<span class='badge badge-pill badge-danger'>Cancelled</span>";
-                                                    } else {
-                                                        echo "<span class='badge badge-pill badge-warning'>Pending Restoration</span>";
-                                                    } ?>
-                                                </span>
-
+                                                <span class="client"><?php echo $invoices->invoice_code; ?></span>
                                             </td>
                                             <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->client_name; ?></span>
-                                                <span class="d-block text-sm text-muted"><?php echo $subscriptions->client_email; ?></span>
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $invoices->package_code; ?></span>
+                                                <span class="d-block text-sm text-muted"><?php echo $invoices->package_name; ?></span>
                                             </td>
-                                            <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->package_code; ?></span>
-                                                <span class="d-block text-sm text-muted"><?php echo $subscriptions->package_name; ?></span>
-                                                <span class="d-block text-sm text-muted">Ksh <?php echo $subscriptions->payment_amt; ?></span>
+                                            <td>
+                                                <span class="client">Ksh <?php echo $invoices->subscription_amt; ?></span>
                                             </td>
-
+                                            <td>
+                                                <span class="client"><?php echo $created_at; ?></span>
+                                            </td>
+                                            <td>
+                                                <span class="client"><?php echo $due; ?></span>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($invoices->status == 'Paid') {
+                                                    echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                } else {
+                                                    echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                } ?>
+                                            </td>
                                         </tr>
                                     <?php
                                     } ?>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <!-- Subscriptions Per Package -->
-                    <div class="card">
-                        <div class="card-body align-items-left">
-                            <figure class="highcharts-figure">
-                                <div id="Subscription_Payments"></div>
-                            </figure>
                         </div>
                     </div>
                 </div>

@@ -151,28 +151,7 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
-
-                    <!-- Subscriptions Per Package -->
-                    <div class="col-xl-6 col-md-6">
-                        <div class="card">
-                            <div class="card-body align-items-left">
-                                <figure class="highcharts-figure">
-                                    <div id="Subscription_Payments"></div>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-6 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <figure class="highcharts-figure">
-                                    <div id="payments_overview"></div>
-                                </figure>
-                            </div>
-
-                        </div>
-                    </div>
+                    
                     <!-- Linked Cards Overview -->
                     <div class="col-xl-6 col-md-6">
                         <div class="card">

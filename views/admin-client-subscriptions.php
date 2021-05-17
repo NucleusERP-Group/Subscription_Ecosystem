@@ -197,7 +197,7 @@ require_once('../partials/dashboard_head.php');
                                                 if ($subscriptions->instance_status == '') {
                                                     echo
                                                     "
-                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Configure ERP Instance</a> <br>
+                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'><i class='fas fa-tools'></i> Configure ERP Instance</a> <br>
                                                 ";
                                                 } else {
                                                     /* Nothing */
@@ -238,7 +238,7 @@ require_once('../partials/dashboard_head.php');
                                                     </div>
                                                 </div>
                                                 <!-- End Configuration -->
-                                                <a href="#delete-<?php echo $subscriptions->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'>Delete</a>
+                                                <a href="#delete-<?php echo $subscriptions->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'><i class="fas fa-trash"></i> Delete</a>
                                                 <!-- Delete Modal -->
                                                 <div class="modal fade" id="delete-<?php echo $subscriptions->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -168,8 +168,7 @@ require_once('../partials/dashboard_head.php');
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th scope="col" class="sort">Email</th>
-                                    <th scope="col" class="sort">Mobile Contacts</th>
+                                    <th scope="col" class="sort">Contacts & Address</th>
                                     <th scope="col" class="sort">Account Status</th>
                                     <th scope="col" class="sort">Date Joined</th>
                                     <th scope="col" class="sort">Manage Clients</th>
@@ -198,9 +197,8 @@ require_once('../partials/dashboard_head.php');
                                         </td>
                                         <td class="order">
                                             <span class="d-block text-sm text-muted"><?php echo $users->email; ?></span>
-                                        </td>
-                                        <td>
-                                            <span class="client"><?php echo $users->phone; ?></span>
+                                            <span class="d-block text-sm text-muted"><?php echo $users->phone; ?></span>
+                                            <span class="d-block text-sm text-muted"><?php echo $users->adr; ?></span>
                                         </td>
                                         <td>
                                             <?php
@@ -344,10 +342,11 @@ require_once('../partials/dashboard_head.php');
                                                             </div>
                                                             <div class="row align-items-center">
                                                                 <div class="col-auto">
-                                                                    <a href="#" class="avatar rounded-circle">
-                                                                        <img alt="Image placeholder" src="<?php echo $grav_url; ?>" class="avatar rounded-circle">
+                                                                    <a href="#" class="img-responsive">
+                                                                        <img alt="Image placeholder" src="<?php echo $grav_url; ?>" width="50" height="50">
                                                                     </a>
                                                                 </div>
+                                                                <br>
                                                                 <div class="col ml-md-n2">
                                                                     <p class="d-block h6 mb-0">Full Name : <?php echo $users->name; ?></p>
                                                                     <p class="d-block h6 mb-0">Mobile : <?php echo $users->phone; ?></p>

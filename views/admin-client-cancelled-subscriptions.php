@@ -183,7 +183,7 @@ require_once('../partials/dashboard_head.php');
                                                 if ($subscriptions->status == 'Cancelled') {
                                                     echo "<span class='badge badge-pill badge-danger'>Cancelled</span>";
                                                 } else {
-                                                    echo "<a href='#restore-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Restore Subscription</a>";
+                                                    echo "<a href='#restore-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'><i class='fas fa-trash-restore'></i> Restore Subscription</a>";
                                                 } ?>
                                                 <form method="POST">
                                                     <!-- Hidden Values -->

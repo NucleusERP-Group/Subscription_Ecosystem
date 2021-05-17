@@ -38,12 +38,12 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php'); ?>
+        <?php require_once('../partials/admin_dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
             <?php
-            require_once('../partials/admin_dashboard_sidenav.php');
+            require_once('../partials/dashboard_main_nav.php');
             $id = $_SESSION['id'];
             $email = $_SESSION['email'];
             $ret = "SELECT * FROM `NucleusSAASERP_Users` WHERE id = '$id' OR email = '$email' ";

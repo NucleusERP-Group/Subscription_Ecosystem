@@ -213,7 +213,7 @@ require_once('../partials/dashboard_head.php');
                                 $res = $stmt->get_result();
                                 while ($subscribed_packages = $res->fetch_object()) {
                                 ?>
-                                    <a href="admin-subscriptions.php" class="list-group-item list-group-item-action">
+                                    <a href="admin-client-subscriptions.php" class="list-group-item list-group-item-action">
                                         <div class="media align-items-center">
                                             <div class="mr-3">
                                                 <?php

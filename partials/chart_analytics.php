@@ -38,4 +38,17 @@ $stmt->fetch();
 $stmt->close();
 
 
- /* 2. Payments Overview */
+/* 2. Payments Overview */
+$query = "SELECT SUM(subscription_amt)  FROM `NucleusSAASERP_UserInvoices` WHERE  status = 'Paid'  ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($paid_invoices);
+$stmt->fetch();
+$stmt->close();
+
+$query = "SELECT SUM(subscription_amt)  FROM `NucleusSAASERP_UserInvoices` WHERE  status = ''  ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($unpaid_invoices);
+$stmt->fetch();
+$stmt->close();

@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Sun May 16 2021
+ * Created on Mon May 17 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -24,58 +24,6 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
-/* Update ERP Instance */
-if (isset($_POST['UpdateInstance'])) {
-    //Error Handling and prevention of posting double entries
-    $error = 0;
-    
-    if (isset($_POST['instance_url']) && !empty($_POST['instance_url'])) {
-        $instance_url = mysqli_real_escape_string($mysqli, trim($_POST['instance_url']));
-    } else {
-        $error = 1;
-        $err = "Instance URL  Cannot Be Empty";
-    }
-
-    if (isset($_POST['id']) && !empty($_POST['id'])) {
-        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
-    } else {
-        $error = 1;
-        $err = "Instance ID  Cannot Be Empty";
-    }
-
-    if (!$error) {
-        $query = "UPDATE  NucleusSAASERP_ERPInstances SET instance_url = ? WHERE id = ?";
-        $stmt = $mysqli->prepare($query);
-        $rc = $stmt->bind_param('ss', $instance_url, $id);
-        /* To Do:  Mail User */
-        $stmt->execute();
-        if ($stmt) {
-            $success = "Subscription ERP Instance Configrations Updated.";
-        } else {
-            $info = "Please Try Again Or Try Later ";
-        }
-    }
-}
-/* Delete Instance */
-if (isset($_GET['delete'])) {
-    $delete = $_GET['delete'];
-    $subscription_code = $_GET['subscription_code'];
-    $adn = "DELETE FROM NucleusSAASERP_ERPInstances WHERE id=?";
-    $status = "UPDATE NucleusSAASERP_UserSubscriptions SET instance_status = '' WHERE subscription_code = ?";
-    $stmt = $mysqli->prepare($adn);
-    $statusstmt = $mysqli->prepare($status);
-    $stmt->bind_param('s', $delete);
-    $statusstmt->bind_param('s', $subscription_code);
-    $stmt->execute();
-    $statusstmt->execute();
-    $statusstmt->close();
-    $stmt->close();
-    if ($stmt && $statusstmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-erp-instance.php");
-    } else {
-        $info = "Please Try Again Or Try Later";
-    }
-}
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -106,7 +54,7 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances API Keys</h5>
                                 </div>
                             </div>
                         </div>
@@ -118,43 +66,48 @@ require_once('../partials/dashboard_head.php');
                             <table id="AdminDashboardDataTables" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Subscription Code</th>
-                                        <th scope="col" class="sort">Package Details</th>
-                                        <th scope="col">ERP Instance</th>
-                                        <th scope="col">Manage Instance</th>
+                                        <th scope="col" class="sort">API Key</th>
+                                        <th scope="col" class="sort">Key Status</th>
+                                        <th scope="col" class="sort">Key Details</th>
+                                        <th scope="col">Date Created</th>
+                                        <th scope="col">Manage Keys</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_ERPInstances` ";
+                                    $ret = "SELECT * FROM `NucleusSAASERP_APIKeys` ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($instances = $res->fetch_object()) {
+                                    while ($apiKeys = $res->fetch_object()) {
                                     ?>
-
                                         <tr>
                                             <td>
-                                                <?php echo $instances->subscription_code; ?>
-                                            </td>
-                                            <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $instances->package_code; ?></span>
-                                                <span class="d-block text-sm text-muted"><?php echo $instances->package_name; ?></span>
+                                                <?php echo $apiKeys->api_key; ?>
                                             </td>
                                             <td>
-                                                <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" target="_blank">
-                                                    <i class="fas fa-external-link-alt"></i>
-                                                    Access ERP Instance
-                                                </a>
+                                                <?php
+                                                if ($apiKeys->status = 'Active') {
+                                                    echo "<span class='badge badge-pill badge-success'>Active</span>";
+                                                } else {
+                                                    echo "<span class='badge badge-pill badge-danger'>Revoked</span>";
+                                                }
+                                                ?>
                                             </td>
                                             <td>
-                                                <a href="#update-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-warning'><i class="fas fa-edit"></i> Edit</a>
+                                                <?php echo $apiKeys->details; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?>
+                                            </td>
+                                            <td>
+                                                <a href="#update-<?php echo $apiKeys->id; ?>" data-toggle="modal" class='badge badge-pill badge-warning'><i class="fas fa-edit"></i> Edit</a>
                                                 <!-- Update Instance -->
-                                                <div class="modal fade" id="update-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="update-<?php echo $apiKeys->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Update ERP Instance</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Update API Keys</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -162,15 +115,27 @@ require_once('../partials/dashboard_head.php');
                                                             <div class="modal-body">
                                                                 <form method="POST">
                                                                     <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label">API Key</label>
+                                                                            <input type="text" required class="form-control" value="<?php echo $apiKeys->api_key; ?>" name="api_key">
+                                                                            <input type="hidden" required value="<?php echo $apiKeys->id; ?>" class="form-control" name="id">
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label class="form-label">API Key Status</label>
+                                                                            <select class="form-control" name="status">
+                                                                                <option><?php echo $apiKeys->status; ?></option>
+                                                                                <option>Active</option>
+                                                                                <option>Revoked</option>
+                                                                            </select>
+                                                                        </div>
                                                                         <div class="col-md-12">
-                                                                            <label class="form-label">NucleusSaaS ERP Instance URL</label>
-                                                                            <input type="text" required class="form-control" value="<?php echo $instances->instance_url; ?>" name="instance_url">
-                                                                            <input type="hidden" required value="<?php echo $instances->id; ?>" class="form-control" name="id">
+                                                                            <label class="form-label">API Key Details</label>
+                                                                            <textarea type="text" required class="form-control summernote" name="details"><?php echo $apiKeys->details; ?></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <br>
                                                                     <div class="text-right">
-                                                                        <button type="submit" name="UpdateInstance" class="btn btn-primary">Save Instance</button>
+                                                                        <button type="submit" name="UpdateAPIKey" class="btn btn-primary">Save API Key</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -178,9 +143,9 @@ require_once('../partials/dashboard_head.php');
                                                     </div>
                                                 </div>
                                                 <!-- End Update -->
-                                                <a href="#delete-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'><i class="fas fa-trash"></i> Delete</a>
+                                                <a href="#delete-<?php echo $apiKeys->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'><i class="fas fa-trash"></i> Delete</a>
                                                 <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete-<?php echo $apiKeys->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -190,13 +155,13 @@ require_once('../partials/dashboard_head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
-                                                                <h4>Delete This Instance Record?</h4>
+                                                                <h4>Delete This API Key Record?</h4>
                                                                 <p>
-                                                                    Hey There You Are About To Delete A Client ERP Instance Details. <br>
-                                                                    This Operation Is Irrevessible All Clients ERP Data Will Be Deleted.
+                                                                    Hey There You Are About To Delete An API Key. <br>
+                                                                    This Operation Is Irrevessible.
                                                                 </p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="admin-erp-instance.php?delete=<?php echo $instances->id; ?>&subscription_code=<?php echo $instances->subscription_code; ?>" class="text-center btn btn-danger">Yes Delete</a>
+                                                                <a href="admin-api-keys.php?delete=<?php echo $apiKeys->id; ?>" class="text-center btn btn-danger">Yes Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -90,7 +90,7 @@ require_once('../partials/dashboard_head.php');
                                             </td>
                                             <td>
                                                 <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" target="_blank">
-                                                    <i class="fas fa-open"></i>
+                                                    <i class="fas fa-external-link-alt"></i>
                                                     Access ERP Instance
                                                 </a>
                                             </td>

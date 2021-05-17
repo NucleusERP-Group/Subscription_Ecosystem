@@ -95,6 +95,10 @@ while ($client = $res->fetch_object()) {
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>
             </a>
+            <a href="admin-system-reports.php" class="btn btn-square text-sm">
+                <span class="btn-inner--icon d-block"><i class="far fa-chart-pie fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Reports</span>
+            </a>
             <a href="admin-system-settings.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cog fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">System Settings</span>

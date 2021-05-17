@@ -18,11 +18,17 @@
 <script src="../public/assets/libs/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 <!-- Dashboard Data Table JS -->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
 <!-- Summernote JS -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <!-- Search Data In Data Tables -->
 <script>
-    
     /* Print Contents In Div */
     function printContent(el) {
         var restorepage = $('body').html();
@@ -35,9 +41,21 @@
     $(document).ready(function() {
         $('#AdminDashboardDataTables').DataTable();
     });
+    /* Initiate Reports Data Tables */
+    $(document).ready(function() {
+        $('.ReportsDataTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
     /* Load Summer Note */
     $(document).ready(function() {
-        $('.summernote').summernote();
+        $('.summernote').summernote({
+            height: 150, //set editable area's height
+
+        });
     });
 </script>
 <!-- Swal Js -->

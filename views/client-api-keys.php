@@ -66,10 +66,8 @@ require_once('../partials/dashboard_head.php');
                             <table id="AdminDashboardDataTables" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="sort">API Key</th>
-                                        <th scope="col" class="sort">Key Status</th>
-                                        <th scope="col" class="sort">Key Details</th>
-                                        <th scope="col">Date Created</th>
+                                        <th scope="col" class="sort">API Key Details </th>
+                                        <th scope="col" class="sort">Key Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,23 +79,21 @@ require_once('../partials/dashboard_head.php');
                                     while ($apiKeys = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <?php echo $apiKeys->api_key; ?>
-                                            </td>
-                                            <td>
+                                            <td class="order">
+                                                <span class="h6 text-sm font-weight-bold mb-0">Key: <?php echo $apiKeys->api_key; ?></span>
+                                                <span class="d-block text-sm text-muted">Key Status: 
                                                 <?php
-                                                if ($apiKeys->status = 'Active') {
+                                                if ($apiKeys->status == 'Active') {
                                                     echo "<span class='badge badge-pill badge-success'>Active</span>";
                                                 } else {
                                                     echo "<span class='badge badge-pill badge-danger'>Revoked</span>";
                                                 }
                                                 ?>
+                                                <span class="d-block text-sm text-muted">Generated On: <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?></span>
+                                                </span>
                                             </td>
                                             <td>
                                                 <?php echo $apiKeys->details; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?>
                                             </td>
                                         </tr>
                                     <?php

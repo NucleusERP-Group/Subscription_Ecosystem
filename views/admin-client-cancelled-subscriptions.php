@@ -142,12 +142,9 @@ require_once('../partials/dashboard_head.php');
                             <table id="AdminDashboardDataTables" class="table align-items-center">
                                 <thead>
                                     <tr>
+                                        <th scope="col" class="sort">Subscription Details</th>
                                         <th scope="col">Client Details</th>
                                         <th scope="col" class="sort">Package Details</th>
-                                        <th scope="col" class="sort">Subscription Code</th>
-                                        <th scope="col" class="sort">Date Subscribed</th>
-                                        <th scope="col" class="sort">Expiriry Date</th>
-                                        <th scope="col">Payment Status</th>
                                         <th scope="col">Subscription Status</th>
                                     </tr>
                                 </thead>
@@ -162,6 +159,17 @@ require_once('../partials/dashboard_head.php');
 
                                         <tr>
                                             <td class="order">
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->subscription_code; ?></span>
+                                                <span class="d-block text-sm text-muted">Subscribed On: <?php echo date('d M Y', strtotime($subscriptions->date_subscribed)); ?></span>
+                                                <span class="d-block text-sm text-muted">Valid Till: <?php echo date('d M Y', strtotime($subscriptions->subscription_expiriry)); ?></span>
+                                                <?php
+                                                if ($subscriptions->payment_status == 'Paid') {
+                                                    echo "Payment Status: <span class='badge badge-pill badge-success'>Paid</span>";
+                                                } else {
+                                                    echo "Payment Status: <span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                } ?>
+                                            </td>
+                                            <td class="order">
                                                 <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->client_name; ?></span>
                                                 <span class="d-block text-sm text-muted"><?php echo $subscriptions->client_email; ?></span>
                                             </td>
@@ -171,28 +179,11 @@ require_once('../partials/dashboard_head.php');
                                                 <span class="d-block text-sm text-muted">Ksh <?php echo $subscriptions->payment_amt; ?></span>
                                             </td>
                                             <td>
-                                                <span class="client"><?php echo $subscriptions->subscription_code; ?></span>
-                                            </td>
-                                            <td>
-                                                <span class="client"><?php echo date('d M Y', strtotime($subscriptions->date_subscribed)); ?></span>
-                                            </td>
-                                            <td>
-                                                <span class="client"><?php echo date('d M Y', strtotime($subscriptions->subscription_expiriry)); ?></span>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                if ($subscriptions->payment_status == 'Paid') {
-                                                    echo "<span class='badge badge-pill badge-success'>Paid</span>";
-                                                } else {
-                                                    echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
-                                                } ?>
-                                            </td>
-                                            <td>
                                                 <?php
                                                 if ($subscriptions->status == 'Cancelled') {
-                                                    echo "<span class='badge badge-pill badge-success'>Cancelled</span>";
+                                                    echo "<span class='badge badge-pill badge-danger'>Cancelled</span>";
                                                 } else {
-                                                    echo "<a href='#restore-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-warning'>Restore Subscription</a>";
+                                                    echo "<a href='#restore-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Restore Subscription</a>";
                                                 } ?>
                                                 <form method="POST">
                                                     <!-- Hidden Values -->

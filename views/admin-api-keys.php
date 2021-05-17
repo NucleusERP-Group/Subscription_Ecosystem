@@ -24,6 +24,107 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
+/* Add API Key */
+if (isset($_POST['AddAPIKey'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_POST['api_key']) && !empty($_POST['api_key'])) {
+        $api_key = mysqli_real_escape_string($mysqli, trim($_POST['api_key']));
+    } else {
+        $error = 1;
+        $err = "API Key Cannot Be Empty";
+    }
+
+    if (isset($_POST['status']) && !empty($_POST['status'])) {
+        $status = mysqli_real_escape_string($mysqli, trim($_POST['status']));
+    } else {
+        $error = 1;
+        $err = "API Key Status Cannot Be Empty";
+    }
+
+    $details = $_POST['details'];
+
+    if (!$error) {
+        /* Prevent Double Entries */
+        $sql = "SELECT * FROM  NucleusSAASERP_APIKeys WHERE   api_key = '$api_key'    ";
+        $res = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            $row = mysqli_fetch_assoc($res);
+            if ($api_key == $row['api_key']) {
+                $err =  "Key Already Exists";
+            }
+        } else {
+            /* No Error Or Duplicate */
+            $query = "INSERT INTO NucleusSAASERP_APIKeys  (api_key, status, details) VALUES (?,?,?)";
+            $stmt = $mysqli->prepare($query);
+            $rc = $stmt->bind_param('sss', $api_key, $status, $details);
+            $stmt->execute();
+            if ($stmt) {
+                $success = "Key Added";
+            } else {
+                $info = "Please Try Again Or Try Later ";
+            }
+        }
+    }
+}
+
+/* Update API Key */
+if (isset($_POST['UpdateAPIKey'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+
+    if (isset($_POST['api_key']) && !empty($_POST['api_key'])) {
+        $api_key = mysqli_real_escape_string($mysqli, trim($_POST['api_key']));
+    } else {
+        $error = 1;
+        $err = "API Key Cannot Be Empty";
+    }
+
+    if (isset($_POST['status']) && !empty($_POST['status'])) {
+        $status = mysqli_real_escape_string($mysqli, trim($_POST['status']));
+    } else {
+        $error = 1;
+        $err = "API Key Status Cannot Be Empty";
+    }
+
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "API Key ID Cannot Be Empty";
+    }
+
+    $details = $_POST['details'];
+
+    if (!$error) {
+
+        $query = "UPDATE  NucleusSAASERP_APIKeys SET api_key = ?, status = ?, details = ? WHERE id = ?";
+        $stmt = $mysqli->prepare($query);
+        $rc = $stmt->bind_param('ssss', $api_key, $status, $details, $id);
+        $stmt->execute();
+        if ($stmt) {
+            $success = "Key Updated";
+        } else {
+            $info = "Please Try Again Or Try Later ";
+        }
+    }
+}
+
+/* Delete API Key */
+if (isset($_GET['delete'])) {
+    $delete = $_GET['delete'];
+    $adn = "DELETE FROM NucleusSAASERP_APIKeys WHERE id=?";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('s', $delete);
+    $stmt->execute();
+    $stmt->close();
+    if ($stmt) {
+        $success = "Deleted" && header("refresh:1; url=admin-api-keys.php");
+    } else {
+        $info = "Please Try Again Or Try Later";
+    }
+}
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -77,7 +178,7 @@ require_once('../partials/dashboard_head.php');
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label class="form-label">API Key</label>
-                                                                <input type="text" required class="form-control"  name="api_key">
+                                                                <input type="text" required class="form-control" name="api_key">
                                                                 <input type="hidden" required value="<?php echo $ID; ?>" class="form-control" name="id">
                                                             </div>
                                                             <div class="col-md-6">

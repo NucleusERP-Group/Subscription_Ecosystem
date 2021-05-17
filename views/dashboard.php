@@ -60,7 +60,7 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-4 col-md-6">
                         <div class="card card-stats">
                             <!-- Card body -->
@@ -151,6 +151,39 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
+
+                    <!-- Subscriptions Per Package -->
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Subscriptions Per Package</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body align-items-left">
+                                <figure class="highcharts-figure">
+                                    <div id="Subscription_Payments"></div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Payments Overview</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="payments_overview"></div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Linked Cards Overview -->
                     <div class="col-xl-6 col-md-6">
                         <div class="card">
@@ -162,7 +195,7 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                             </div>
                             <div class="list-group list-group-flush">
-                            <?php
+                                <?php
                                 $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` LIMIT 5 ";
                                 $stmt = $mysqli->prepare($ret);
                                 $stmt->execute(); //ok

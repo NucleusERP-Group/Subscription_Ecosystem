@@ -121,9 +121,100 @@ while ($client = $res->fetch_object()) {
                     <li class="nav-item">
                         <a href="#" class="nav-link nav-link-icon sidenav-toggler" data-action="sidenav-pin" data-target="#sidenav-main"><i class="far fa-bars"></i></a>
                     </li>
+
                     <li class="nav-item">
                         <a href="#" class="nav-link nav-link-icon" data-action="omnisearch-open" data-target="#omnisearch"><i class="far fa-search"></i></a>
                     </li>
+
+                    <li class="nav-item dropdown dropdown-animate">
+                        <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-pie"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg dropdown-menu-arrow p-0">
+                            <div class="py-3 px-3">
+                                <h5 class="heading h6 mb-0">Advanced Reports</h5>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="admin-reports-clients.php" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <span class="avatar bg-primary text-white rounded-circle">
+                                                <i class="fas fa-users"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-fill ml-3">
+                                            <p class="text-sm lh-140 mb-0">
+                                                NucleusSaaS ERP Clients
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="admin-reports-packages.php" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <span class="avatar bg-primary text-white rounded-circle">
+                                                <i class="fas fa-project-diagram"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-fill ml-3">
+                                            <p class="text-sm lh-140 mb-0">
+                                                NucleusSaaS ERP Packages
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="admin-reports-subscriptions.php" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <span class="avatar bg-primary text-white rounded-circle">
+                                                <i class="fas fa-calendar-check"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-fill ml-3">
+                                            <p class="text-sm lh-140 mb-0">
+                                                NucleusSaaS ERP Subscriptions
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="admin-reports-invoices.php" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <span class="avatar bg-primary text-white rounded-circle">
+                                                <i class="fas fa-file-invoice-dollar"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-fill ml-3">
+                                            <p class="text-sm lh-140 mb-0">
+                                                NucleusSaaS ERP Invoices
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="admin-reports-cards.php" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <span class="avatar bg-primary text-white rounded-circle">
+                                                <i class="fas fa-credit-card"></i>
+                                            </span>
+                                        </div>
+                                        <div class="flex-fill ml-3">
+                                            <p class="text-sm lh-140 mb-0">
+                                                NucleusSaaS ERP Linked Cards
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
                     <li class="nav-item dropdown dropdown-animate">
                         <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg dropdown-menu-arrow p-0">

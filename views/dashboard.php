@@ -40,7 +40,14 @@ require_once('../partials/dashboard_head.php');
             <!-- Page content -->
             <div class="page-content">
                 <!-- Page title -->
-                <?php require_once('../partials/dashboard_ml.php'); ?>
+                <div class="page-title">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <h5 class="h3 font-weight-400 mb-0 text-white">NucleusSaaS ERP Subscriptions Manager</h5>
+                            <span class="text-sm text-white opacity-8"> Administrator Dashboard</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xl-4 col-md-6">
                         <div class="card card-stats">
@@ -151,7 +158,7 @@ require_once('../partials/dashboard_head.php');
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Linked Cards Overview -->
                     <div class="col-xl-6 col-md-6">
                         <div class="card">

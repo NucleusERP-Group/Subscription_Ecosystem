@@ -187,12 +187,7 @@ require_once('../partials/dashboard_head.php');
                                     </a>
                                     <?php
                                     if ($invoice->status == 'Paid') {
-                                        echo
-                                        "
-                                            <a href='client-payment-history.php' class='action-item'>
-                                                <i class='far fa-download'></i> View Payment Records
-                                            </a>
-                                        ";
+                                        /* Nothing */
                                     } else {
                                         echo
                                         "

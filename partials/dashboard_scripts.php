@@ -129,7 +129,6 @@
             ]
         }]
     });
-  
 </script>
 <!-- Swal Js -->
 <script src="../public/js/swal.js"></script>

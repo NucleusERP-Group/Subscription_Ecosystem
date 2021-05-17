@@ -127,7 +127,16 @@ while ($client = $res->fetch_object()) {
                     </li>
 
                     <li class="nav-item dropdown dropdown-animate">
-                        <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-pie"></i></a>
+                        <?php
+                        if ($client->access_level == 'Admin') {
+                            echo
+                            '
+                                <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-pie"></i></a>
+                            ';
+                        } else {
+                            /* Silence Sometimes Is The Best Answer */
+                        }
+                        ?>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg dropdown-menu-arrow p-0">
                             <div class="py-3 px-3">
                                 <h5 class="heading h6 mb-0">Advanced Reports</h5>

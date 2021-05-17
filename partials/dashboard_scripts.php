@@ -18,11 +18,24 @@
 <script src="../public/assets/libs/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 <!-- Dashboard Data Table JS -->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+<!-- High Charts CDNS -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <!-- Summernote JS -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <!-- Search Data In Data Tables -->
+<!-- Load Charts Analytics -->
+<?php require_once('chart_analytics.php'); ?>
 <script>
-    
     /* Print Contents In Div */
     function printContent(el) {
         var restorepage = $('body').html();
@@ -35,9 +48,86 @@
     $(document).ready(function() {
         $('#AdminDashboardDataTables').DataTable();
     });
+    /* Initiate Reports Data Tables */
+    $(document).ready(function() {
+        $('#ReportsDataTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
     /* Load Summer Note */
     $(document).ready(function() {
-        $('.summernote').summernote();
+        $('.summernote').summernote({
+            height: 150, //set editable area's height
+
+        });
+    });
+
+
+    /* Initiate And Plot Few Charts */
+    // Make monochrome colors
+    var pieColors = (function() {
+        var colors = [],
+            base = Highcharts.getOptions().colors[0],
+            i;
+
+        for (i = 0; i < 10; i += 1) {
+            // Start out with a darkened base color (negative brighten), and end
+            // up with a much brighter color
+            colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
+        }
+        return colors;
+    }());
+
+    Highcharts.chart('Subscription_Payments', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Percentage Subscriptions Per Package'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                colors: pieColors,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                    distance: -50,
+                    filter: {
+                        property: 'percentage',
+                        operator: '>',
+                        value: 4
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Subscriptions',
+            data: [{
+                    name: 'Community Version',
+                    y: <?php echo $community_version; ?>
+                },
+                {
+                    name: 'Enterprise Version',
+                    y: <?php echo $enterprise_version; ?>
+                }
+            ]
+        }]
     });
 </script>
 <!-- Swal Js -->

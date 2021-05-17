@@ -143,12 +143,12 @@ require_once('../partials/dashboard_head.php');
                                             </td>
                                             <td>
                                                 <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" target="_blank">
-                                                    <i class="fas fa-open"></i>
+                                                    <i class="fas fa-external-link-alt"></i>
                                                     Access ERP Instance
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#update-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-warning'>Edit</a>
+                                                <a href="#update-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-warning'><i class="fas fa-edit"></i> Edit</a>
                                                 <!-- Update Instance -->
                                                 <div class="modal fade" id="update-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -178,7 +178,7 @@ require_once('../partials/dashboard_head.php');
                                                     </div>
                                                 </div>
                                                 <!-- End Update -->
-                                                <a href="#delete-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'>Delete</a>
+                                                <a href="#delete-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'><i class="fas fa-trash"></i> Delete</a>
                                                 <!-- Delete Modal -->
                                                 <div class="modal fade" id="delete-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">

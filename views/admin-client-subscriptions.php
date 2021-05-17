@@ -78,17 +78,49 @@ if (isset($_POST['addInstance'])) {
         $err = "Instance URL  Cannot Be Empty";
     }
 
+    /* Notifications */
+    if (isset($_POST['notification_from']) && !empty($_POST['notification_from'])) {
+        $notification_from = mysqli_real_escape_string($mysqli, trim($_POST['notification_from']));
+    } else {
+        $error = 1;
+        $err = "Notification From  Cannot Be Empty";
+    }
+
+    if (isset($_POST['notification_details']) && !empty($_POST['notification_details'])) {
+        $notification_details = mysqli_real_escape_string($mysqli, trim($_POST['notification_details']));
+    } else {
+        $error = 1;
+        $err = "Notification Details  Cannot Be Empty";
+    }
+
     if (!$error) {
+        /* Add Instance */
         $query = "INSERT INTO NucleusSAASERP_ERPInstances  (client_id, client_email, instance_url, package_code, package_name, subscription_code) VALUES (?,?,?,?,?,?)";
+        /* Subscription Has Instace */
         $instancestatus = "UPDATE NucleusSAASERP_UserSubscriptions SET instance_status = ? WHERE  subscription_code = ? ";
+        /* Notify User */
+        $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
+        /* Prepare Instance */
         $stmt = $mysqli->prepare($query);
+        /* Prepare Has Instance */
         $instancestmt = $mysqli->prepare($instancestatus);
+        /* Prepare Notification */
+        $notifstmt = $mysqli->prepare($notif);
+        /* Bind Add Instance  */
         $rc = $stmt->bind_param('ssssss', $client_id, $client_email, $instance_url, $package_code, $package_name, $subscription_code);
+        /* Bind Has Instance */
         $rc = $instancestmt->bind_param('ss', $instance_status, $subscription_code);
-        /* To Do:  Mail User */
+        /* Bind Notify User */
+        $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
+        /* Execute Add Instance */
         $stmt->execute();
+        /* Execute Has Instance */
         $instancestmt->execute();
-        if ($stmt && $instancestmt) {
+        /* Execute Notification */
+        $notifstmt->execute();
+        /* Load Mailer And Mail User */
+        require_once('../config/mailer_config.php');
+        if ($stmt && $instancestmt && $notifstmt && $mail->send()) {
             $success = "Subscription ERP Instance Configured.";
         } else {
             $info = "Please Try Again Or Try Later ";
@@ -197,7 +229,7 @@ require_once('../partials/dashboard_head.php');
                                                 if ($subscriptions->instance_status == '') {
                                                     echo
                                                     "
-                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'>Configure ERP Instance</a> <br>
+                                                <a href='#configure-$subscriptions->id' data-toggle='modal' class='badge badge-pill badge-success'><i class='fas fa-tools'></i> Configure ERP Instance</a><br>
                                                 ";
                                                 } else {
                                                     /* Nothing */
@@ -226,6 +258,20 @@ require_once('../partials/dashboard_head.php');
                                                                             <input type="hidden" required value="<?php echo $subscriptions->subscription_code; ?>" class="form-control" name="subscription_code">
                                                                             <input type="hidden" required value="<?php echo $subscriptions->package_name; ?>" class="form-control" name="package_name">
                                                                             <input type="hidden" required value="Has Instance" class="form-control" name="instance_status">
+                                                                            <!-- Notification Details -->
+                                                                            <input type="hidden" name="notification_from" value="ERP Instance">
+                                                                            <input type="hidden" name="notification_details" value="Hello, <?php echo $subscriptions->client_name; ?>. Your NucleusSaaS ERP Instance For  Subscription  <b><?php echo $subscriptions->subscription_code . "" . $subscriptions->package_code . "-" . $subscriptions->package_name; ?></b> Is Being Configured. Come Back In The Next 24Hrs.">
+                                                                            <!-- Mail To Client -->
+                                                                            <input type="hidden" name="subject" value="NucleusSaaS ERP Instance">
+                                                                            <input type="hidden" name="message" value="Hello, <?php echo $subscriptions->client_name; ?>. Your NucleusSaaS ERP Instance for <b><?php echo $subscriptions->subscription_code . " " . $subscriptions->package_code . "-" . $subscriptions->package_name; ?></b> is being set up. It be propagated in the next 24 Hrs.<br>
+                                                                            Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
+                                                                            Kind Regards,<br>
+                                                                            <b>NucleusSaaS ERP Group</b><br>
+                                                                            <i>
+                                                                                Deploy your business operations and services on our fully redundant, 
+                                                                                high performance Software As Service Enterprise Resource Planning platform
+                                                                                and benefit from its high reliability, security and enterprise feature set.
+                                                                            </i>">
                                                                         </div>
                                                                     </div>
                                                                     <br>
@@ -238,7 +284,7 @@ require_once('../partials/dashboard_head.php');
                                                     </div>
                                                 </div>
                                                 <!-- End Configuration -->
-                                                <a href="#delete-<?php echo $subscriptions->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'>Delete</a>
+                                                <a href="#delete-<?php echo $subscriptions->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'><i class="fas fa-trash"></i> Delete</a>
                                                 <!-- Delete Modal -->
                                                 <div class="modal fade" id="delete-<?php echo $subscriptions->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">

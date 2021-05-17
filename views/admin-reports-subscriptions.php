@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri May 14 2021
+ * Created on Mon May 17 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -24,6 +24,7 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
+
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -32,7 +33,7 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php'); ?>
+        <?php require_once('../partials/admin_dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
@@ -54,51 +55,79 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Clients Subscriptions Advanced Reports</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Listing -->
                     <div class="card">
-                        <!-- Table -->
                         <div class="table-responsive card-body">
-                            <table id="AdminDashboardDataTables" class="table align-items-center">
+                            <table id="ReportsDataTable" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Subscription Code</th>
+                                        <th scope="col" class="sort">Subscription Details</th>
+                                        <th scope="col">Client Details</th>
                                         <th scope="col" class="sort">Package Details</th>
-                                        <th scope="col">ERP Instance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_ERPInstances` WHERE client_id = '$id' OR client_email = '$email' ";
+                                    $ret = "SELECT * FROM `NucleusSAASERP_UserSubscriptions`  ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($instances = $res->fetch_object()) {
+                                    while ($subscriptions = $res->fetch_object()) {
                                     ?>
 
                                         <tr>
                                             <td>
-                                                <?php echo $instances->subscription_code; ?>
+                                                <span class="client"><?php echo $subscriptions->subscription_code; ?></span>
+                                                <span class="d-block text-sm text-muted">Subscribed On:<?php echo date('d M Y', strtotime($subscriptions->date_subscribed)); ?></span>
+                                                <span class="d-block text-sm text-muted">Valid Till :<?php echo date('d M Y', strtotime($subscriptions->subscription_expiriry)); ?></span>
+                                                <span class="d-block text-sm text-muted">Payment Status:
+                                                    <?php
+                                                    if ($subscriptions->payment_status == 'Paid') {
+                                                        echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                    } else {
+                                                        echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                    } ?>
+                                                </span>
+                                                <span class="d-block text-sm text-muted">Subscription Status:
+                                                    <?php
+                                                    if ($subscriptions->status == 'Active') {
+                                                        echo "<span class='badge badge-pill badge-success'>Active</span>";
+                                                    } elseif ($subscriptions->status == 'Cancelled') {
+                                                        echo "<span class='badge badge-pill badge-danger'>Cancelled</span>";
+                                                    } else {
+                                                        echo "<span class='badge badge-pill badge-warning'>Pending Restoration</span>";
+                                                    } ?>
+                                                </span>
+
                                             </td>
                                             <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $instances->package_code; ?></span>
-                                                <span class="d-block text-sm text-muted"><?php echo $instances->package_name; ?></span>
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->client_name; ?></span>
+                                                <span class="d-block text-sm text-muted"><?php echo $subscriptions->client_email; ?></span>
                                             </td>
-                                            <td>
-                                                <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" target="_blank">
-                                                    <i class="fas fa-external-link-alt"></i>
-                                                    Access ERP Instance
-                                                </a>
+                                            <td class="order">
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $subscriptions->package_code; ?></span>
+                                                <span class="d-block text-sm text-muted"><?php echo $subscriptions->package_name; ?></span>
+                                                <span class="d-block text-sm text-muted">Ksh <?php echo $subscriptions->payment_amt; ?></span>
                                             </td>
+
                                         </tr>
                                     <?php
                                     } ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <!-- Subscriptions Per Package -->
+                    <div class="card">
+                        <div class="card-body align-items-left">
+                            <figure class="highcharts-figure">
+                                <div id="Subscription_Payments"></div>
+                            </figure>
                         </div>
                     </div>
                 </div>

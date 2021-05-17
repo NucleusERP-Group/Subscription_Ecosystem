@@ -261,8 +261,8 @@ require_once('../partials/dashboard_head.php');
                                 </div>
                             </div>
                             <!-- Table -->
-                            <div class="table-responsive">
-                                <table id="DataTable" class="table align-items-center">
+                            <div class="table-responsive card-body">
+                                <table id="AdminDashboardDataTables" class="table align-items-center">
                                     <thead>
                                         <tr>
                                             <th scope="col">Subscription Package</th>

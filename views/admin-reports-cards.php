@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri May 14 2021
+ * Created on Mon May 17 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -20,10 +20,13 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
+require_once('../config/codeGen.php');
 client_login();
+
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -32,7 +35,7 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php'); ?>
+        <?php require_once('../partials/admin_dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
@@ -54,53 +57,56 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances API Keys</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Linked Credit / Debit Cards Reports</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Listing -->
-                    <div class="card">
-                        <!-- Table -->
-                        <div class="table-responsive card-body">
-                            <table id="AdminDashboardDataTables" class="table align-items-center">
-                                <thead>
+                </div>
+                <br>
+                <!-- Listing -->
+                <div class="card">
+                    <div class="table-responsive card-body">
+                        <table id="ReportsDataTable" class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Card Holder</th>
+                                    <th scope="col" class="sort">Card Vendor</th>
+                                    <th scope="col" class="sort">Card Number</th>
+                                    <th scope="col" class="sort">Card CVV</th>
+                                    <th scope="col" class="sort">Expiry Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $ret = "SELECT * FROM `NucleusSAASERP_UsersCards` ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute(); //ok
+                                $res = $stmt->get_result();
+                                while ($cards = $res->fetch_object()) {
+                                ?>
                                     <tr>
-                                        <th scope="col" class="sort">API Key Details </th>
-                                        <th scope="col" class="sort">Key Description</th>
+                                        <td class="order">
+                                            <span class="h6 text-sm font-weight-bold mb-0"><?php echo $cards->card_holder_name; ?></span>
+                                            <span class="d-block text-sm text-muted"><?php echo $cards->card_holder_email; ?></span>
+                                        </td>
+                                        <td class="order">
+                                            <span class="d-block text-sm text-muted"><?php echo $cards->card_name; ?></span>
+                                        </td>
+                                        <td class="order">
+                                            <span class="d-block text-sm text-muted"><?php echo $cards->card_number;?></span>
+                                        </td>
+                                        <td>
+                                            <span class="client"><?php echo $cards->card_cvv; ?></span>
+                                        </td>
+                                        <td>
+                                            <span class="client"><?php echo date('M Y', strtotime($cards->card_exp_date)); ?></span>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_APIKeys` ";
-                                    $stmt = $mysqli->prepare($ret);
-                                    $stmt->execute(); //ok
-                                    $res = $stmt->get_result();
-                                    while ($apiKeys = $res->fetch_object()) {
-                                    ?>
-                                        <tr>
-                                            <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0">Key: <?php echo $apiKeys->api_key; ?></span>
-                                                <span class="d-block text-sm text-muted">Key Status: 
-                                                <?php
-                                                if ($apiKeys->status == 'Active') {
-                                                    echo "<span class='badge badge-pill badge-success'>Active</span>";
-                                                } else {
-                                                    echo "<span class='badge badge-pill badge-danger'>Revoked</span>";
-                                                }
-                                                ?>
-                                                <span class="d-block text-sm text-muted">Generated On: <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?></span>
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <?php echo $apiKeys->details; ?>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    } ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                <?php
+                                } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- Footer -->
@@ -111,7 +117,5 @@ require_once('../partials/dashboard_head.php');
     <!-- Scripts -->
     <?php require_once('../partials/dashboard_scripts.php'); ?>
 </body>
-
-
 
 </html>

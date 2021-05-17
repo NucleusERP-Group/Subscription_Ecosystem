@@ -1,6 +1,6 @@
 <?php
 /*
- * Created on Fri May 14 2021
+ * Created on Mon May 17 2021
  *
  * The MIT License (MIT)
  * Copyright (c) 2021 MartDevelopers Inc
@@ -20,6 +20,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+
 session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
@@ -32,11 +33,12 @@ require_once('../partials/dashboard_head.php');
     <!-- Application container -->
     <div class="container-fluid container-application">
         <!-- Sidenav -->
-        <?php require_once('../partials/dashboard_sidenav.php'); ?>
+        <?php require_once('../partials/admin_dashboard_sidenav.php'); ?>
         <!-- Content -->
         <div class="main-content position-relative">
             <!-- Main nav -->
             <?php
+
             require_once('../partials/dashboard_main_nav.php');
             $id = $_SESSION['id'];
             $email = $_SESSION['email'];
@@ -54,46 +56,64 @@ require_once('../partials/dashboard_head.php');
                             <div class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0">
                                 <!-- Page title + Go Back button -->
                                 <div class="d-inline-block">
-                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">NucleusSaaS ERP Instances API Keys</h5>
+                                    <h5 class="h4 d-inline-block font-weight-400 mb-0 text-white">Subscribed Clients Invoices Reports</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Listing -->
                     <div class="card">
-                        <!-- Table -->
                         <div class="table-responsive card-body">
-                            <table id="AdminDashboardDataTables" class="table align-items-center">
+                            <table id="ReportsDataTable" class="table align-items-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="sort">API Key Details </th>
-                                        <th scope="col" class="sort">Key Description</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col" class="sort">Package</th>
+                                        <th scope="col" class="sort">Invoiced Amount</th>
+                                        <th scope="col" class="sort">Date Invoiced</th>
+                                        <th scope="col" class="sort">Due Date</th>
+                                        <th scope="col">Payment Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_APIKeys` ";
+                                    $ret = "SELECT * FROM `NucleusSAASERP_UserInvoices` ORDER BY `NucleusSAASERP_UserInvoices`.`created_at` ASC ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($apiKeys = $res->fetch_object()) {
+                                    while ($invoices = $res->fetch_object()) {
+                                        /* Date Invoice Created */
+                                        $created_at = date('d M Y ', strtotime($invoices->created_at));
+                                        $created = date_create(date('y-m-d ', strtotime($invoices->created_at)));
+                                        /* Due Date */
+                                        $due_date = date_add($created, date_interval_create_from_date_string('20 days'));
+                                        $due = date_format($due_date, 'd M Y');
                                     ?>
+
                                         <tr>
+                                            <td>
+                                                <span class="client"><?php echo $invoices->invoice_code; ?></span>
+                                            </td>
                                             <td class="order">
-                                                <span class="h6 text-sm font-weight-bold mb-0">Key: <?php echo $apiKeys->api_key; ?></span>
-                                                <span class="d-block text-sm text-muted">Key Status: 
-                                                <?php
-                                                if ($apiKeys->status == 'Active') {
-                                                    echo "<span class='badge badge-pill badge-success'>Active</span>";
-                                                } else {
-                                                    echo "<span class='badge badge-pill badge-danger'>Revoked</span>";
-                                                }
-                                                ?>
-                                                <span class="d-block text-sm text-muted">Generated On: <?php echo date('d M Y g:ia', strtotime($apiKeys->created_at)); ?></span>
-                                                </span>
+                                                <span class="h6 text-sm font-weight-bold mb-0"><?php echo $invoices->package_code; ?></span>
+                                                <span class="d-block text-sm text-muted"><?php echo $invoices->package_name; ?></span>
                                             </td>
                                             <td>
-                                                <?php echo $apiKeys->details; ?>
+                                                <span class="client">Ksh <?php echo $invoices->subscription_amt; ?></span>
+                                            </td>
+                                            <td>
+                                                <span class="client"><?php echo $created_at; ?></span>
+                                            </td>
+                                            <td>
+                                                <span class="client"><?php echo $due; ?></span>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($invoices->status == 'Paid') {
+                                                    echo "<span class='badge badge-pill badge-success'>Paid</span>";
+                                                } else {
+                                                    echo "<span class='badge badge-pill badge-warning'>UnPaid</span>";
+                                                } ?>
                                             </td>
                                         </tr>
                                     <?php

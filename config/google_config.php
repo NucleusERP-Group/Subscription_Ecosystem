@@ -53,7 +53,7 @@ while ($sys = $res->fetch_object()) {
     define("CLIENT_SECRET", "$sys->CLIENT_SECRET");
 }
 /* Site Urls */
-define("SITE_URL", "http://127.0.0.1/NerpSubscription/views/");
+define("SITE_URL", "http://nucleussaaserp.org/views/");
 define("REDIRECT_URL", SITE_URL . "client-signin-with-google.php");
 
 /* Permissions */

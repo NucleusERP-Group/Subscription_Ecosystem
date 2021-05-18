@@ -122,6 +122,14 @@ require_once('../partials/dashboard_head.php');
                             </table>
                         </div>
                     </div>
+                    <!-- Subscriptions Per Package -->
+                    <div class="card">
+                        <div class="card-body align-items-left">
+                            <figure class="highcharts-figure">
+                                <div id="Incomes_Overview"></div>
+                            </figure>
+                        </div>
+                    </div>
                 </div>
                 <!-- Footer -->
             <?php require_once('../partials/dashboard_footer.php');
@@ -130,6 +138,35 @@ require_once('../partials/dashboard_head.php');
     </div>
     <!-- Scripts -->
     <?php require_once('../partials/dashboard_scripts.php'); ?>
+    <!-- Plot 3D Chart -->
+    <script>
+        /* Incomes Overview */
+        Highcharts.chart('Incomes_Overview', {
+            chart: {
+                type: 'pie',
+                options3d: {
+                    enabled: true,
+                    alpha: 45
+                }
+            },
+            title: {
+                text: 'Subscription Packages Incomes Overview'
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 100,
+                    depth: 45
+                }
+            },
+            series: [{
+                name: 'Ksh',
+                data: [
+                    ['Paid Invoices', <?php echo $paid_invoices; ?>],
+                    ['Unpaid Invoices', <?php echo $unpaid_invoices; ?>],
+                ]
+            }]
+        });
+    </script>
 </body>
 
 

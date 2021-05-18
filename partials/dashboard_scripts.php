@@ -30,6 +30,7 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <!-- Summernote JS -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <!-- Search Data In Data Tables -->
@@ -65,9 +66,7 @@
         });
     });
 
-
-    /* Initiate And Plot Few Charts */
-    // Make monochrome colors
+    /* Subsciprions Per Package Settings */
     var pieColors = (function() {
         var colors = [],
             base = Highcharts.getOptions().colors[0],
@@ -81,7 +80,8 @@
         return colors;
     }());
 
-    Highcharts.chart('Subscription_Payments', {
+    /* Subscriptions Per Package Chart */
+    Highcharts.chart('Subscriptions_Per_Package', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,

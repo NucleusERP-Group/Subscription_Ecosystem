@@ -126,7 +126,7 @@ require_once('../partials/dashboard_head.php');
                     <div class="card">
                         <div class="card-body align-items-left">
                             <figure class="highcharts-figure">
-                                <div id="Subscription_Payments"></div>
+                                <div id="Subscriptions_Per_Package"></div>
                             </figure>
                         </div>
                     </div>

@@ -421,7 +421,7 @@ require_once('../partials/dashboard_head.php');
                                                                     <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. You Have Successfully Paid Invoiced Subscription For This Package: <?php echo $invoice->package_code . " " . $invoice->package_name; ?>">
                                                                     <!-- Mail To Client -->
                                                                     <input type="hidden" name="subject" value="Invoice #:<?php echo $invoice->invoice_code; ?> Payment">
-                                                                    <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully paid Ksh <?php echo $invoice->subscription_amt; ?> for  subscribed package :<b><?php echo $packages->package_code . " " . $packages->package_name; ?></b>.
+                                                                    <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully paid Ksh <?php echo $invoice->subscription_amt; ?> for  subscribed package :<b><?php echo $invoice->package_code . " " . $invoice->package_name; ?></b>.
                                                                     Kindly proceed to view your attached paid invoice on Invoices Tab on your dashboard.<br>
                                                                     Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
                                                                     Kind Regards,<br>

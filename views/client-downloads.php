@@ -24,6 +24,98 @@ session_start();
 require_once('../config/config.php');
 require_once('../config/checklogin.php');
 client_login();
+/* Request Client Download */
+if (isset($_POST['requestForDownload'])) {
+    //Error Handling and prevention of posting double entries
+    $error = 0;
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
+    } else {
+        $error = 1;
+        $err = "ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['desktop_platform']) && !empty($_POST['desktop_platform'])) {
+        $desktop_platform = mysqli_real_escape_string($mysqli, trim($_POST['desktop_platform']));
+    } else {
+        $error = 1;
+        $err = "Desktop Platform Cannot Be Empty";
+    }
+
+    if (isset($_POST['mobile_platform']) && !empty($_POST['mobile_platform'])) {
+        $mobile_platform = mysqli_real_escape_string($mysqli, trim($_POST['mobile_platform']));
+    } else {
+        $error = 1;
+        $err = "Mobile Platform Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_id']) && !empty($_POST['client_id'])) {
+        $client_id = mysqli_real_escape_string($mysqli, trim($_POST['client_id']));
+    } else {
+        $error = 1;
+        $err = "Client ID Cannot Be Empty";
+    }
+
+    if (isset($_POST['client_name']) && !empty($_POST['client_name'])) {
+        $client_name = mysqli_real_escape_string($mysqli, trim($_POST['client_name']));
+    } else {
+        $error = 1;
+        $err = "Client Name  Cannot Be Empty";
+    }
+
+
+    if (isset($_POST['client_email']) && !empty($_POST['client_email'])) {
+        $client_email = mysqli_real_escape_string($mysqli, trim($_POST['client_email']));
+    } else {
+        $error = 1;
+        $err = "Client Email  Cannot Be Empty";
+    }
+
+
+    /* Notifications */
+    if (isset($_POST['notification_from']) && !empty($_POST['notification_from'])) {
+        $notification_from = mysqli_real_escape_string($mysqli, trim($_POST['notification_from']));
+    } else {
+        $error = 1;
+        $err = "Notification From  Cannot Be Empty";
+    }
+
+    if (isset($_POST['notification_details']) && !empty($_POST['notification_details'])) {
+        $notification_details = mysqli_real_escape_string($mysqli, trim($_POST['notification_details']));
+    } else {
+        $error = 1;
+        $err = "Notification Details  Cannot Be Empty";
+    }
+
+
+    if (!$error) {
+
+        /* Submit Download Request */
+        $query = "UPDATE NucleusSAASERP_ERPInstances SET desktop_platform =?, mobile_platform =? WHERE id = ?";
+        /* Notify User */
+        $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
+
+        /* Prepare Donwload Request   */
+        $stmt = $mysqli->prepare($query);
+        /* Prepare Notification */
+        $notifstmt = $mysqli->prepare($notif);
+        /* Bind Download Request */
+        $rc = $stmt->bind_param('sss', $desktop_platform, $mobile_platform, $id);
+        /* Bind Notification */
+        $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
+        /* Execute Binds */
+        $stmt->execute();
+        $notifstmt->execute();
+        /* Load Mailer */
+        require_once('../config/mailer_config.php');
+        if ($stmt && $notifstmt && $mail->send()) {
+            $success = "Download Request Submitted.";
+        } else {
+            $info = "Please Try Again Or Try Later ";
+        }
+    }
+}
+
 require_once('../partials/dashboard_head.php');
 ?>
 
@@ -140,16 +232,18 @@ require_once('../partials/dashboard_head.php');
                                                                                 <option>Mac Operating System</option>
                                                                             </select>
                                                                             <!-- Hidden Values -->
-                                                                            <input type="hidden" required name="id" value="<?php echo $ID; ?>" class="form-control">
+                                                                            <input type="hidden" required name="id" value="<?php echo $instances->id; ?>" class="form-control">
                                                                             <input type="hidden" required name="client_name" value="<?php echo $client->name; ?>" class="form-control">
                                                                             <input type="hidden" required name="client_email" value="<?php echo $client->email; ?>" class="form-control">
-                                                                            
+                                                                            <input type="hidden" required name="client_id" value="<?php echo $client->id; ?>" class="form-control">
+
+
                                                                             <!-- Notification Details -->
                                                                             <input type="hidden" name="notification_from" value="NucleusSaaS ERP Executables">
                                                                             <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Your request for executables versions of NucleusSaaS ERP, is being configured. Come back after 24 Hours to get your requested executables.">
                                                                             <!-- Mail To Client -->
                                                                             <input type="hidden" name="subject" value="NucleusSaaS ERP Executables Download Request.">
-                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, <br> We hope you’re well!. We have received your request for <b><?php echo $instances->package_code . " " . $instances->package_name;?></b> executables</b> and 
+                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, <br> We hope you’re well!. We have received your request for <b><?php echo $instances->package_code . " " . $instances->package_name; ?></b> executables</b> and 
                                                                             our hardworking team is currently working on generating those executables flavours for you as we speak. <br>
                                                                             In the next 24 hours we will share a download link where you can access them. <br>
                                                                             Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>

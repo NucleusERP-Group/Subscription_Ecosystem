@@ -49,6 +49,14 @@ if (isset($_POST['requestForDownload'])) {
         $err = "Mobile Platform Cannot Be Empty";
     }
 
+    if (isset($_POST['has_download_request']) && !empty($_POST['has_download_request'])) {
+        $has_download_request = mysqli_real_escape_string($mysqli, trim($_POST['has_download_request']));
+    } else {
+        $error = 1;
+        $err = "Has Download Request Cannot Be Empty";
+    }
+
+
     if (isset($_POST['client_id']) && !empty($_POST['client_id'])) {
         $client_id = mysqli_real_escape_string($mysqli, trim($_POST['client_id']));
     } else {
@@ -91,16 +99,15 @@ if (isset($_POST['requestForDownload'])) {
     if (!$error) {
 
         /* Submit Download Request */
-        $query = "UPDATE NucleusSAASERP_ERPInstances SET desktop_platform =?, mobile_platform =? WHERE id = ?";
+        $query = "UPDATE NucleusSAASERP_ERPInstances SET desktop_platform =?, mobile_platform =?, has_download_request=? WHERE id = ?";
         /* Notify User */
         $notif = "INSERT INTO NucleusSAASERP_UserNotifications (client_id, client_email, notification_from, notification_details) VALUES(?,?,?,?)";
-
         /* Prepare Donwload Request   */
         $stmt = $mysqli->prepare($query);
         /* Prepare Notification */
         $notifstmt = $mysqli->prepare($notif);
         /* Bind Download Request */
-        $rc = $stmt->bind_param('sss', $desktop_platform, $mobile_platform, $id);
+        $rc = $stmt->bind_param('ssss', $desktop_platform, $mobile_platform, $has_download_request, $id);
         /* Bind Notification */
         $rc = $notifstmt->bind_param('ssss', $client_id, $client_email, $notification_from, $notification_details);
         /* Execute Binds */
@@ -196,7 +203,7 @@ require_once('../partials/dashboard_head.php');
                                                     Request Download
                                                 </a>
                                                 <?php
-                                                if ($instances->has_download_request == '') {
+                                                if ($instances->download_link == '') {
                                                     /* Nothing */
                                                 } else {
                                                     echo
@@ -236,7 +243,7 @@ require_once('../partials/dashboard_head.php');
                                                                             <input type="hidden" required name="client_name" value="<?php echo $client->name; ?>" class="form-control">
                                                                             <input type="hidden" required name="client_email" value="<?php echo $client->email; ?>" class="form-control">
                                                                             <input type="hidden" required name="client_id" value="<?php echo $client->id; ?>" class="form-control">
-
+                                                                            <input type="hidden" required name="has_download_request" value="Yes" class="form-control">
 
                                                                             <!-- Notification Details -->
                                                                             <input type="hidden" name="notification_from" value="NucleusSaaS ERP Executables">

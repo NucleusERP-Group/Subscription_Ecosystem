@@ -72,7 +72,7 @@ require_once('../partials/dashboard_head.php');
                                         <th scope="col">Subscription Code</th>
                                         <th scope="col" class="sort">Package Details</th>
                                         <th scope="col">ERP Instance</th>
-                                        <th scope="col">Request An Executable</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,9 +100,21 @@ require_once('../partials/dashboard_head.php');
                                             </td>
                                             <td>
                                                 <a href="#dowloads-<?php echo $instances->id; ?>" class="badge badge-pill badge-success" data-toggle="modal">
-                                                    <i class="fas fa-download"></i>
+                                                    <i class="fas fa-spinner"></i>
                                                     Request Download
                                                 </a>
+                                                <?php
+                                                if ($instances->has_download_request == '') {
+                                                    /* Nothing */
+                                                } else {
+                                                    echo
+                                                    "
+                                                    <a href='' class='badge badge-pill badge-secondary' data-toggle='modal'>
+                                                        <i class='fas fa-cloud-download-alt'></i>
+                                                        Download Executables
+                                                    </a>
+                                                    ";
+                                                } ?>
                                             </td>
                                             <!-- Request For A Download -->
                                             <div class="modal fade" id="dowloads-<?php echo $instances->id; ?>">

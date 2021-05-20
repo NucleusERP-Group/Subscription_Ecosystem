@@ -198,17 +198,19 @@ require_once('../partials/dashboard_head.php');
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#dowloads-<?php echo $instances->id; ?>" class="badge badge-pill badge-success" data-toggle="modal">
-                                                    <i class="fas fa-spinner"></i>
-                                                    Request Download
-                                                </a>
                                                 <?php
                                                 if ($instances->download_link == '') {
-                                                    /* Nothing */
+                                                    echo
+                                                    "
+                                                    <a href='#dowloads-$instances->id' class='badge badge-pill badge-success' data-toggle='modal'>
+                                                        <i class='fas fa-spinner'></i>
+                                                        Request Download
+                                                    </a>
+                                                    ";
                                                 } else {
                                                     echo
                                                     "
-                                                    <a href='$instances->download_link' target='_blank' class='badge badge-pill badge-secondary' data-toggle='modal'>
+                                                    <a href='$instances->download_link' target='_blank' class='badge badge-pill badge-secondary'>
                                                         <i class='fas fa-cloud-download-alt'></i>
                                                         Download Executables
                                                     </a>

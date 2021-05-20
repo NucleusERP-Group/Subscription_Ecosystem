@@ -243,9 +243,8 @@ require_once('../partials/dashboard_head.php');
                                                                             <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Your request for executables versions of NucleusSaaS ERP, is being configured. Come back after 24 Hours to get your requested executables.">
                                                                             <!-- Mail To Client -->
                                                                             <input type="hidden" name="subject" value="NucleusSaaS ERP Executables Download Request.">
-                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, <br> We hope you’re well!. We have received your request for <b><?php echo $instances->package_code . " " . $instances->package_name; ?></b> executables</b> and 
-                                                                            our hardworking team is currently working on generating those executables flavours for you as we speak. <br>
-                                                                            In the next 24 hours we will share a download link where you can access them. <br>
+                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, <br> We hope you’re well!. We have received your download request for <b><?php echo $instances->package_code . " " . $instances->package_name; ?></b> executables</b> and 
+                                                                            our hardworking team is currently working on generating those executables flavours for you as we speak. In the next 24 hours we will share a download link where you can access them. <br>
                                                                             Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
                                                                             Kind Regards,<br>
                                                                             <b>NucleusSaaS ERP Group</b><br>

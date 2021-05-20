@@ -83,6 +83,10 @@ while ($client = $res->fetch_object()) {
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>
             </a>
+            <a href="client-downloads.php" class="btn btn-square text-sm">
+                <span class="btn-inner--icon d-block"><i class="far fa-download fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Downloads</span>
+            </a>
             <!-- Based On User Previledges Access Admin Dashboard -->
             <?php
             if ($client->access_level == 'Admin') {

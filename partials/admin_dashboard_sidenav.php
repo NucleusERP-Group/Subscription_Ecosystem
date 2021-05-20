@@ -91,6 +91,10 @@ while ($client = $res->fetch_object()) {
                 <span class="btn-inner--icon d-block"><i class="far fa-columns fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">ERP Instaces</span>
             </a>
+            <a href="admin-erp-instances-download-requests.php" class="btn btn-square text-sm">
+                <span class="btn-inner--icon d-block"><i class="far fa-cloud-download fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Client Downloads</span>
+            </a>
             <a href="admin-api-keys.php" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>

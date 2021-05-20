@@ -233,7 +233,6 @@ require_once('../partials/dashboard_head.php');
                                                                         <div class="form-group col-md-12">
                                                                             <label for="">Desktop Application Platorm</label>
                                                                             <select class="form-control" name="desktop_platform">
-                                                                                <option>Select Operating System</option>
                                                                                 <option>Windows Operating System</option>
                                                                                 <option>Linux Operating System</option>
                                                                                 <option>Mac Operating System</option>

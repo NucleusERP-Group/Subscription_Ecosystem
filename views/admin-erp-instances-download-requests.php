@@ -158,16 +158,15 @@ require_once('../partials/dashboard_head.php');
                                 <thead>
                                     <tr>
                                         <th scope="col" class="sort">Package Details</th>
-                                        <th scope="col">ERP Instance</th>
                                         <th scope="col">Executable Flavours</th>
-                                        <th scope="col">Executable Status</th>
                                         <th scope="col">Executable Download Link</th>
                                         <th scope="col">Manage Instance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM `NucleusSAASERP_ERPInstances`  ";
+                                    /* Only Load ERP Instances Which Clients Has Requested For Download Links */
+                                    $ret = "SELECT * FROM `NucleusSAASERP_ERPInstances`  WHERE has_download_request = 'Yes' ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
@@ -182,14 +181,12 @@ require_once('../partials/dashboard_head.php');
                                             <td class="order">
                                                 <span class="d-block text-sm text-muted">Desktop Platform: <?php echo $instances->desktop_platform; ?></span>
                                                 <span class="d-block text-sm text-muted">Mobile Platform: <?php echo $instances->mobile_platform; ?></span>
-                                            </td>
-                                            <td>
-                                                <?php 
-                                                if($instances->download_link == ''){
-                                                    echo "<span class='badge badge-danger'>No Link</span>";
-                                                }else{
-                                                    echo "<span class='badge badge-success'>Link Available</span>";
-                                                }?>
+                                                <?php
+                                                if ($instances->download_link == '') {
+                                                    echo "Executable Status: <span class='badge badge-danger'>No Link</span>";
+                                                } else {
+                                                    echo "Executable Status: <span class='badge badge-success'>Link Available</span>";
+                                                } ?>
                                             </td>
                                             <td>
                                                 <a href="<?php echo $instances->download_link; ?>" class="badge badge-pill badge-primary" target="_blank">
@@ -213,45 +210,40 @@ require_once('../partials/dashboard_head.php');
                                                                 <form method="POST">
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <label class="form-label">NucleusSaaS ERP Exectables Download  URL</label>
-                                                                            <input type="text" required class="form-control" value="<?php echo $instances->download_link; ?>" name="instance_url">
+                                                                            <label class="form-label">NucleusSaaS ERP Exectables Download URL</label>
+                                                                            <input type="text" required class="form-control" value="<?php echo $instances->download_link; ?>" name="download_link">
                                                                             <input type="hidden" required value="<?php echo $instances->id; ?>" class="form-control" name="id">
+                                                                            <!-- Client Details -->
+                                                                            <input type="hidden" required name="client_name" value="<?php echo $client->name; ?>" class="form-control">
+                                                                            <input type="hidden" required name="client_email" value="<?php echo $client->email; ?>" class="form-control">
+                                                                            <input type="hidden" required name="client_id" value="<?php echo $client->id; ?>" class="form-control">
+                                                                            <!-- Notification Details -->
+                                                                            <input type="hidden" name="notification_from" value="NucleusSaaS ERP Executables">
+                                                                            <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Your request for executables versions of NucleusSaaS ERP, is being configured. Come back after 24 Hours to get your requested executables.">
+                                                                            <!-- Mail To Client -->
+                                                                            <input type="hidden" name="subject" value="NucleusSaaS ERP Executables Download Request Approval.">
+                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, <br> We hope you’re well!. We have received your download request for <b><?php echo $instances->package_code . " " . $instances->package_name; ?></b> executables</b> and 
+                                                                            our hardworking team has generated those executables flavours for you. To access your download links, navigate to <b>Downloads</b> on your client portal and click <b>Download</b> on the <b>NucleusSaaS ERP Instances</b>.<br>
+                                                                            Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
+                                                                            Kind Regards,<br>
+                                                                            <b>NucleusSaaS ERP Group</b><br>
+                                                                            <i>
+                                                                                Deploy your business operations and services on our fully redundant, 
+                                                                                high performance Software As Service Enterprise Resource Planning platform
+                                                                                and benefit from its high reliability, security and enterprise feature set.
+                                                                            </i>
+                                                                            ">
                                                                         </div>
                                                                     </div>
                                                                     <br>
                                                                     <div class="text-right">
-                                                                        <button type="submit" name="UpdateInstance" class="btn btn-primary">Save Instance</button>
+                                                                        <button type="submit" name="AddDownloadLink" class="btn btn-primary">Save Url</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- End Update -->
-                                                <a href="#delete-<?php echo $instances->id; ?>" data-toggle="modal" class='badge badge-pill badge-danger'><i class="fas fa-trash"></i> Delete</a>
-                                                <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $instances->id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">CONFIRM DELETE</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body text-center text-danger">
-                                                                <h4>Delete This Instance Record?</h4>
-                                                                <p>
-                                                                    Hey There You Are About To Delete A Client ERP Instance Details. <br>
-                                                                    This Operation Is Irrevessible All Clients ERP Data Will Be Deleted.
-                                                                </p>
-                                                                <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="admin-erp-instance.php?delete=<?php echo $instances->id; ?>&subscription_code=<?php echo $instances->subscription_code; ?>" class="text-center btn btn-danger">Yes Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Delete Modal -->
                                             </td>
                                         </tr>
                                     <?php

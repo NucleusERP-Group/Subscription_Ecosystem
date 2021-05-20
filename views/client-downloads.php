@@ -109,7 +109,7 @@ require_once('../partials/dashboard_head.php');
                                                 } else {
                                                     echo
                                                     "
-                                                    <a href='' class='badge badge-pill badge-secondary' data-toggle='modal'>
+                                                    <a href='$instances->download_link' target='_blank' class='badge badge-pill badge-secondary' data-toggle='modal'>
                                                         <i class='fas fa-cloud-download-alt'></i>
                                                         Download Executables
                                                     </a>
@@ -141,36 +141,26 @@ require_once('../partials/dashboard_head.php');
                                                                             </select>
                                                                             <!-- Hidden Values -->
                                                                             <input type="hidden" required name="id" value="<?php echo $ID; ?>" class="form-control">
-                                                                            <input type="hidden" required name="client_id" value="<?php echo $client->id; ?>" class="form-control">
                                                                             <input type="hidden" required name="client_name" value="<?php echo $client->name; ?>" class="form-control">
                                                                             <input type="hidden" required name="client_email" value="<?php echo $client->email; ?>" class="form-control">
-                                                                            <input type="hidden" required name="trans_code" value="<?php echo $paycode; ?>" class="form-control">
-                                                                            <input type="hidden" required name="subscription_id" value="<?php echo $invoice->subscription_id; ?>" class="form-control">
-                                                                            <input type="hidden" required name="subscription_code" value="<?php echo $invoice->subscription_code; ?>" class="form-control">
-                                                                            <input type="hidden" required name="package_code" value="<?php echo $invoice->package_code; ?>" class="form-control">
-                                                                            <input type="hidden" required name="package_name" value="<?php echo $invoice->package_name; ?>" class="form-control">
-                                                                            <input type="hidden" required name="amount" value="<?php echo $invoice->subscription_amt; ?>" class="form-control">
-                                                                            <!-- Update On User Subscriptions -->
-                                                                            <input type="hidden" required name="payment_status" value="Paid" class="form-control">
-                                                                            <!-- Update On User Invoices -->
-                                                                            <input type="hidden" required name="status" value="Paid" class="form-control">
-                                                                            <input type="hidden" required name="invoice_id" value="<?php echo $invoice->id; ?>" class="form-control">
+                                                                            
                                                                             <!-- Notification Details -->
-                                                                            <input type="hidden" name="notification_from" value="Invoice Payment">
-                                                                            <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. You Have Successfully Paid Invoiced Subscription For This Package: <?php echo $invoice->package_code . " " . $invoice->package_name; ?>">
+                                                                            <input type="hidden" name="notification_from" value="NucleusSaaS ERP Executables">
+                                                                            <input type="hidden" name="notification_details" value="Hello, <?php echo $client->name; ?>. Your request for executables versions of NucleusSaaS ERP, is being configured. Come back after 24 Hours to get your requested executables.">
                                                                             <!-- Mail To Client -->
-                                                                            <input type="hidden" name="subject" value="Invoice #:<?php echo $invoice->invoice_code; ?> Payment">
-                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, I hope you’re well!. You have successfully paid Ksh <?php echo $invoice->subscription_amt; ?> for  subscribed package :<b><?php echo $invoice->package_code . " " . $invoice->package_name; ?></b>.
-                                                                    Kindly proceed to view your attached paid invoice on Invoices Tab on your dashboard.<br>
-                                                                    Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
-                                                                    Kind Regards,<br>
-                                                                    <b>NucleusSaaS ERP Group</b><br>
-                                                                    <i>
-                                                                        Deploy your business operations and services on our fully redundant, 
-                                                                        high performance Software As Service Enterprise Resource Planning platform
-                                                                        and benefit from its high reliability, security and enterprise feature set.
-                                                                    </i>
-                                                                    ">
+                                                                            <input type="hidden" name="subject" value="NucleusSaaS ERP Executables Download Request.">
+                                                                            <input type="hidden" name="message" value="Hello, <?php echo $client->name; ?>, <br> We hope you’re well!. We have received your request for <b><?php echo $instances->package_code . " " . $instances->package_name;?></b> executables</b> and 
+                                                                            our hardworking team is currently working on generating those executables flavours for you as we speak. <br>
+                                                                            In the next 24 hours we will share a download link where you can access them. <br>
+                                                                            Don’t hesitate to reach out if you have any questions.<br><br><br><br><br>
+                                                                            Kind Regards,<br>
+                                                                            <b>NucleusSaaS ERP Group</b><br>
+                                                                            <i>
+                                                                                Deploy your business operations and services on our fully redundant, 
+                                                                                high performance Software As Service Enterprise Resource Planning platform
+                                                                                and benefit from its high reliability, security and enterprise feature set.
+                                                                            </i>
+                                                                            ">
                                                                         </div>
                                                                         <div class="form-group col-md-12">
                                                                             <label for="">Mobile Application Platform</label>
@@ -185,9 +175,6 @@ require_once('../partials/dashboard_head.php');
                                                                     <button type="submit" name="requestForDownload" class="btn btn-primary">Submit</button>
                                                                 </div>
                                                             </form>
-                                                        </div>
-                                                        <div class="modal-footer justify-content-between">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>

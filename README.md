@@ -1,4 +1,4 @@
-# Subscription_Ecosystem
+# Subscription Ecosystem
 Nucleus ERP Subscription Ecosystem CodeBase. It takes care of all subscriptions to NucleusSaaS ERP. 
 
 # Modules/ Functionalities
@@ -11,3 +11,4 @@ Nucleus ERP Subscription Ecosystem CodeBase. It takes care of all subscriptions 
 6. Pricing plans
 7. And many more...
 ```
+![Dashboard](https://github.com/NucleusERP-Group/Subscription_Ecosystem/blob/main/Screen.png)

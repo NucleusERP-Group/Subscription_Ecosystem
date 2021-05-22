@@ -189,7 +189,7 @@ require_once('../partials/dashboard_head.php');
                                                 } ?>
                                             </td>
                                             <td>
-                                                <a href="<?php echo $instances->download_link; ?>" class="badge badge-pill badge-primary" target="_blank">
+                                                <a href="<?php echo $instances->download_link; ?>" class="badge badge-pill badge-primary">
                                                     <i class="fas fa-external-link-alt"></i>
                                                     Open Download Link
                                                 </a>

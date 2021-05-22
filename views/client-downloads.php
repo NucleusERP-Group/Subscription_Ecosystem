@@ -210,7 +210,7 @@ require_once('../partials/dashboard_head.php');
                                                 } else {
                                                     echo
                                                     "
-                                                    <a href='$instances->download_link' target='_blank' class='badge badge-pill badge-secondary'>
+                                                    <a href='$instances->download_link'  class='badge badge-pill badge-secondary'>
                                                         <i class='fas fa-cloud-download-alt'></i>
                                                         Download Executables
                                                     </a>

@@ -26,7 +26,7 @@
                     <a href="downloads.php">Downloads</a>
                 </li>
                 <li>
-                    <a target="_blank" class="button button-secondary" href="client-login.php">
+                    <a  class="button button-secondary" href="client-login.php">
                         <i class="fas fa-lock icon-left"></i>Client Login
                     </a>
                 </li>

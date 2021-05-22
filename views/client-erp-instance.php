@@ -89,7 +89,7 @@ require_once('../partials/dashboard_head.php');
                                                 <span class="d-block text-sm text-muted"><?php echo $instances->package_name; ?></span>
                                             </td>
                                             <td>
-                                                <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" target="_blank">
+                                                <a href="<?php echo $instances->instance_url; ?>" class="badge badge-pill badge-primary" >
                                                     <i class="fas fa-external-link-alt"></i>
                                                     Access ERP Instance
                                                 </a>

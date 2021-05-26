@@ -130,12 +130,18 @@
         }]
     });
 </script>
-<!-- Alert Js -->
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- iZi Toast Js -->
+<script src="../public/js/iziToast.min.js" type="text/javascript"></script>
 <?php if (isset($success)) { ?>
     <!--This code for injecting success alert-->
     <script>
-        alertify.success('<?php echo $success; ?>');
+        iziToast.success({
+            title: 'Success',
+            position: 'center',
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            message: '<?php echo $success; ?>',
+        });
     </script>
 
 <?php } ?>
@@ -143,7 +149,15 @@
 <?php if (isset($err)) { ?>
     <!--This code for injecting error alert-->
     <script>
-        alertify.error('<?php echo $err; ?>');
+        iziToast.error({
+            title: 'Error',
+            timeout: 10000,
+            resetOnHover: true,
+            position: 'topRight',
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            message: '<?php echo $err; ?>',
+        });
     </script>
 
 <?php } ?>
@@ -151,7 +165,13 @@
 <?php if (isset($info)) { ?>
     <!--This code for injecting info alert-->
     <script>
-        alertify.warning('<?php echo $info; ?>');
+        iziToast.warning({
+            title: 'Warning',
+            position: 'topLeft',
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            message: '<?php echo $info; ?>',
+        });
     </script>
 
 <?php }

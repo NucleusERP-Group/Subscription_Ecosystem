@@ -28,5 +28,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
     <!-- Summernote css -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <!-- IziToast -->
+    <link rel="stylesheet" href="../public/css/iziToast.min.css">
 
 </head>

@@ -130,16 +130,18 @@
         }]
     });
 </script>
-<!-- Swal Js -->
-<script src="../public/js/swal.js"></script>
-<!-- Init Swal Js -->
+<!-- iZi Toast Js -->
+<script src="../public/js/iziToast.min.js" type="text/javascript"></script>
 <?php if (isset($success)) { ?>
     <!--This code for injecting success alert-->
     <script>
-        setTimeout(function() {
-                swal("Success", "<?php echo $success; ?>", "success");
-            },
-            100);
+        iziToast.success({
+            title: 'Success',
+            position: 'center',
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            message: '<?php echo $success; ?>',
+        });
     </script>
 
 <?php } ?>
@@ -147,10 +149,15 @@
 <?php if (isset($err)) { ?>
     <!--This code for injecting error alert-->
     <script>
-        setTimeout(function() {
-                swal("Failed", "<?php echo $err; ?>", "error");
-            },
-            100);
+        iziToast.error({
+            title: 'Error',
+            timeout: 10000,
+            resetOnHover: true,
+            position: 'topRight',
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            message: '<?php echo $err; ?>',
+        });
     </script>
 
 <?php } ?>
@@ -158,10 +165,13 @@
 <?php if (isset($info)) { ?>
     <!--This code for injecting info alert-->
     <script>
-        setTimeout(function() {
-                swal("Success", "<?php echo $info; ?>", "warning");
-            },
-            100);
+        iziToast.warning({
+            title: 'Warning',
+            position: 'topLeft',
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            message: '<?php echo $info; ?>',
+        });
     </script>
 
 <?php }

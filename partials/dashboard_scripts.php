@@ -130,16 +130,12 @@
         }]
     });
 </script>
-<!-- Swal Js -->
-<script src="../public/js/swal.js"></script>
-<!-- Init Swal Js -->
+<!-- Alert Js -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <?php if (isset($success)) { ?>
     <!--This code for injecting success alert-->
     <script>
-        setTimeout(function() {
-                swal("Success", "<?php echo $success; ?>", "success");
-            },
-            100);
+        alertify.success('<?php echo $success; ?>');
     </script>
 
 <?php } ?>
@@ -147,10 +143,7 @@
 <?php if (isset($err)) { ?>
     <!--This code for injecting error alert-->
     <script>
-        setTimeout(function() {
-                swal("Failed", "<?php echo $err; ?>", "error");
-            },
-            100);
+        alertify.error('<?php echo $err; ?>');
     </script>
 
 <?php } ?>
@@ -158,10 +151,7 @@
 <?php if (isset($info)) { ?>
     <!--This code for injecting info alert-->
     <script>
-        setTimeout(function() {
-                swal("Success", "<?php echo $info; ?>", "warning");
-            },
-            100);
+        alertify.warning('<?php echo $info; ?>');
     </script>
 
 <?php }

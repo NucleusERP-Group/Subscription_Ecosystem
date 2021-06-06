@@ -61,7 +61,7 @@ while ($notif = $res->fetch_object()) {
                     <h4>Clear Notification ?</h4>
                     <br>
                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                    <a href="client-notifications.php?clear_notification=<?php echo $notif->id; ?>" class="text-center btn btn-danger"> Clear Notification </a>
+                    <a href="client-notifications?clear_notification=<?php echo $notif->id; ?>" class="text-center btn btn-danger"> Clear Notification </a>
                 </div>
             </div>
         </div>

@@ -138,7 +138,7 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-client-subscriptions.php");
+        $success = "Deleted" && header("refresh:1; url=admin-client-subscriptions");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -304,7 +304,7 @@ require_once('../partials/dashboard_head.php');
                                                                     Invoices And ERP Instances Linked To Subscription Will Be Deleted.
                                                                 </p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="admin-client-subscriptions.php?delete=<?php echo $subscriptions->id; ?>" class="text-center btn btn-danger">Yes Delete</a>
+                                                                <a href="admin-client-subscriptions?delete=<?php echo $subscriptions->id; ?>" class="text-center btn btn-danger">Yes Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>

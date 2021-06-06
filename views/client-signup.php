@@ -197,7 +197,7 @@ require_once('../partials/dashboard_head.php');
 
                                     </div>
                                     <div class="card-footer px-md-5"><small>Registered?</small>
-                                        <a href="client-login.php" class="small font-weight-bold">Sign In</a>
+                                        <a href="client-login" class="small font-weight-bold">Sign In</a>
                                     </div>
                                 </div>
                             </div>

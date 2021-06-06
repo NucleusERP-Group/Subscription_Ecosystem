@@ -130,7 +130,7 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Card Record Deleted" && header("refresh:1; url=client-billing.php");
+        $success = "Card Record Deleted" && header("refresh:1; url=client-billing");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -179,12 +179,12 @@ require_once('../partials/dashboard_head.php');
                     <!-- Nav -->
                     <ul class="nav nav-dark nav-tabs nav-overflow">
                         <li class="nav-item">
-                            <a href="client-billing.php" class="nav-link active">
+                            <a href="client-billing" class="nav-link active">
                                 <i class="far fa-credit-card mr-2"></i>Cards
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="client-payment-history.php" class="nav-link">
+                            <a href="client-payment-history" class="nav-link">
                                 <i class="far fa-file-invoice mr-2"></i>History
                             </a>
                         </li>
@@ -237,7 +237,7 @@ require_once('../partials/dashboard_head.php');
                                                                         <h4>Delete <?php echo $card->card_name; ?> Details ?</h4>
                                                                         <br>
                                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                        <a href="client-billing.php?delete=<?php echo $card->card_id; ?>" class="text-center btn btn-danger"> Delete </a>
+                                                                        <a href="client-billing?delete=<?php echo $card->card_id; ?>" class="text-center btn btn-danger"> Delete </a>
                                                                     </div>
                                                                 </div>
                                                             </div>

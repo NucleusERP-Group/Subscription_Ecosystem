@@ -71,7 +71,7 @@ if (isset($_GET['delete'])) {
     $statusstmt->close();
     $stmt->close();
     if ($stmt && $statusstmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-erp-instance.php");
+        $success = "Deleted" && header("refresh:1; url=admin-erp-instance");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -196,7 +196,7 @@ require_once('../partials/dashboard_head.php');
                                                                     This Operation Is Irrevessible All Clients ERP Data Will Be Deleted.
                                                                 </p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="admin-erp-instance.php?delete=<?php echo $instances->id; ?>&subscription_code=<?php echo $instances->subscription_code; ?>" class="text-center btn btn-danger">Yes Delete</a>
+                                                                <a href="admin-erp-instance?delete=<?php echo $instances->id; ?>&subscription_code=<?php echo $instances->subscription_code; ?>" class="text-center btn btn-danger">Yes Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -33,7 +33,7 @@ while ($client = $res->fetch_object()) {
     <div class="sidenav" id="sidenav-main">
         <!-- Sidenav header -->
         <div class="sidenav-header d-flex align-items-center">
-            <a class="navbar-bran" href="dashboard.php">
+            <a class="navbar-bran" href="dashboard">
                 <img src="../public/img/logos/Logo.png" height="100" width="100" class="navbar-brand-img" alt="...">
             </a>
             <div class="ml-auto">
@@ -63,47 +63,47 @@ while ($client = $res->fetch_object()) {
         </div>
         <!-- Application nav -->
         <div class="nav-application clearfix">
-            <a href="dashboard.php" class="btn btn-square text-sm">
+            <a href="dashboard" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-home fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Home</span>
             </a>
-            <a href="admin-subscriptions.php" class="btn btn-square text-sm">
+            <a href="admin-subscriptions" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-project-diagram fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">NucleusSaaS Packages</span>
             </a>
-            <a href="admin-client-subscriptions.php" class="btn btn-square text-sm">
+            <a href="admin-client-subscriptions" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-calendar-check fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Clients Subscriptions</span>
             </a>
-            <a href="admin-client-cancelled-subscriptions.php" class="btn btn-square text-sm">
+            <a href="admin-client-cancelled-subscriptions" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-calendar-times fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Cancelled Subscriptions</span>
             </a>
-            <a href="admin-clients.php" class="btn btn-square text-sm">
+            <a href="admin-clients" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-users fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Clients</span>
             </a>
-            <a href="admin-invoices.php" class="btn btn-square text-sm">
+            <a href="admin-invoices" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-tasks fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Invoices</span>
             </a>
-            <a href="admin-erp-instance.php" class="btn btn-square text-sm">
+            <a href="admin-erp-instance" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-columns fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">ERP Instaces</span>
             </a>
-            <a href="admin-erp-instances-download-requests.php" class="btn btn-square text-sm">
+            <a href="admin-erp-instances-download-requests" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cloud-download fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Client Downloads</span>
             </a>
-            <a href="admin-api-keys.php" class="btn btn-square text-sm">
+            <a href="admin-api-keys" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>
             </a>
-            <a href="admin-system-settings.php" class="btn btn-square text-sm">
+            <a href="admin-system-settings" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cog fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">System Settings</span>
             </a>
-            <a href="client-logout.php" class="btn btn-square text-sm">
+            <a href="client-logout" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-power-off fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Log Out</span>
             </a>

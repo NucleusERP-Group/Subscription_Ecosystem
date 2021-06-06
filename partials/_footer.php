@@ -33,10 +33,10 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="features_community.php">Community Version ERP</a>
+                                    <a href="features_community">Community Version ERP</a>
                                 </li>
                                 <li>
-                                    <a href="features_enterprise.php">Enterprise Version ERP </a>
+                                    <a href="features_enterprise">Enterprise Version ERP </a>
                                 </li>
                             </ul>
                         </div>
@@ -46,10 +46,10 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="nucleus_features.php">Main Modules</a>
+                                    <a href="nucleus_features">Main Modules</a>
                                 </li>
                                 <li>
-                                    <a href="nucleus_network.php">Network</a>
+                                    <a href="nucleus_network">Network</a>
                                 </li>
                             </ul>
                         </div>
@@ -59,10 +59,10 @@
                             </h5>
                             <ul>
                                 <li>
-                                    <a href="nucleus_about.php">About</a>
+                                    <a href="nucleus_about">About</a>
                                 </li>
                                 <li>
-                                    <a href="contact.php">Contact</a>
+                                    <a href="contact">Contact</a>
                                 </li>
                             </ul>
                         </div>

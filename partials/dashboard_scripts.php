@@ -140,6 +140,8 @@
             position: 'center',
             transitionIn: 'flipInX',
             transitionOut: 'flipOutX',
+            transitionInMobile: 'fadeInUp',
+            transitionOutMobile: 'fadeOutDown',
             message: '<?php echo $success; ?>',
         });
     </script>
@@ -156,6 +158,8 @@
             position: 'topRight',
             transitionIn: 'flipInX',
             transitionOut: 'flipOutX',
+            transitionInMobile: 'fadeInUp',
+            transitionOutMobile: 'fadeOutDown',
             message: '<?php echo $err; ?>',
         });
     </script>
@@ -170,6 +174,9 @@
             position: 'topLeft',
             transitionIn: 'flipInX',
             transitionOut: 'flipOutX',
+            transitionIn: 'fadeInUp',
+            transitionInMobile: 'fadeInUp',
+            transitionOutMobile: 'fadeOutDown',
             message: '<?php echo $info; ?>',
         });
     </script>

@@ -35,7 +35,7 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-cards.php");
+        $success = "Deleted" && header("refresh:1; url=admin-cards");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -140,7 +140,7 @@ require_once('../partials/dashboard_head.php');
                                                             This Operation Is Irrevessible All Payments And Invoices Linked To This Card Will Be Deleted.
                                                         </p>
                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                        <a href="admin-cards.php?delete=<?php echo $card->id; ?>" class="text-center btn btn-danger">Yes Remove Card</a>
+                                                        <a href="admin-cards?delete=<?php echo $card->id; ?>" class="text-center btn btn-danger">Yes Remove Card</a>
                                                     </div>
                                                 </div>
                                             </div>

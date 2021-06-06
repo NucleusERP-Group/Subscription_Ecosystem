@@ -76,7 +76,7 @@ require_once('../partials/_head.php');
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>
@@ -126,7 +126,7 @@ require_once('../partials/_head.php');
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>
@@ -172,7 +172,7 @@ require_once('../partials/_head.php');
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>
@@ -222,7 +222,7 @@ require_once('../partials/_head.php');
                                         </ul>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-shopping-cart icon-left"></i>Order Now
                                         </a>
                                     </div>

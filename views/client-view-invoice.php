@@ -351,14 +351,14 @@ require_once('../partials/dashboard_head.php');
                                         <i class="far fa-print"></i>
                                         Print
                                     </button>
-                                    <a href="client-download-invoice.php?print=<?php echo $invoice->id; ?>" target="_blank" class="action-item">
+                                    <a href="client-download-invoice?print=<?php echo $invoice->id; ?>" target="_blank" class="action-item">
                                         <i class="far fa-download"></i> Download PDF
                                     </a>
                                     <?php
                                     if ($invoice->status == 'Paid') {
                                         echo
                                         "
-                                            <a href='client-payment-history.php' class='action-item'>
+                                            <a href='client-payment-history' class='action-item'>
                                                 <i class='far fa-download'></i> View Payment Records
                                             </a>
                                         ";

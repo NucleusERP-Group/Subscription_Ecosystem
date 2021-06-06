@@ -24,5 +24,5 @@ session_start();
 unset($_SESSION['id']);
 unset($_SESSION['email']);
 session_destroy();
-header("Location: client-login.php");
+header("Location: client-login");
 exit;

@@ -53,7 +53,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-client-subscriptions.php">
+                                <a href="admin-client-subscriptions">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Active Subscriptions</h6>
@@ -72,7 +72,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-client-cancelled-subscriptions.php">
+                                <a href="admin-client-cancelled-subscriptions">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Cancelled Subscriptions</h6>
@@ -90,7 +90,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-invoices.php">
+                                <a href="admin-invoices">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Unpaid Invoices</h6>
@@ -108,7 +108,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-cards.php">
+                                <a href="admin-cards">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Linked Cards</h6>
@@ -126,7 +126,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-invoices.php">
+                                <a href="admin-invoices">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Pending Payments</h6>
@@ -144,7 +144,7 @@ require_once('../partials/dashboard_head.php');
                         <div class="card card-stats">
                             <!-- Card body -->
                             <div class="card-body">
-                                <a href="admin-invoices.php">
+                                <a href="admin-invoices">
                                     <div class="row">
                                         <div class="col">
                                             <h6 class="text-muted mb-1">Subscription Payments</h6>
@@ -177,7 +177,7 @@ require_once('../partials/dashboard_head.php');
                                 $res = $stmt->get_result();
                                 while ($card = $res->fetch_object()) {
                                 ?>
-                                    <a href="admin-cards.php" class="list-group-item list-group-item-action">
+                                    <a href="admin-cards" class="list-group-item list-group-item-action">
                                         <div class="media align-items-center">
                                             <div class="mr-3">
                                                 <?php
@@ -221,7 +221,7 @@ require_once('../partials/dashboard_head.php');
                                 $res = $stmt->get_result();
                                 while ($subscribed_packages = $res->fetch_object()) {
                                 ?>
-                                    <a href="admin-client-subscriptions.php" class="list-group-item list-group-item-action">
+                                    <a href="admin-client-subscriptions" class="list-group-item list-group-item-action">
                                         <div class="media align-items-center">
                                             <div class="mr-3">
                                                 <?php

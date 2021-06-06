@@ -120,7 +120,7 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-api-keys.php");
+        $success = "Deleted" && header("refresh:1; url=admin-api-keys");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -305,7 +305,7 @@ require_once('../partials/dashboard_head.php');
                                                                     This Operation Is Irrevessible.
                                                                 </p>
                                                                 <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                <a href="admin-api-keys.php?delete=<?php echo $apiKeys->id; ?>" class="text-center btn btn-danger">Yes Delete</a>
+                                                                <a href="admin-api-keys?delete=<?php echo $apiKeys->id; ?>" class="text-center btn btn-danger">Yes Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -107,5 +107,5 @@ if ($success) {
 } else {
     $_SESSION["e_msg"] = $client->error;
 }
-header("location:client-dashboard.php");
+header("location:client-dashboard");
 exit;

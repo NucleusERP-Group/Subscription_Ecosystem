@@ -39,7 +39,7 @@ require_once('../partials/_head.php');
         <!-- Content Row -->
         <section class="content-row content-row-color content-row-clouds">
             <div class="content-slider animate-container-slide" data-nav="true" data-rotation="5">
-                <a class="slide" data-title="Community Version" href="subscriptions.php">
+                <a class="slide" data-title="Community Version" href="subscriptions">
                     <div class="container">
                         <header class="content-header content-header-large content-header-uppercas">
                             <h1>
@@ -52,7 +52,7 @@ require_once('../partials/_head.php');
                         <img src="../public/uploads/server-shared.png" alt="">
                     </div>
                 </a>
-                <a class="slide" data-title="Enterprise Version" href="subscriptions.php">
+                <a class="slide" data-title="Enterprise Version" href="subscriptions">
                     <div class="container">
                         <header class="content-header content-header-large ">
                             <h1>
@@ -273,7 +273,7 @@ require_once('../partials/_head.php');
                     </h2>
                     <p>
                         Our technicians can provide you with the best custom made or community version Enterprise Resource Planning solutions on the market, no matter whether you're a small business or large enterprise.<br><br>
-                        <a class="button button-secondary" href="contact.php">
+                        <a class="button button-secondary" href="contact">
                             <i class="fas fa-envelope icon-left"></i>Get in touch
                         </a>
                     </p>

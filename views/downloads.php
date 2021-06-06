@@ -70,7 +70,7 @@ require_once('../partials/_head.php'); ?>
                                     </div>
 
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>
@@ -92,7 +92,7 @@ require_once('../partials/_head.php'); ?>
                                         </p>
                                     </div>
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>
@@ -111,7 +111,7 @@ require_once('../partials/_head.php'); ?>
                                     </div>
 
                                     <div class="product-order">
-                                        <a class="button button-secondary" href="client-login.php">
+                                        <a class="button button-secondary" href="client-login">
                                             <i class="fas fa-download icon-left"></i>Download Now
                                         </a>
                                     </div>

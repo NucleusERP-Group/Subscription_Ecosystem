@@ -70,7 +70,7 @@ if (isset($_POST['DeleteAccount'])) {
                 $rc = $stmt->bind_param('sss', $account_status, $id, $email);
                 $stmt->execute();
                 if ($stmt) {
-                    $success = "Account Deleted"  && header("refresh:1; url=client-logout.php");;
+                    $success = "Account Deleted"  && header("refresh:1; url=client-logout");;
                 } else {
                     $err = "Please Try Again Or Try Later";
                 }

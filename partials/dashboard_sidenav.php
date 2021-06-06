@@ -33,7 +33,7 @@ while ($client = $res->fetch_object()) {
     <div class="sidenav" id="sidenav-main">
         <!-- Sidenav header -->
         <div class="sidenav-header d-flex align-items-center">
-            <a class="navbar-bran" href="client-dashboard.php">
+            <a class="navbar-bran" href="client-dashboard">
                 <img src="../public/img/logos/Logo.png" height="100" width="100" class="navbar-brand-img" alt="...">
             </a>
             <div class="ml-auto">
@@ -63,27 +63,27 @@ while ($client = $res->fetch_object()) {
         </div>
         <!-- Application nav -->
         <div class="nav-application clearfix">
-            <a href="client-dashboard.php" class="btn btn-square text-sm">
+            <a href="client-dashboard" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-home fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Home</span>
             </a>
-            <a href="client-subscriptions.php" class="btn btn-square text-sm">
+            <a href="client-subscriptions" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-project-diagram fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">NucleusSaaS Packages</span>
             </a>
-            <a href="client-invoices.php" class="btn btn-square text-sm">
+            <a href="client-invoices" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-tasks fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Invoices</span>
             </a>
-            <a href="client-erp-instance.php" class="btn btn-square text-sm">
+            <a href="client-erp-instance" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-columns fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">ERP Instace</span>
             </a>
-            <a href="client-api-keys.php" class="btn btn-square text-sm">
+            <a href="client-api-keys" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-cogs fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">API Keys</span>
             </a>
-            <a href="client-downloads.php" class="btn btn-square text-sm">
+            <a href="client-downloads" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-download fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Downloads</span>
             </a>
@@ -92,7 +92,7 @@ while ($client = $res->fetch_object()) {
             if ($client->access_level == 'Admin') {
                 echo
                 '
-                <a href="dashboard.php" class="btn btn-square text-sm">
+                <a href="dashboard" class="btn btn-square text-sm">
                     <span class="btn-inner--icon d-block"><i class="far fa-user-secret fa-2x"></i></span>
                     <span class="btn-inner--icon d-block pt-2">Admin Dashboard</span>
                 </a>
@@ -101,7 +101,7 @@ while ($client = $res->fetch_object()) {
                 /* Silence Sometimes Is The Best Answer */
             }
             ?>
-            <a href="client-logout.php" class="btn btn-square text-sm">
+            <a href="client-logout" class="btn btn-square text-sm">
                 <span class="btn-inner--icon d-block"><i class="far fa-power-off fa-2x"></i></span>
                 <span class="btn-inner--icon d-block pt-2">Log Out</span>
             </a>

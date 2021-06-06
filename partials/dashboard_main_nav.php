@@ -77,7 +77,7 @@ while ($client = $res->fetch_object()) {
 
                             </div>
                             <div class="py-3 text-center">
-                                <a href="client-notifications.php" class="link link-sm link--style-3">View all notifications</a>
+                                <a href="client-notifications" class="link link-sm link--style-3">View all notifications</a>
                             </div>
                         </div>
                     </li>
@@ -90,24 +90,24 @@ while ($client = $res->fetch_object()) {
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow">
                             <h6 class="dropdown-header px-0">Hi, <?php echo $client->name; ?>!</h6>
-                            <a href="client-profile.php" class="dropdown-item">
+                            <a href="client-profile" class="dropdown-item">
                                 <i class="far fa-user"></i>
                                 <span>My profile</span>
                             </a>
-                            <a href="client-settings.php" class="dropdown-item">
+                            <a href="client-settings" class="dropdown-item">
                                 <i class="far fa-cog"></i>
                                 <span>Settings</span>
                             </a>
-                            <a href="client-billing.php" class="dropdown-item">
+                            <a href="client-billing" class="dropdown-item">
                                 <i class="far fa-credit-card"></i>
                                 <span>Billing</span>
                             </a>
-                            <a href="client-cancelled-packages.php" class="dropdown-item">
+                            <a href="client-cancelled-packages" class="dropdown-item">
                                 <i class="far fa-calendar-times"></i>
                                 <span>Cancelled Packages</span>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="client-logout.php" class="dropdown-item">
+                            <a href="client-logout" class="dropdown-item">
                                 <i class="far fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -158,7 +158,7 @@ while ($client = $res->fetch_object()) {
                                 </a>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="admin-reports-packages.php" class="list-group-item list-group-item-action">
+                                <a href="admin-reports-packages" class="list-group-item list-group-item-action">
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <span class="avatar bg-primary text-white rounded-circle">
@@ -174,7 +174,7 @@ while ($client = $res->fetch_object()) {
                                 </a>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="admin-reports-subscriptions.php" class="list-group-item list-group-item-action">
+                                <a href="admin-reports-subscriptions" class="list-group-item list-group-item-action">
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <span class="avatar bg-primary text-white rounded-circle">
@@ -190,7 +190,7 @@ while ($client = $res->fetch_object()) {
                                 </a>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="admin-reports-invoices.php" class="list-group-item list-group-item-action">
+                                <a href="admin-reports-invoices" class="list-group-item list-group-item-action">
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <span class="avatar bg-primary text-white rounded-circle">
@@ -206,7 +206,7 @@ while ($client = $res->fetch_object()) {
                                 </a>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="admin-reports-cards.php" class="list-group-item list-group-item-action">
+                                <a href="admin-reports-cards" class="list-group-item list-group-item-action">
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <span class="avatar bg-primary text-white rounded-circle">
@@ -255,7 +255,7 @@ while ($client = $res->fetch_object()) {
                                 <?php } ?>
                             </div>
                             <div class="py-3 text-center">
-                                <a href="client-notifications.php" class="link link-sm link--style-3">View all notifications</a>
+                                <a href="client-notifications" class="link link-sm link--style-3">View all notifications</a>
                             </div>
                         </div>
                     </li>
@@ -272,24 +272,24 @@ while ($client = $res->fetch_object()) {
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow">
                             <h6 class="dropdown-header px-0">Hi, <?php echo $client->name; ?>!</h6>
-                            <a href="client-profile.php" class="dropdown-item">
+                            <a href="client-profile" class="dropdown-item">
                                 <i class="far fa-user"></i>
                                 <span>My profile</span>
                             </a>
-                            <a href="client-settings.php" class="dropdown-item">
+                            <a href="client-settings" class="dropdown-item">
                                 <i class="far fa-cog"></i>
                                 <span>Settings</span>
                             </a>
-                            <a href="client-billing.php" class="dropdown-item">
+                            <a href="client-billing" class="dropdown-item">
                                 <i class="far fa-credit-card"></i>
                                 <span>Billing</span>
                             </a>
-                            <a href="client-cancelled-packages.php" class="dropdown-item">
+                            <a href="client-cancelled-packages" class="dropdown-item">
                                 <i class="far fa-calendar-times"></i>
                                 <span>Cancelled Subscriptions</span>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="client-logout.php" class="dropdown-item">
+                            <a href="client-logout" class="dropdown-item">
                                 <i class="far fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -319,37 +319,37 @@ while ($client = $res->fetch_object()) {
                     <div class="col-sm-6">
                         <ul class="list-unstyled mb-0">
                             <li>
-                                <a class="list-link" href="client-profile.php">
+                                <a class="list-link" href="client-profile">
                                     <i class="far fa-search"></i>
                                     <span>Profile & Settings</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="list-link" href="client-billing.php">
+                                <a class="list-link" href="client-billing">
                                     <i class="far fa-search"></i>
                                     <span>Billings & Billing History</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="list-link" href="client-subscriptions.php">
+                                <a class="list-link" href="client-subscriptions">
                                     <i class="far fa-search"></i>
                                     <span>Subscriptions</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="list-link" href="client-erp-instance.php">
+                                <a class="list-link" href="client-erp-instance">
                                     <i class="far fa-search"></i>
                                     <span>ERP Instance</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="list-link" href="client-invoices.php">
+                                <a class="list-link" href="client-invoices">
                                     <i class="far fa-search"></i>
                                     <span>Invoices</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="list-link" href="client-api-keys.php">
+                                <a class="list-link" href="client-api-keys">
                                     <i class="far fa-search"></i>
                                     <span>Market Place API Keys</span>
                                 </a>

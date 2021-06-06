@@ -45,7 +45,7 @@ if (isset($_POST['Reset_Password'])) {
         /* Alert */
         if ($stmt) {
             $_SESSION['email'] = $email;
-            $success = "Confim Your Password" && header("refresh:1; url=client-confirm-password.php");
+            $success = "Confim Your Password" && header("refresh:1; url=client-confirm-password");
         } else {
             $err = "Password Reset Failed";
         }
@@ -94,7 +94,7 @@ require_once('../partials/dashboard_head.php');
                                         </form>
                                     </div>
                                     <div class="card-footer px-md-5"><small>Remembered Password?</small>
-                                        <a href="client-login.php" class="small font-weight-bold">Sign In</a>
+                                        <a href="client-login" class="small font-weight-bold">Sign In</a>
                                     </div>
                                 </div>
                             </div>

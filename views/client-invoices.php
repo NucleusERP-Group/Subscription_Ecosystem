@@ -122,7 +122,7 @@ require_once('../partials/dashboard_head.php');
 
                                         <tr>
                                             <td>
-                                                <a href="client-view-invoice.php?print=<?php echo $invoices->id; ?>" data-toggle="tooltip" title="View Invoice Details">
+                                                <a href="client-view-invoice?print=<?php echo $invoices->id; ?>" data-toggle="tooltip" title="View Invoice Details">
                                                     <span class="client"><?php echo $invoices->invoice_code; ?></span>
                                                 </a>
                                             </td>

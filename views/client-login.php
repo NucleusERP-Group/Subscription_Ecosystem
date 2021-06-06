@@ -54,7 +54,7 @@ if (isset($_POST['login'])) {
         $_SESSION['email'] = $email;
 
         if ($rs) {
-            header("location:client-dashboard.php");
+            header("location:client-dashboard");
         } else {
             $err =  "Incorrect Email Or Password";
         }
@@ -99,7 +99,7 @@ require_once('../partials/dashboard_head.php');
                                                         <label class="form-control-label">Password</label>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <a href="client-reset-password.php" class="small text-muted text-underline--dashed border-primary">Lost Password?</a>
+                                                        <a href="client-reset-password" class="small text-muted text-underline--dashed border-primary">Lost Password?</a>
                                                     </div>
                                                 </div>
                                                 <div class="input-group input-group-merge">
@@ -129,7 +129,7 @@ require_once('../partials/dashboard_head.php');
                                         </form>
                                     </div>
                                     <div class="card-footer px-md-5"><small>Not registered?</small>
-                                        <a href="client-signup.php" class="small font-weight-bold">Create account</a>
+                                        <a href="client-signup" class="small font-weight-bold">Create account</a>
                                     </div>
                                 </div>
                             </div>

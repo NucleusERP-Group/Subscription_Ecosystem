@@ -53,7 +53,7 @@ if (isset($_POST['ConfirmPassword'])) {
                 $rc = $stmt->bind_param('ss', $new_password, $email);
                 $stmt->execute();
                 if ($stmt) {
-                    $success = "Password Changed" && header("refresh:1; url=client-login.php");
+                    $success = "Password Changed" && header("refresh:1; url=client-login");
                 } else {
                     $err = "Please Try Again Or Try Later";
                 }
@@ -124,7 +124,8 @@ require_once('../partials/dashboard_head.php');
                                                 <div class="mt-4"><button type="submit" name="ConfirmPassword" class="btn btn-sm btn-primary btn-icon rounded-pill">
                                                         <span class="btn-inner--text">Reset Password</span>
                                                         <span class="btn-inner--icon"><i class="far fa-user-lock"></i></span>
-                                                    </button></div>
+                                                    </button>
+                                                </div>
                                         </form>
 
                                     </div>

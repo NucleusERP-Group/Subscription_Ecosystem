@@ -35,7 +35,7 @@ if (isset($_GET['clear_notification'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Cleared" && header("refresh:1; url=client-notifications.php");
+        $success = "Cleared" && header("refresh:1; url=client-notifications");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -121,7 +121,7 @@ require_once('../partials/dashboard_head.php');
                                                         <h4>Clear Notification ?</h4>
                                                         <br>
                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                        <a href="client-notifications.php?clear_notification=<?php echo $notif->id; ?>" class="text-center btn btn-danger"> Clear Notification </a>
+                                                        <a href="client-notifications?clear_notification=<?php echo $notif->id; ?>" class="text-center btn btn-danger"> Clear Notification </a>
                                                     </div>
                                                 </div>
                                             </div>

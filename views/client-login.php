@@ -121,7 +121,7 @@ require_once('../partials/dashboard_head.php');
                                                     <span class="btn-inner--text">Sign In</span>
                                                     <span class="btn-inner--icon"><i class="far fa-user-lock"></i></span>
                                                 </button>
-                                                <a href="client-signin-with-google.php" class="btn btn-sm btn-primary btn-icon rounded-pill">
+                                                <a href="client-signin-with-google" class="btn btn-sm btn-primary btn-icon rounded-pill">
                                                     <span class="btn-inner--text">Sign In With Google</span>
                                                     <span class="btn-inner--icon"><i class="fab fa-google"></i></span>
                                                 </a>

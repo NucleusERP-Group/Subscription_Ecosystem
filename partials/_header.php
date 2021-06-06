@@ -20,10 +20,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="subscriptions.php">Subscriptions</a>
+                    <a href="subscriptions">Subscriptions</a>
                 </li>
                 <li>
-                    <a href="downloads.php">Downloads</a>
+                    <a href="downloads">Downloads</a>
                 </li>
                 <li>
                     <a  class="button button-secondary" href="client-login">

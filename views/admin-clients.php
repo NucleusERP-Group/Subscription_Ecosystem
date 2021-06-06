@@ -118,7 +118,7 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-clients.php");
+        $success = "Deleted" && header("refresh:1; url=admin-clients");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -326,7 +326,7 @@ require_once('../partials/dashboard_head.php');
                                                             This Operation Is Irrevessible All Subscriptions, Payments, Credit / Debit Cards, ERP Instances And Invoices Linked To This User Will Be Deleted.
                                                         </p>
                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                        <a href="admin-clients.php?delete=<?php echo $users->id; ?>" class="text-center btn btn-danger">Yes Delete User Account</a>
+                                                        <a href="admin-clients?delete=<?php echo $users->id; ?>" class="text-center btn btn-danger">Yes Delete User Account</a>
                                                     </div>
                                                 </div>
                                             </div>

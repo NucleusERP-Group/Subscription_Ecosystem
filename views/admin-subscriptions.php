@@ -148,7 +148,7 @@ if (isset($_GET['delete'])) {
     $stmt->execute();
     $stmt->close();
     if ($stmt) {
-        $success = "Deleted" && header("refresh:1; url=admin-subscriptions.php");
+        $success = "Deleted" && header("refresh:1; url=admin-subscriptions");
     } else {
         $info = "Please Try Again Or Try Later";
     }
@@ -404,7 +404,7 @@ require_once('../partials/dashboard_head.php');
                                                             This Operation Is Irrevessible All Subscriptions, Payments And Invoices Linked To This Package Will Be Deleted.
                                                         </p>
                                                         <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                        <a href="admin-subscriptions.php?delete=<?php echo $packages->id; ?>" class="text-center btn btn-danger">Yes Delete Package</a>
+                                                        <a href="admin-subscriptions?delete=<?php echo $packages->id; ?>" class="text-center btn btn-danger">Yes Delete Package</a>
                                                     </div>
                                                 </div>
                                             </div>

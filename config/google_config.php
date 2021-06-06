@@ -54,7 +54,7 @@ while ($sys = $res->fetch_object()) {
 }
 /* Site Urls */
 define("SITE_URL", "http://nucleussaaserp.org/views/");
-define("REDIRECT_URL", SITE_URL . "client-signin-with-google.php");
+define("REDIRECT_URL", SITE_URL . "client-signin-with-google");
 
 /* Permissions */
 define("SCOPE", 'https://www.googleapis.com/auth/userinfo.email ' .
